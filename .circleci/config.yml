@@ -17,7 +17,7 @@ jobs:
 
           - run: mvn install -DskipTests
 
-          - run: mvn dependency:gooffline
+          - run: mvn dependency:go-offline
 
           - save_cache:
               paths:

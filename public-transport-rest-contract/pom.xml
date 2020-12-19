@@ -169,6 +169,7 @@
                             <modelNameSuffix>Model</modelNameSuffix>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
+                                <java8>false</java8>
                             </configOptions>
                         </configuration>
                     </execution>

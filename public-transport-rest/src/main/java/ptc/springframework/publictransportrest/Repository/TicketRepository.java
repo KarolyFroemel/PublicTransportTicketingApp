@@ -7,5 +7,5 @@ import ptc.springframework.publictransportrest.model.TicketType;
 import java.util.UUID;
 
 @Repository
-public class TicketRepository implements JpaRepository<TicketType, UUID> {
+public interface TicketRepository extends JpaRepository<TicketType, UUID> {
 }

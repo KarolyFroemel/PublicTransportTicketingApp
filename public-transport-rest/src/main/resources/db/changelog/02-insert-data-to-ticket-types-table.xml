@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="2">
+        <insert tableName="ticket_types">
+            <column name="name" value="Single ticket"/>
+            <column name="description" value="Single ticket for one ride. Valid to 60 minutes from validation."/>
+            <column name="price" value="360"/>
+        </insert>
+        <insert tableName="ticket_types">
+            <column name="name" value="Group of single tickets."/>
+            <column name="description" value="This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation."/>
+            <column name="price" value="3000"/>
+        </insert>
+        <insert tableName="ticket_types">
+            <column name="name" value="Monthly pass"/>
+            <column name="description" value="Montly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase."/>
+            <column name="price" value="10000"/>
+        </insert>
+        <insert tableName="ticket_types">
+            <column name="name" value="Daily pass"/>
+            <column name="description" value="Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day."/>
+            <column name="price" value="1500"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

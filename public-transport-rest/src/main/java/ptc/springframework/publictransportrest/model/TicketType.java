@@ -23,9 +23,9 @@ public class TicketType {
 
     private String description;
 
-    private Integer price;
+    private Long price;
 
-    public TicketType(String name, String description, Integer price) {
+    public TicketType(String name, String description, Long price) {
         this.name = name;
         this.description = description;
         this.price = price;

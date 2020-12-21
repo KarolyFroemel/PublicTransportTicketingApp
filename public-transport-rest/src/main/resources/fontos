@@ -405,3 +405,6 @@ DerbyDatabase: char(36)
 InformixDatabase: char(36)
 SybaseDatabase: UNIQUEIDENTIFIER
 SybaseASADatabase: UNIQUEIDENTIFIER
+
+Mock
+ ne felejtsuk el inicializalni a mockot

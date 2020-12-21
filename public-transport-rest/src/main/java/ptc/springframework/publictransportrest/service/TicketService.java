@@ -14,7 +14,6 @@ public class TicketService {
     TicketRepository ticketRepository;
 
     public List<TicketType> getTicketTypes() {
-        //TODO:ures lista eseten vegy eldobni egy hibat vagy ha ugyis hobat dob akkor egy global exception handlert epiteni
         return ticketRepository.findAll();
     }
 }

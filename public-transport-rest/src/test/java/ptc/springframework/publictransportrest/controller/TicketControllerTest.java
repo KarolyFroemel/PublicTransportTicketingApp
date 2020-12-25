@@ -3,12 +3,12 @@ package ptc.springframework.publictransportrest.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,7 +33,7 @@ class TicketControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     TicketService ticketService;
 
     @Autowired
@@ -62,7 +62,7 @@ class TicketControllerTest {
         //given
         Mockito.lenient().when(ticketService.getTicketTypes()).thenReturn(ticketTypesTest);
 
-        //when
+        //when+then
         mockMvc.perform(get("/tickets").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].name").value("Single ticket"))
@@ -71,7 +71,5 @@ class TicketControllerTest {
                 .andExpect(jsonPath("$.[1].name").value("Group of single tickets."))
                 .andExpect(jsonPath("$.[1].description").value("This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation."))
                 .andExpect(jsonPath("$.[1].price").value(3000L));
-
-
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="3">
+        <createTable tableName="users">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="user"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="Karoly_Froemel" id="4">
+        <createTable tableName="tickets">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="SERIAL">
+                <constraints nullable="false" foreignKeyName="fk_tickets_users" references="users(id)"/>
+            </column>
+            <column name="ticket_id" type="SERIAL">
+                <constraints nullable="false" foreignKeyName="fk_ticket_ticket_types" references="ticket_types(id)"/>
+            </column>
+            <column name="purchase_date" type="TIMESTAMP"/>
+            <column name="validation_date" type="TIMESTAMP"/>
+            <column name="consumable" type="TIMESTAMP"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="tickets"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

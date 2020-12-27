@@ -9,11 +9,11 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ticket_types")
-public class TicketType {
+@Builder
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,17 +21,20 @@ public class TicketType {
     private Long id;
 
     @NonNull
-    @Size(max = 50)
+    @Size(max = 250)
     private String name;
 
     @NonNull
     @Size(max = 250)
-    private String description;
+    private String email;
 
     @NonNull
-    @Min(1)
-    private Long price;
+    @Size(max = 250)
+    private String password;
 
-    @OneToMany(mappedBy = "ticketType", fetch = FetchType.LAZY)
-    private List<User> users;
+    @Min(0)
+    private Long balance;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 }

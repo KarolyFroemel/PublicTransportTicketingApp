@@ -22,10 +22,29 @@ class TicketRepositoryTest {
     public void findAlltickets() {
         List<TicketType> ticketTypesTest = new ArrayList<>();
 
-        ticketTypesTest.add(new TicketType(1L, "Single ticket", "Single ticket for one ride. Valid to 60 minutes from validation.", 360L));
-        ticketTypesTest.add(new TicketType(2L, "Group of single tickets.", "This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation.", 3000L));
-        ticketTypesTest.add(new TicketType(3L, "Monthly pass", "Montly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase.", 10000L));
-        ticketTypesTest.add(new TicketType(4L, "Daily pass", "Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day.", 1500L));
+        ticketTypesTest.add(TicketType.builder()
+                .id(1L)
+                .name("Single ticket")
+                .description("Single ticket for one ride. Valid to 60 minutes from validation.")
+                .price(360L).build());
+
+        ticketTypesTest.add(TicketType.builder()
+                .id(2L)
+                .name("Group of single tickets.")
+                .description("This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation.")
+                .price(3000L).build());
+
+        ticketTypesTest.add(TicketType.builder()
+                .id(3L)
+                .name("Monthly pass")
+                .description("Montly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase.")
+                .price(10000L).build());
+
+        ticketTypesTest.add(TicketType.builder()
+                .id(4L)
+                .name("Daily pass")
+                .description("Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day.")
+                .price(1500L).build());
 
         ticketTypesTest.forEach(ticketType -> ticketRepository.save(ticketType));
         List<TicketType> ticketTypes = ticketRepository.findAll();

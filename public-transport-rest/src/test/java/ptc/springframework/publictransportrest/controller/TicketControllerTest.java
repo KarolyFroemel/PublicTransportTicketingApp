@@ -51,8 +51,18 @@ class TicketControllerTest {
 
         ticketTypesTest = new ArrayList<>();
 
-        ticketTypesTest.add(new TicketType(1L, "Single ticket", "Single ticket for one ride. Valid to 60 minutes from validation.", 360L));
-        ticketTypesTest.add(new TicketType(2L, "Group of single tickets.", "This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation.", 3000L));
+        ticketTypesTest.add(TicketType.builder()
+                .id(1L)
+                .name("Single ticket")
+                .description("Single ticket for one ride. Valid to 60 minutes from validation.")
+                .price(360L).build());
+
+        ticketTypesTest.add(TicketType.builder()
+                .id(2L).name("Group of single tickets.")
+                .description("This group contains 10 single tickets. " +
+                        "Each of single ticket for one ride. Valid to 60 minutes from validation.")
+                .price( 3000L).build());
+
 
     }
 

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,6 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "ticket_types")
 public class TicketType {
 
@@ -32,6 +34,9 @@ public class TicketType {
     @Min(1)
     private Long price;
 
-    @OneToMany(mappedBy = "ticketType", fetch = FetchType.LAZY)
-    private List<User> users;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tickets",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ticket_type_id")})
+    private List<User> users = new ArrayList<>();
 }

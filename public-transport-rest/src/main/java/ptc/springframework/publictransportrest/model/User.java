@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 @Table(name = "users")
 public class User {
 
@@ -35,6 +36,6 @@ public class User {
     @Min(0)
     private Long balance;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Ticket> tickets;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<TicketType> tickets;
 }

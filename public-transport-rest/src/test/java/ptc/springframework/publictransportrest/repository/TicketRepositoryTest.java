@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ActiveProfiles(profiles = "test")
 @DataJpaTest
-class TicketRepositoryTest {
+class TicketTypeRepositoryTest {
 
     @Autowired
-    TicketRepository ticketRepository;
+    TicketTypeRepository ticketTypeRepository;
 
     @Test
     public void findAlltickets() {
@@ -46,8 +46,8 @@ class TicketRepositoryTest {
                 .description("Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day.")
                 .price(1500L).build());
 
-        ticketTypesTest.forEach(ticketType -> ticketRepository.save(ticketType));
-        List<TicketType> ticketTypes = ticketRepository.findAll();
+        ticketTypesTest.forEach(ticketType -> ticketTypeRepository.save(ticketType));
+        List<TicketType> ticketTypes = ticketTypeRepository.findAll();
 
         assertEquals(4, ticketTypes.size());
     }
@@ -56,7 +56,7 @@ class TicketRepositoryTest {
     @Test
     public void emptyTable() {
 
-        List<TicketType> ticketTypes = ticketRepository.findAll();
+        List<TicketType> ticketTypes = ticketTypeRepository.findAll();
 
         assertEquals(0, ticketTypes.size());
     }

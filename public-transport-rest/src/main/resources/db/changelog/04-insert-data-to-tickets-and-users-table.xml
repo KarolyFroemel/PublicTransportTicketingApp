@@ -14,7 +14,7 @@
         <insert tableName="users">
             <column name="name" value="Edinson Cavani"/>
             <column name="email" value="edinson.cavani@gmail.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="123456"/>
             <column name="balance" value="1000000"/>
         </insert>
     </changeSet>
@@ -22,19 +22,19 @@
     <changeSet author="Karoly_Froemel" id="6">
         <insert tableName="tickets">
             <column name="user_id" value="1"/>
-            <column name="ticket_id" value="1"/>
+            <column name="ticket_type_id" value="1"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
             <column name="validation_date" value="2021-12-01 00:00:01"/>
         </insert>
         <insert tableName="tickets">
             <column name="user_id" value="1"/>
-            <column name="ticket_id" value="2"/>
+            <column name="ticket_type_id" value="2"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
             <column name="validation_date" value="2021-12-01 00:00:01"/>
         </insert>
         <insert tableName="tickets">
             <column name="user_id" value="1"/>
-            <column name="ticket_id" value="3"/>
+            <column name="ticket_type_id" value="3"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
             <column name="validation_date" value="2021-12-01 00:00:01"/>
         </insert>

@@ -36,8 +36,8 @@
             <column name="user_id" type="SERIAL">
                 <constraints nullable="false" foreignKeyName="fk_tickets_users" references="users(id)"/>
             </column>
-            <column name="ticket_id" type="SERIAL">
-                <constraints nullable="false" foreignKeyName="fk_ticket_ticket_types" references="ticket_types(id)"/>
+            <column name="ticket_type_id" type="SERIAL">
+                <constraints nullable="false" foreignKeyName="fk_tickets_ticket_types" references="ticket_types(id)"/>
             </column>
             <column name="purchase_date" type="TIMESTAMP"/>
             <column name="validation_date" type="TIMESTAMP"/>

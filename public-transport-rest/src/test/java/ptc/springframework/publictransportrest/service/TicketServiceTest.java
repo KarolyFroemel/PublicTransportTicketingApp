@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ptc.springframework.publictransportrest.model.TicketType;
-import ptc.springframework.publictransportrest.repository.TicketRepository;
+import ptc.springframework.publictransportrest.repository.TicketTypeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ class TicketServiceTest {
     private TicketService ticketService;
 
     @Mock
-    private TicketRepository ticketRepository;
+    private TicketTypeRepository ticketTypeRepository;
 
     private List<TicketType> ticketTypes;
 
@@ -60,14 +60,14 @@ class TicketServiceTest {
                 .description("Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day.")
                 .price(1500L).build());
 
-        Mockito.lenient().when(ticketRepository.findAll()).thenReturn(ticketTypes);
+        Mockito.lenient().when(ticketTypeRepository.findAll()).thenReturn(ticketTypes);
 
         //when
         List<TicketType> result = ticketService.getTicketTypes();
 
         //then
         assertEquals(4, result.size());
-        Mockito.verify(ticketRepository, times(1)).findAll();
+        Mockito.verify(ticketTypeRepository, times(1)).findAll();
 
     }
 }

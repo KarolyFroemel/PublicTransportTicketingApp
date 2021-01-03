@@ -36,6 +36,13 @@ fontos dolgok uuid rol es generalasrol mas generalashoz is jo
 https://stackoverflow.com/questions/41112332/generate-uuid-values-by-default-for-each-row-on-column-of-uuid-type-in-h2-databa
 
 
+/*@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "ticketTypes",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ticket_type_id")})
+    private List<User> users = new ArrayList<>();*/
+
+
 tipusok a dbk hez
 
 boolean

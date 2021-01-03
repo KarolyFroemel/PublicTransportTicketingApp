@@ -3,37 +3,41 @@ package ptc.springframework.publictransportrest.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 @Entity
 @Table(name = "tickets")
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name="ticket_type_id", nullable=false)
+    @OneToOne
+    @JoinColumn(name="ticket_type_id", referencedColumnName = "id" ,nullable=false)
     private TicketType ticketType;
 
     @NonNull
-    private Date purchaseDate;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime purchaseDate;
+
+//    @NonNull
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime validationDate;
 
     @NonNull
-    private Date validationDate;
-
-    @NonNull
-    private Date consumable;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime canBeUsed;
 
 }

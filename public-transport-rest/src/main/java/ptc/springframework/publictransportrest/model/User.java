@@ -1,25 +1,35 @@
 package ptc.springframework.publictransportrest.model;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
+//    @Column(name = "id", updatable = false, nullable = false)
+//    @ColumnDefault("random_uuid()")
+    @Type(type = "uuid-char")
+    private UUID id;
 
     @NonNull
     @Size(max = 250)
@@ -29,13 +39,12 @@ public class User {
     @Size(max = 250)
     private String email;
 
-    @NonNull
     @Size(max = 250)
     private String password;
 
     @Min(0)
     private Long balance;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    private List<TicketType> tickets;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    List<Ticket> tickets = new ArrayList<>();
 }

@@ -17,7 +17,7 @@ paths:
         - ticket
       operationId: getTicketTypes
       summary: Get all ticket types
-      description: Get all types of tickets to shhow it for the user.
+      description: Get all types of tickets to show it for the user.
       responses:
         '200':
           description: Get all types of tickets
@@ -29,6 +29,37 @@ paths:
                   $ref: '#/components/schemas/TicketType'
         '404':
           description: Ticket not found!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tickets/{userId}:
+    get:
+      tags:
+        - ticket
+      summary: Get all tickets of user
+      operationId: getUserTicketsById
+      description: Get all tickets of user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Get all tickets which are belong to a specific user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+        '404':
+          description: Tickets not found!
           content:
             application/json:
               schema:
@@ -60,3 +91,23 @@ components:
         - name
         - description
         - price
+
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        purchaseDate:
+          type: string
+        validationDate:
+          type: string
+        canBeUsed:
+          type: string
+      required:
+        - id
+        - name
+        - purchaseDate
+        - canBeUsed

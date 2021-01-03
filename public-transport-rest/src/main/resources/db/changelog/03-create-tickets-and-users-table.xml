@@ -6,7 +6,7 @@
 
     <changeSet author="Karoly_Froemel" id="3">
         <createTable tableName="users">
-            <column name="id" type="SERIAL">
+            <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="name" type="varchar(250)">
@@ -30,18 +30,18 @@
 
     <changeSet author="Karoly_Froemel" id="4">
         <createTable tableName="tickets">
-            <column name="id" type="SERIAL">
+            <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="user_id" type="SERIAL">
+            <column name="user_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_tickets_users" references="users(id)"/>
             </column>
-            <column name="ticket_type_id" type="SERIAL">
+            <column name="ticket_type_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_tickets_ticket_types" references="ticket_types(id)"/>
             </column>
             <column name="purchase_date" type="TIMESTAMP"/>
             <column name="validation_date" type="TIMESTAMP"/>
-            <column name="consumable" type="TIMESTAMP"/>
+            <column name="can_be_used" type="TIMESTAMP"/>
         </createTable>
 
         <rollback>

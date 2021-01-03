@@ -20,12 +20,6 @@ public class TicketType {
 
     @Id
     @GeneratedValue
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator"
-//    )
-//    @Column(name = "id", updatable = false, nullable = false)
-//    @ColumnDefault("random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
 
@@ -43,4 +37,5 @@ public class TicketType {
 
     @OneToOne(mappedBy = "ticketType", fetch = FetchType.LAZY)
     private Ticket tickets;
+
 }

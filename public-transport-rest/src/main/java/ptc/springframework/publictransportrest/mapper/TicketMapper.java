@@ -3,6 +3,10 @@ package ptc.springframework.publictransportrest.mapper;
 import contract.ticket.model.TicketModel;
 import contract.ticket.model.TicketTypeModel;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
+import ptc.springframework.publictransportrest.helper.DateTimeFormatterHelper;
 import ptc.springframework.publictransportrest.model.Ticket;
 import ptc.springframework.publictransportrest.model.TicketType;
 
@@ -11,21 +15,25 @@ import java.util.List;
 
 @Mapper
 public interface TicketMapper {
+
+    @Mappings({
+            @Mapping(target="name", source="name"),
+            @Mapping(target="description", source="description"),
+            @Mapping(target="price", source="price")
+    })
+    TicketTypeModel toTicketTypeModel(TicketType ticketType);
+
+
+    @Mappings({
+            @Mapping(target="id", source="id"),
+            @Mapping(target="name", source="ticketType.name"),
+            @Mapping(target="purchaseDate", source="purchaseDate", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target="validationDate", source="validationDate", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target="canBeUsed", source="canBeUsed", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    })
+    TicketModel toTicketModel(Ticket ticket);
+
     List<TicketTypeModel> toTicketTypeModelList(List<TicketType> ticketTypes);
 
-    default List<TicketModel> toTicketModelList(List<Ticket> tickets) {
-
-        List<TicketModel> ticketModelList = new ArrayList<>();
-
-        tickets.forEach(ticket -> {
-            TicketModel ticketmodel = new TicketModel();
-            ticketmodel.setId(ticket.getId());
-            ticketmodel.setName(ticket.getTicketType().getName());
-            ticketmodel.setPurchaseDate(ticket.getPurchaseDate().toString());
-            ticketmodel.setCanBeUsed(ticket.getCanBeUsed().toString());
-            ticketmodel.setValidationDate(ticket.getValidationDate() == null ? " unused " : ticket.getValidationDate().toString());
-        });
-
-        return ticketModelList;
-    };
+    List<TicketModel> toTicketModelList(List<Ticket> tickets);
 }

@@ -5,12 +5,9 @@ import contract.ticket.model.TicketTypeModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
-import ptc.springframework.publictransportrest.helper.DateTimeFormatterHelper;
 import ptc.springframework.publictransportrest.model.Ticket;
 import ptc.springframework.publictransportrest.model.TicketType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper

@@ -1,7 +1,6 @@
 package ptc.springframework.publictransportrest.model;
 
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -20,7 +19,6 @@ public class TicketType {
 
     @Id
     @GeneratedValue
-    @Type(type = "uuid-char")
     private UUID id;
 
     @NonNull

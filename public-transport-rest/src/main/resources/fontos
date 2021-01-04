@@ -414,4 +414,6 @@ SybaseDatabase: UNIQUEIDENTIFIER
 SybaseASADatabase: UNIQUEIDENTIFIER
 
 Mock
- ne felejtsuk el inicializalni a mockot
+ ne felejtsuk el inicializalni a mockot:mockMvc = MockMvcBuilders.standaloneSetup(ticketController).build();
+
+ https://blog.trifork.com/2012/12/11/properly-testing-spring-mvc-controllers/

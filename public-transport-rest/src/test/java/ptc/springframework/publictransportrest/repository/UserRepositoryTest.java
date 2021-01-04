@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles(profiles = "test")
 @DataJpaTest
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-//@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest {
 
     @Autowired
@@ -42,9 +40,9 @@ class UserRepositoryTest {
 
         Optional<User> user = userRepository.findById(savedUser.getId());
 
-        assertEquals("Edinson Cavani", user.get().getName());
-        assertEquals("edinson.cavani@gmail.com", user.get().getEmail());
-        assertEquals(1000000L, user.get().getBalance());
+        assertEquals("Edinson Cavani", user.orElse(new User()).getName());
+        assertEquals("edinson.cavani@gmail.com", user.orElse(new User()).getEmail());
+        assertEquals(1000000L, user.orElse(new User()).getBalance());
     }
 
 }

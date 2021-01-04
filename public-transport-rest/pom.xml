@@ -19,7 +19,7 @@
         <org.apache.maven.plugins.version>3.6.1</org.apache.maven.plugins.version>
         <liquibase-core.version>4.1.1</liquibase-core.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
-        <lombok.version>1.18.12</lombok.version>
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 
     <dependencies>

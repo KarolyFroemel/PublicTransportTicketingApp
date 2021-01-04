@@ -12,13 +12,12 @@ import ptc.springframework.publictransportrest.testdata.TicketTestData;
 import ptc.springframework.publictransportrest.testdata.TicketTypeTestData;
 import ptc.springframework.publictransportrest.testdata.UserTestData;
 
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TicketMapperTest {
 
@@ -42,8 +41,8 @@ class TicketMapperTest {
 
         assertThat(ticketModel.getId(),is(ticket.getId()));
         assertThat(ticketModel.getName(),is(ticket.getTicketType().getName()));
-        assertThat(ticketModel.getPurchaseDate().toString(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getPurchaseDate())));
-        assertThat(ticketModel.getCanBeUsed().toString(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getCanBeUsed())));
+        assertThat(ticketModel.getPurchaseDate(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getPurchaseDate())));
+        assertThat(ticketModel.getCanBeUsed(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getCanBeUsed())));
         assertNull(ticketModel.getValidationDate());
     }
 

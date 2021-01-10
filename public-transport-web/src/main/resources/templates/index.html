@@ -1,87 +1,45 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-
-    .navbar {
-        width: 100%;
-        background-color: #555;
-        overflow: auto;
-    }
-
-    .navbar a {
-        float: left;
-        padding: 12px;
-        color: white;
-        text-decoration: none;
-        font-size: 17px;
-    }
-
-    .navbar a:hover {
-        background-color: #000;
-    }
-
-    .active {
-        background-color: #4CAF50;
-    }
-
-    @media screen and (max-width: 500px) {
-        .navbar a {
-            float: none;
-            display: block;
-        }
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>My Tickets</title>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+<!--    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>-->
 </head>
 <body>
-
-
 <div class="container">
-    <div class="navbar">
-        <a href="#"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
-        <a class="active" href="#"><i class="fa fa-money" aria-hidden="true"></i> Buy ticket</a>
-        <a href="#"><i class="fa fa-fw fa-ticket" aria-hidden="true"></i> Validate ticket</a>
-        <a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> My tickets</a>
-        <a href="#"><i class="fa fa-eraser" aria-hidden="true"></i> Refound ticket</a>
-        <a href="#"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i> Contact</a>
-        <a href="#"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Login</a>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h1> My tickets </h1>
+    <form method="post" th:object="${user}">
+        <div class="form-group row">
+            <div class="col-md-4 mt-5">
+                <label for="birthdate">Date of birth</label>
+                <div class="input-group date">
+                    <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{birtdate}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th> Name </th>
-                    <th> Description </th>
-                    <th> Price </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${tickets.empty}">
-                    <td colspan="2"> No tickets Available </td>
-                </tr>
-                <tr th:each="ticket : ${tickets}">
-                    <td><span th:text="${ticket.name}"> Name </span></td>
-                    <td><span th:text="${ticket.description}"> Description </span></td>
-                    <td><span th:text="${ticket.price}"> Price </span></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <a class="btn btn-success" href="#" th:href="@{/tickets/buy}"> Buy ticket </a>
-            <a class="btn btn-primary" href="#" th:href="@{/tickets/validate}" th:classappend="${tickets.empty} ? 'disabled' : ''"> Validate ticket </a>
-        </div>
-    </div>
+
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </form>
+
 </div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: "yyyy-mm-dd"
+    });
+</script>
 </body>
 </html>

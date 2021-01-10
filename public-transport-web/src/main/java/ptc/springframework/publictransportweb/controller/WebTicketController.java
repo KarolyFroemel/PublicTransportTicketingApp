@@ -30,15 +30,13 @@ public class WebTicketController {
     public String ticketPurchasePage(Model model){
         model.addAttribute("tickets", ticketService.getTicketTypes());
         model.addAttribute("ticketPurchaseDTO", new TicketPurchaseDTO());
-        return "buy";
+        return "ticketPurchase";
     }
 
     @PostMapping("/ticketPurchasePage")
     public String ticketPurchasePageSave(TicketPurchaseDTO ticketPurchaseDTO, Model model){
         System.out.println("ticket type: " + ticketPurchaseDTO.getTicketTypeName());
         System.out.println("Ticket date: " + ticketPurchaseDTO.getValidFrom());
-        model.addAttribute("tickets", ticketService.getTicketTypes());
-        model.addAttribute("ticketPurchaseDTO", new TicketPurchaseDTO());
-        return "buy";
+        return "successfulTicketPurchase";
     }
 }

@@ -31,4 +31,10 @@ public class WebTicketController {
         return ResponseEntity.ok(ticketService.getTicketTypes());
     }
 
+    @GetMapping("/ticketPurchasePage")
+    public String ticketPurchasePage(Model model){
+        model.addAttribute("tickets", ticketService.getTicketTypes());
+        return "buy";
+    }
+
 }

@@ -65,6 +65,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /tickets/{userId}/purchaseTicket/{ticketName}:
+    post:
+      tags:
+        - ticket
+      summary: Purchase ticket
+      operationId: purchaseTicket
+      description: Purchase ticket.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: ticketName
+          in: path
+          required: true
+          description: ticket name
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Ticket purchased
+
+        '404':
+          description: Ticket purchase failed!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   schemas:
     Error:

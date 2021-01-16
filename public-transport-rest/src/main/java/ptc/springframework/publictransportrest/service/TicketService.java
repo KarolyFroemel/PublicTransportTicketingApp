@@ -35,4 +35,8 @@ public class TicketService {
         log.info("Find all tickets by user id!" );
         return userRepository.findById(id).orElseThrow(UserNotfoundException::new).getTickets();
     }
+
+    public void purchaseTicket(UUID userId, String ticketName) {
+
+    }
 }

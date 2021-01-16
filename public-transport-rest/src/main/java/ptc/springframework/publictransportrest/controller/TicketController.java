@@ -30,4 +30,10 @@ public class TicketController implements TicketsApi {
     public ResponseEntity<List<TicketModel>> getUserTicketsById(UUID userId) {
         return ResponseEntity.ok(ticketMapper.toTicketModelList(ticketService.getTicketsByUserId(userId)));
     }
+
+    @Override
+    public ResponseEntity<Void> purchaseTicket(UUID userId, String ticketName) {
+        ticketService.purchaseTicket(userId,ticketName);
+        return ResponseEntity.ok().build();
+    }
 }

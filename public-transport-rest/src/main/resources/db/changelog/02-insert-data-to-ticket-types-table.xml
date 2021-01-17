@@ -10,24 +10,21 @@
             <column name="name" value="Single ticket"/>
             <column name="description" value="Single ticket for one ride. Valid to 60 minutes from validation."/>
             <column name="price" value="360"/>
-        </insert>
-        <insert tableName="ticket_types">
-            <column name="id" value="5995c029-d4c0-42e2-9654-aa02f91834f3"/>
-            <column name="name" value="Group of single tickets."/>
-            <column name="description" value="This group contains 10 single tickets. Each of single ticket for one ride. Valid to 60 minutes from validation."/>
-            <column name="price" value="3000"/>
+            <column name="expiration_time" value="366"/>
         </insert>
         <insert tableName="ticket_types">
             <column name="id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
             <column name="name" value="Monthly pass"/>
-            <column name="description" value="Montly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase."/>
+            <column name="description" value="Monthly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase."/>
             <column name="price" value="10000"/>
+            <column name="expiration_time" value="31"/>
         </insert>
         <insert tableName="ticket_types">
             <column name="id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="name" value="Daily pass"/>
             <column name="description" value="Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day."/>
             <column name="price" value="1500"/>
+            <column name="expiration_time" value="1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

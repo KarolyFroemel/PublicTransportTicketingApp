@@ -36,4 +36,7 @@ public class TicketType {
     @OneToOne(mappedBy = "ticketType", fetch = FetchType.LAZY)
     private Ticket tickets;
 
+    @NonNull
+    private Long expirationTime;
+
 }

@@ -20,7 +20,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         details.add(ex.getLocalizedMessage());
         Arrays.asList(ex.getStackTrace()).forEach(stackTraceElement -> details.add(stackTraceElement.toString()));
         Error error = new Error("User not found error", details);
-        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TicketTypeNotFoundException.class)
+    protected ResponseEntity<Object> handleTicketTypeNotFoundException(Exception ex, WebRequest request) {
+        List<String> details = new ArrayList<>();
+        details.add(ex.getLocalizedMessage());
+        Arrays.asList(ex.getStackTrace()).forEach(stackTraceElement -> details.add(stackTraceElement.toString()));
+        Error error = new Error("Ticket type not found!", details);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NullPointerException.class)

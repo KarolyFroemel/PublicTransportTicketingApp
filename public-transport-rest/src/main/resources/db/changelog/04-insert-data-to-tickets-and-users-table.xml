@@ -27,21 +27,24 @@
             <column name="user_id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
             <column name="ticket_type_id" value="dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
-            <column name="can_be_used" value="2021-12-01 00:00:01"/>
+            <column name="valid_from" value="2020-12-01 00:00:01"/>
+            <column name="valid_to" value="2021-12-01 00:00:01"/>
         </insert>
         <insert tableName="tickets">
             <column name="id" value="1369ccdc-d5e5-4344-8b14-cdfefa8e7451"/>
             <column name="user_id" value="234f00e0-e544-48ec-9d68-e1bef9fedd9f"/>
-            <column name="ticket_type_id" value="5995c029-d4c0-42e2-9654-aa02f91834f3"/>
+            <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
-            <column name="can_be_used" value="2021-12-01 00:00:01"/>
+            <column name="valid_from" value="2020-12-01 00:00:01"/>
+            <column name="valid_to" value="2021-12-01 00:00:01"/>
         </insert>
         <insert tableName="tickets">
             <column name="id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
             <column name="user_id" value="234f00e0-e544-48ec-9d68-e1bef9fedd9f"/>
             <column name="ticket_type_id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
             <column name="purchase_date" value="2020-12-01 00:00:01"/>
-            <column name="can_be_used" value="2021-12-01 00:00:01"/>
+            <column name="valid_from" value="2020-12-01 00:00:01"/>
+            <column name="valid_to" value="2021-12-01 00:00:01"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

@@ -40,8 +40,9 @@
                 <constraints nullable="false" foreignKeyName="fk_tickets_ticket_types" references="ticket_types(id)"/>
             </column>
             <column name="purchase_date" type="TIMESTAMP"/>
+            <column name="valid_from" type="TIMESTAMP"/>
+            <column name="valid_to" type="TIMESTAMP"/>
             <column name="validation_date" type="TIMESTAMP"/>
-            <column name="can_be_used" type="TIMESTAMP"/>
         </createTable>
 
         <rollback>

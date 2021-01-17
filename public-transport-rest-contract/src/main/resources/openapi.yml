@@ -65,31 +65,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /tickets/{userId}/purchaseTicket/{ticketName}:
+  /tickets/purchaseTicket:
     post:
       tags:
         - ticket
       summary: Purchase ticket
       operationId: purchaseTicket
       description: Purchase ticket.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: user id
-          schema:
-            type: string
-            format: uuid
-        - name: ticketName
-          in: path
-          required: true
-          description: ticket name
-          schema:
-            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseTicket'
       responses:
         '201':
           description: Ticket purchased
-
         '404':
           description: Ticket purchase failed!
           content:
@@ -119,6 +110,8 @@ components:
           type: string
         price:
           type: integer
+        expirationTime:
+          type: integer
       required:
         - name
         - description
@@ -134,12 +127,26 @@ components:
           type: string
         purchaseDate:
           type: string
-        validationDate:
+        validFrom:
           type: string
-        canBeUsed:
+        validTo:
+          type: string
+        validationDate:
           type: string
       required:
         - id
         - name
         - purchaseDate
-        - canBeUsed
+        - validFrom
+        - validTo
+
+    PurchaseTicket:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        ticketName:
+          type: string
+        validFrom:
+          type: string

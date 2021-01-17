@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TicketMapperTest {
 
-    TicketMapper ticketMapper = Mappers.getMapper(TicketMapper.class);
+    private TicketMapper ticketMapper = Mappers.getMapper(TicketMapper.class);
 
     @Test
     void toTicketTypeModel() {
@@ -31,6 +31,7 @@ class TicketMapperTest {
         assertThat(ticketTypeModel.getName(),is(ticketType.getName()));
         assertThat(ticketTypeModel.getDescription(),is(ticketType.getDescription()));
         assertThat(ticketTypeModel.getPrice(),is(ticketType.getPrice().intValue()));
+        assertThat(ticketTypeModel.getExpirationTime(),is(ticketType.getExpirationTime().intValue()));
     }
 
     @Test
@@ -42,7 +43,8 @@ class TicketMapperTest {
         assertThat(ticketModel.getId(),is(ticket.getId()));
         assertThat(ticketModel.getName(),is(ticket.getTicketType().getName()));
         assertThat(ticketModel.getPurchaseDate(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getPurchaseDate())));
-        assertThat(ticketModel.getCanBeUsed(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getCanBeUsed())));
+        assertThat(ticketModel.getValidFrom(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getValidFrom())));
+        assertThat(ticketModel.getValidTo(),is(DateTimeFormatterHelper.parseTimestamp(ticket.getValidTo())));
         assertNull(ticketModel.getValidationDate());
     }
 

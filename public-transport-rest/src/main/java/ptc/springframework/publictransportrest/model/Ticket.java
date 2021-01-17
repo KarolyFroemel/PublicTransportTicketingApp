@@ -29,15 +29,16 @@ public class Ticket {
     private TicketType ticketType;
 
     @NonNull
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime purchaseDate;
 
-//    @NonNull
-//    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime validationDate;
+    @NonNull
+    private LocalDateTime validFrom;
 
     @NonNull
-//    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime canBeUsed;
+    private LocalDateTime validTo;
+
+    private LocalDateTime validationDate;
+
+
 
 }

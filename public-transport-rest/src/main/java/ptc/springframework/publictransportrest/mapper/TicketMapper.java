@@ -16,7 +16,9 @@ public interface TicketMapper {
     @Mappings({
             @Mapping(target="name", source="name"),
             @Mapping(target="description", source="description"),
-            @Mapping(target="price", source="price")
+            @Mapping(target="price", source="price"),
+            @Mapping(target="expirationTime", source="expirationTime")
+
     })
     TicketTypeModel toTicketTypeModel(TicketType ticketType);
 
@@ -25,8 +27,9 @@ public interface TicketMapper {
             @Mapping(target="id", source="id"),
             @Mapping(target="name", source="ticketType.name"),
             @Mapping(target="purchaseDate", source="purchaseDate", dateFormat = "yyyy-MM-dd HH:mm:ss"),
-            @Mapping(target="validationDate", source="validationDate", dateFormat = "yyyy-MM-dd HH:mm:ss"),
-            @Mapping(target="canBeUsed", source="canBeUsed", dateFormat = "yyyy-MM-dd HH:mm:ss")
+            @Mapping(target="validFrom", source="validFrom", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target="validTo", source="validTo", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target="validationDate", source="validationDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     })
     TicketModel toTicketModel(Ticket ticket);
 

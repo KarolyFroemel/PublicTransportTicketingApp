@@ -417,3 +417,6 @@ Mock
  ne felejtsuk el inicializalni a mockot:mockMvc = MockMvcBuilders.standaloneSetup(ticketController).build();
 
  https://blog.trifork.com/2012/12/11/properly-testing-spring-mvc-controllers/
+
+ az integracios tesztek parameterei
+ https://www.baeldung.com/integration-testing-in-spring

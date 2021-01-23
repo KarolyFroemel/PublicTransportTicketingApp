@@ -58,6 +58,11 @@ public class TicketService {
 
         ticketRepository.save(newTicket);
         log.info("Ticket created!");
+
+        user.deductFee(ticketType.getPrice());
+        userRepository.save(user);
+
+        log.info("Ticket fee deducted!");
     }
 
     private LocalDateTime calculateValidTo(TicketType ticketType) {

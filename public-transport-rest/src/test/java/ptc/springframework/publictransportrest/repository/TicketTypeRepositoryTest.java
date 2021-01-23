@@ -40,4 +40,16 @@ class TicketTypeRepositoryTest {
 
         assertEquals(0, ticketTypes.size());
     }
+
+    @Test
+    @DirtiesContext
+    public void findByName() {
+        TicketType ticketType = TicketTypeTestData.getSingleTicketType();
+        ticketTypeRepository.save(ticketType);
+
+        TicketType ticketTypeResult = ticketTypeRepository.findByName(ticketType.getName()).get();
+
+        assertEquals(ticketType.getName(),ticketTypeResult.getName());
+
+    }
 }

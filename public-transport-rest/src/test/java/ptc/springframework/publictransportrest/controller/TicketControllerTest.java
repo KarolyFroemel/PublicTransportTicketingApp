@@ -1,5 +1,7 @@
 package ptc.springframework.publictransportrest.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import contract.ticket.model.PurchaseTicketModel;
 import contract.ticket.model.TicketModel;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +31,11 @@ import ptc.springframework.publictransportrest.testdata.TicketTypeTestData;
 import ptc.springframework.publictransportrest.testdata.UserTestData;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -116,5 +120,25 @@ class TicketControllerTest {
                 .andExpect(jsonPath("$.[0].validationDate").value(IsNull.nullValue()))
                 .andExpect(jsonPath("$.[0].validFrom").value(ticketModelList.get(0).getValidFrom()))
                 .andExpect(jsonPath("$.[0].validTo").value(ticketModelList.get(0).getValidTo()));
+    }
+
+    @Test
+    void purchaseTicket() throws Exception {
+        //given
+        PurchaseTicketModel purchaseTicketModel = new PurchaseTicketModel();
+        purchaseTicketModel.setTicketName("Single ticket");
+        purchaseTicketModel.setUserId(UUID.randomUUID());
+        purchaseTicketModel.setValidFrom("2021-01-01");
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String purchaseTicketModelJsonString = mapper.writeValueAsString(purchaseTicketModel);
+
+        //when*then
+        mockMvc.perform(
+                post("/tickets/purchaseTicket")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(purchaseTicketModelJsonString))
+                .andExpect(status().isCreated());
     }
 }

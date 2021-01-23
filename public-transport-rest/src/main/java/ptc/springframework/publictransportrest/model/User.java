@@ -40,4 +40,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<Ticket> tickets = new ArrayList<>();
 
+    public void deductFee(Long fee) {
+        this.balance  -= fee;
+    }
+
 }

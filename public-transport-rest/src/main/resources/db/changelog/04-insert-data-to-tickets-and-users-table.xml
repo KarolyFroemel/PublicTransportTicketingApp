@@ -10,14 +10,12 @@
             <column name="name" value="David Beckham"/>
             <column name="email" value="david.beckham@gmail.com"/>
             <column name="password" value="123456"/>
-            <column name="balance" value="1000000"/>
         </insert>
         <insert tableName="users">
             <column name="id" value="234f00e0-e544-48ec-9d68-e1bef9fedd9f"/>
             <column name="name" value="Edinson Cavani"/>
             <column name="email" value="edinson.cavani@gmail.com"/>
             <column name="password" value="123456"/>
-            <column name="balance" value="1000000"/>
         </insert>
     </changeSet>
 

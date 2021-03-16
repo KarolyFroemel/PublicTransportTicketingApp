@@ -6,8 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import ptc.springframework.publictransportrest.exception.TicketTypeNotFoundException;
-import ptc.springframework.publictransportrest.exception.UserNotfoundException;
+import ptc.springframework.publictransportrest.exception.*;
 import ptc.springframework.publictransportrest.helper.DateTimeFormatterHelper;
 import ptc.springframework.publictransportrest.model.Ticket;
 import ptc.springframework.publictransportrest.model.TicketType;
@@ -20,6 +19,7 @@ import ptc.springframework.publictransportrest.testdata.TicketTypeTestData;
 import ptc.springframework.publictransportrest.testdata.UserTestData;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +44,9 @@ class TicketServiceTest {
 
     @Mock
     private TicketRepository ticketRepository;
+
+    @Mock
+    private AccountService accountService;
 
     @BeforeEach
     void setUp() {
@@ -76,7 +79,7 @@ class TicketServiceTest {
         Mockito.when(userRepository.findById(any(UUID.class))).thenReturn(otionalUserResult);
 
         //when
-        List<Ticket> ticketResultList = userRepository.findById(UUID.randomUUID()).get().getTickets();
+        List<Ticket> ticketResultList = ticketService.getTicketsByUserId(UUID.randomUUID());
 
         //then
         assertEquals(1, ticketResultList.size());
@@ -84,7 +87,7 @@ class TicketServiceTest {
     }
 
     @Test
-    void testGetTicketTypes() {
+    void purchaseTicket() {
         //given
         User user = UserTestData.getDavidUser();
         TicketType ticketType = TicketTypeTestData.getSingleTicketType();
@@ -95,7 +98,6 @@ class TicketServiceTest {
         Mockito.when(ticketRepository.save(any(Ticket.class))).thenReturn(ticket);
 
         //when
-        System.out.println(DateTimeFormatterHelper.parseDate(LocalDate.now()));
         ticketService.purchaseTicket(user.getId(), "Singel ticket", DateTimeFormatterHelper.parseDate(LocalDate.now()));
 
         //then
@@ -107,7 +109,7 @@ class TicketServiceTest {
     }
 
     @Test
-    void whenUserNotFoundExceptionThrownGetTicketTypes() {
+    void whenUserNotFoundExceptionThrownInPurchaseTicket() {
         //given
         Mockito.when(userRepository.findById(any(UUID.class))).thenThrow(UserNotfoundException.class);
         //then
@@ -118,7 +120,7 @@ class TicketServiceTest {
     }
 
     @Test
-    void whenTicketTypeNotFoundExceptionThrownGetTicketTypes() {
+    void whenTicketTypeNotFoundExceptionThrownInPurchaseTicket() {
         //given
         Mockito.when(userRepository.findById(any(UUID.class))).thenReturn(Optional.of(UserTestData.getDavidUser()));
         Mockito.when(ticketTypeRepository.findByName(any(String.class))).thenThrow(TicketTypeNotFoundException.class);
@@ -127,5 +129,121 @@ class TicketServiceTest {
             ticketService.purchaseTicket(UUID.randomUUID(),
                     "Single ticket", DateTimeFormatterHelper.parseDate(LocalDate.now()))
         );
+    }
+
+    @Test
+    void deletTicketOrPass() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(user.getTickets().get(0)));
+        Mockito.doNothing().when(accountService).addToBalance(any(UUID.class), any(Long.class));
+        Mockito.doNothing().when(ticketRepository).delete(any(Ticket.class));
+
+        //when
+        ticketService.deleteTicket(UUID.randomUUID(), UUID.randomUUID());
+
+        //then
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+        Mockito.verify(accountService, times(1)).addToBalance(any(UUID.class), any(Long.class));
+        Mockito.verify(ticketRepository, times(1)).delete(any(Ticket.class));
+    }
+
+    @Test
+    void deleteAlreadyValidatedTicket() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(0);
+        ticket.setValidationDate(LocalDateTime.now());
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //then
+        TicketAlreadyValidatedException exception = assertThrows(TicketAlreadyValidatedException.class, () ->
+                ticketService.deleteTicket(UUID.randomUUID(), UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void deleteExpiredTicket() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(0);
+        ticket.setValidTo(LocalDateTime.now().minusDays(1L));
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //then
+        TicketExpiredException exception = assertThrows(TicketExpiredException.class, () ->
+                ticketService.deleteTicket(UUID.randomUUID(), UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void deleteValidationStartedPass() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(1);
+        ticket.setValidFrom(LocalDateTime.now().minusDays(1L));
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //then
+        TicketExpiredException exception = assertThrows(TicketExpiredException.class, () ->
+                ticketService.deleteTicket(UUID.randomUUID(), UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void validateTicket() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(0);
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+        Mockito.when(ticketRepository.save(any(Ticket.class))).thenReturn(ticket);
+
+        //when
+        ticketService.validateTicket(UUID.randomUUID());
+
+        //then
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+        Mockito.verify(ticketRepository, times(1)).save(any(Ticket.class));
+    }
+
+    @Test
+    void validateTicketCantValidatePassException() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(1);
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //when+then
+        CantValidatePassException exception = assertThrows(CantValidatePassException.class, () ->
+                ticketService.validateTicket(UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void validateTicketTicketAlreadyValidatedException() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(0);
+        ticket.setValidationDate(LocalDateTime.now());
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //when+then
+        TicketAlreadyValidatedException exception = assertThrows(TicketAlreadyValidatedException.class, () ->
+                ticketService.validateTicket(UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void validateTicketTicketExpiredException() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        Ticket ticket = user.getTickets().get(0);
+        ticket.setValidTo(LocalDateTime.now().minusDays(1));
+        Mockito.when(ticketRepository.findById(any(UUID.class))).thenReturn(Optional.of(ticket));
+
+        //when+then
+        TicketExpiredException exception = assertThrows(TicketExpiredException.class, () ->
+                ticketService.validateTicket(UUID.randomUUID()));
+        Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
     }
 }

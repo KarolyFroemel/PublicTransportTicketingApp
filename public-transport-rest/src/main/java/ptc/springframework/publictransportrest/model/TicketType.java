@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -18,7 +19,6 @@ import java.util.UUID;
 public class TicketType {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
     @NonNull
@@ -33,8 +33,8 @@ public class TicketType {
     @Min(1)
     private Long price;
 
-    @OneToOne(mappedBy = "ticketType", fetch = FetchType.LAZY)
-    private Ticket tickets;
+    @OneToMany(mappedBy = "ticketType", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 
     @NonNull
     private Long expirationTime;

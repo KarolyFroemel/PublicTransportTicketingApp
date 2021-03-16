@@ -17,14 +17,13 @@ import java.util.UUID;
 public class Ticket {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="ticket_type_id", referencedColumnName = "id" ,nullable=false)
     private TicketType ticketType;
 
@@ -39,6 +38,16 @@ public class Ticket {
 
     private LocalDateTime validationDate;
 
+    public boolean isTicketValidated() {
+         return this.validationDate == null ? false : true;
+    }
 
+    public boolean isTicketExpired() {
+        return LocalDateTime.now().isAfter(validTo);
+    }
+
+    public boolean isPassValidationStarted() {
+        return LocalDateTime.now().isAfter(validFrom);
+    }
 
 }

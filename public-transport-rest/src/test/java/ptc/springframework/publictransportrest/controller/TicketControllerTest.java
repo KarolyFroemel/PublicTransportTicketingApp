@@ -19,8 +19,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import ptc.springframework.publictransportrest.PublicTransportRestApplication;
+import ptc.springframework.publictransportrest.exception.*;
+import ptc.springframework.publictransportrest.helper.DateTimeFormatterHelper;
 import ptc.springframework.publictransportrest.mapper.TicketMapper;
 import ptc.springframework.publictransportrest.model.Ticket;
 import ptc.springframework.publictransportrest.model.TicketType;
@@ -30,12 +31,13 @@ import ptc.springframework.publictransportrest.testdata.TicketTestData;
 import ptc.springframework.publictransportrest.testdata.TicketTypeTestData;
 import ptc.springframework.publictransportrest.testdata.UserTestData;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.times;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,32 +45,43 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles(profiles = "test")
-@Transactional
 class TicketControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Mock
-    TicketService ticketService;
+    private TicketService ticketService;
 
     @Autowired
-    TicketMapper ticketMapper;
+    private TicketMapper ticketMapper;
 
     @Mock
-    TicketMapper ticketMapperMock;
+    private TicketMapper ticketMapperMock;
 
     @InjectMocks
-    TicketController ticketController;
+    private TicketController ticketController;
 
     private List<TicketType> ticketTypesTest;
 
     private List<Ticket> userTickets;
 
+    private PurchaseTicketModel purchaseTicketModel;
+
+    private ObjectMapper mapper = new ObjectMapper();
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(ticketController).build();
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(ticketController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
+
+        purchaseTicketModel = new PurchaseTicketModel();
+        purchaseTicketModel.setTicketName("Single ticket");
+        purchaseTicketModel.setUserId(UUID.randomUUID());
+        purchaseTicketModel.setValidFrom(DateTimeFormatterHelper.parseDate(LocalDate.now()));
 
         ticketTypesTest = TicketTypeTestData.getTicketTypeList();
     }
@@ -81,20 +94,20 @@ class TicketControllerTest {
                 .when(ticketMapperMock.toTicketTypeModelList(any()))
                 .thenReturn(ticketMapper.toTicketTypeModelList(TicketTypeTestData.getTicketTypeList()));
 
-//        when+then
+        //when+then
         mockMvc.perform(get("/tickets").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].name").value("Single ticket"))
                 .andExpect(jsonPath("$.[0].description").value("Single ticket for one ride. Valid to 60 minutes from validation."))
-                .andExpect(jsonPath("$.[0].price").value(360L))
+                .andExpect(jsonPath("$.[0].price").value(1L))
                 .andExpect(jsonPath("$.[0].expirationTime").value(366L))
                 .andExpect(jsonPath("$.[1].name").value("Monthly pass"))
                 .andExpect(jsonPath("$.[1].description").value("Monthly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase."))
-                .andExpect(jsonPath("$.[1].price").value(10000L))
+                .andExpect(jsonPath("$.[1].price").value(30L))
                 .andExpect(jsonPath("$.[1].expirationTime").value(31L))
                 .andExpect(jsonPath("$.[2].name").value("Daily pass"))
                 .andExpect(jsonPath("$.[2].description").value("Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day."))
-                .andExpect(jsonPath("$.[2].price").value(1500L))
+                .andExpect(jsonPath("$.[2].price").value(10L))
                 .andExpect(jsonPath("$.[2].expirationTime").value(1L));
 
     }
@@ -111,7 +124,7 @@ class TicketControllerTest {
 
         Mockito.when(ticketMapperMock.toTicketModelList(any())).thenReturn(ticketModelList);
 
-        //when*then
+        //when+then
         mockMvc.perform(get("/tickets/516ce0cc-4b70-11eb-ae93-0242ac130002").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].id").value(ticketModelList.get(0).getId().toString()))
@@ -123,22 +136,127 @@ class TicketControllerTest {
     }
 
     @Test
+    void getUserTicketsByIdUserNotFound() throws Exception {
+        //given
+        User user = UserTestData.getDavidUser();
+        userTickets = TicketTestData.getTicketList(user);
+        List<TicketModel> ticketModelList = ticketMapper.toTicketModelList(userTickets);
+        Mockito.doThrow(new UserNotfoundException()).when(ticketService).getTicketsByUserId(any(UUID.class));
+
+        //when+then
+        mockMvc.perform(get("/tickets/516ce0cc-4b70-11eb-ae93-0242ac130002")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("User not found error!"));
+    }
+
+    @Test
     void purchaseTicket() throws Exception {
         //given
-        PurchaseTicketModel purchaseTicketModel = new PurchaseTicketModel();
-        purchaseTicketModel.setTicketName("Single ticket");
-        purchaseTicketModel.setUserId(UUID.randomUUID());
-        purchaseTicketModel.setValidFrom("2021-01-01");
-
-        ObjectMapper mapper = new ObjectMapper();
-
         String purchaseTicketModelJsonString = mapper.writeValueAsString(purchaseTicketModel);
-
-        //when*then
+        Mockito.doNothing().when(ticketService)
+                .purchaseTicket(any(UUID.class), any(String.class), any(String.class));
+        //when
         mockMvc.perform(
                 post("/tickets/purchaseTicket")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(purchaseTicketModelJsonString))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void purchaseTicketUserNotFound() throws Exception {
+        //given
+        String purchaseTicketModelJsonString = mapper.writeValueAsString(purchaseTicketModel);
+        Mockito.doThrow(new UserNotfoundException())
+                .when(ticketService)
+                .purchaseTicket(any(UUID.class), any(String.class), any(String.class));
+
+        //when+then
+        mockMvc.perform(
+                post("/tickets/purchaseTicket")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(purchaseTicketModelJsonString))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("User not found error!"));
+    }
+
+    @Test
+    void purchaseTicketTicketTypeNotFound() throws Exception {
+        //given
+        String purchaseTicketModelJsonString = mapper.writeValueAsString(purchaseTicketModel);
+        Mockito.doThrow(new TicketTypeNotFoundException())
+                .when(ticketService)
+                .purchaseTicket(any(UUID.class), any(String.class), any(String.class));
+
+        //when+then
+        mockMvc.perform(
+                post("/tickets/purchaseTicket")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(purchaseTicketModelJsonString))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Ticket type not found!"));
+    }
+
+    @Test
+    void validateTicket() throws Exception {
+        //given
+        Mockito.doNothing().when(ticketService).validateTicket(any(UUID.class));
+
+        //when + then
+        mockMvc.perform(
+                put("/tickets/validateTicket/"+UUID.randomUUID())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Mockito.verify(ticketService, times(1)).validateTicket(any(UUID.class));
+
+    }
+
+    @Test
+    void validateTicketException() throws Exception {
+        //given
+        Mockito.doNothing().when(ticketService).validateTicket(any(UUID.class));
+        Mockito.doThrow(new TicketAlreadyValidatedException())
+                .when(ticketService)
+                .validateTicket(any(UUID.class));
+
+        //when + then
+        mockMvc.perform(
+                put("/tickets/validateTicket/"+UUID.randomUUID())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Ticket already validated!"));
+    }
+
+    @Test
+    void deleteTicket() throws Exception {
+        //given
+        Mockito.doNothing().when(ticketService).validateTicket(any(UUID.class));
+
+        //when + then
+        mockMvc.perform(
+                delete("/tickets/"+UUID.randomUUID()+"/deleteTicket/"+ UUID.randomUUID())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Mockito.verify(ticketService, times(1)).deleteTicket(any(UUID.class), any(UUID.class));
+
+    }
+
+    @Test
+    void deleteTicketException() throws Exception {
+        //given
+        Mockito.doNothing().when(ticketService).deleteTicket(any(UUID.class), any(UUID.class));
+        Mockito.doThrow(new TicketExpiredException())
+                .when(ticketService)
+                .deleteTicket(any(UUID.class), any(UUID.class));
+
+        //when + then
+        mockMvc.perform(
+                delete("/tickets/"+UUID.randomUUID()+"/deleteTicket/"+ UUID.randomUUID())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Ticket is expired!"));
     }
 }

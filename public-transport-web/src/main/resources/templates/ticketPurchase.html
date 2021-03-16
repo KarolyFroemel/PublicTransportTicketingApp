@@ -13,7 +13,7 @@
 <div class="container">
     <div class="navbar">
         <a href="#"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
-        <a class="active" href="#"><i class="fa fa-money" aria-hidden="true"></i> Buy ticket</a>
+        <a class="active" th:href="@{'/ticketPurchasePage'}"><i class="fa fa-money" aria-hidden="true"></i> Buy ticket</a>
         <a href="#"><i class="fa fa-fw fa-ticket" aria-hidden="true"></i> Validate ticket</a>
         <a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> My tickets</a>
         <a href="#"><i class="fa fa-eraser" aria-hidden="true"></i> Refound ticket</a>
@@ -36,7 +36,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${tickets.empty}">
+                <tr th:if="${tickets.isEmpty()}">
                     <td colspan="2"> No tickets Available </td>
                 </tr>
                 <tr th:each="ticket : ${tickets}">
@@ -60,10 +60,9 @@
                     <div class="form-group">
                         <label for="ticket">Choose ticket type</label>
                         <select class="form-control selectpicker" th:field="*{ticketTypeName}" id="ticket">
-                            <option value="">Nothing selected</option>
                             <option th:each="ticket : ${tickets}"
                                     th:value="${ticket.name}"
-                                    th:text="${ticket.name}">pizza
+                                    th:text="${ticket.name}">
                             </option>
                         </select>
                     </div>
@@ -80,7 +79,7 @@
 
                     </div>
 
-                    <button class="btn btn-primary" type="submit" style="background-color: #4CAF50" name="montlyPass">
+                    <button class="btn btn-primary" type="submit" style="background-color: #4CAF50" name="userId">
                         Buy Ticket
                     </button>
                 </form>

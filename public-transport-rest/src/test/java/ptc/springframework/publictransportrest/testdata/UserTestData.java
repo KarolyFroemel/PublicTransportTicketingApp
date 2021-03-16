@@ -10,11 +10,12 @@ public class UserTestData {
 
     public static User getEdisonUser() {
         User user = User.builder()
-                .id(UUID.randomUUID())
+                .id(UUID.fromString("472ea919-f2e6-48e8-b373-e7268b3b2dd8"))
                 .name("Edinson Cavani")
                 .email("edinson.cavani@gmail.com")
-                .balance(1000000L)
                 .build();
+
+        user.setAccount(AccountTestData.getNewTestAccount(user));
 
         user.setTickets(TicketTestData.getTicketList(user));
 
@@ -23,11 +24,12 @@ public class UserTestData {
 
     public static User getDavidUser() {
         User user =  User.builder()
-                .id(UUID.randomUUID())
+                .id(UUID.fromString("f1a0e02d-2134-4e95-84b7-e729534d49e2"))
                 .name("David Beckham")
                 .email("david.beckham@gmail.com")
-                .balance(1000000L)
                 .build();
+
+        user.setAccount(AccountTestData.getNewTestAccount(user));
 
         user.setTickets(TicketTestData.getTicketList(user));
 

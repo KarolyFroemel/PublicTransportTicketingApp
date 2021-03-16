@@ -59,7 +59,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Ticket'
         '404':
-          description: Tickets not found!
+          description: User not found!
           content:
             application/json:
               schema:
@@ -83,6 +83,124 @@ paths:
           description: Ticket purchased
         '404':
           description: Ticket purchase failed!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tickets/validateTicket/{ticketId}:
+    put:
+      tags:
+        - ticket
+      summary: Validate ticket
+      operationId: validateTicket
+      description: Validate one ticket.
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          description: ticket id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Ticket validation was successful
+        '404':
+          description: Validation error!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tickets/{userId}/deleteTicket/{ticketId}:
+    delete:
+      tags:
+        - ticket
+      summary: Delete ticket
+      operationId: deleteTicket
+      description: delete one ticket or pass.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: ticketId
+          in: path
+          required: true
+          description: ticket id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Ticket validation was successful
+        '404':
+          description: Validation error!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /account/getBalance/{userId}:
+    get:
+      tags:
+        - account
+      summary: Get account balance
+      operationId: getBalance
+      description: Get user account balance.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Get user balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '404':
+          description: Account not found!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /account/{userId}/fillBalance/{balance}:
+    put:
+      tags:
+        - account
+      summary: Fill account balance
+      operationId: fillUserBalance
+      description: Fill user account balance.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: balance
+          in: path
+          required: true
+          description: addition balance
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: User balance changed successfully.
+        '404':
+          description: Error during changing balance!
           content:
             application/json:
               schema:
@@ -150,3 +268,15 @@ components:
           type: string
         validFrom:
           type: string
+      required:
+        - userId
+        - ticketName
+        - validFrom
+
+    Balance:
+      type: object
+      properties:
+        balance:
+          type: string
+      required:
+        - blance

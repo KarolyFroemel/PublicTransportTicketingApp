@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TicketType {
+public class TicketTypeModel {
 
     private String name;
     private String Description;

@@ -25,14 +25,17 @@ class UserRepositoryTest {
     @Autowired
     TicketRepository ticketRepository;
 
+    @Autowired
+    AccountRepository accountRepository;
+
     @Test
     public void saveUser() {
+
         User savedUser = userRepository.save(
                 User.builder()
                         .id(UUID.randomUUID())
                         .name("Edinson Cavani")
                         .email("edinson.cavani@gmail.com")
-                        .balance(1000000L)
                         .build()
         );
 
@@ -42,7 +45,6 @@ class UserRepositoryTest {
 
         assertEquals("Edinson Cavani", user.orElse(new User()).getName());
         assertEquals("edinson.cavani@gmail.com", user.orElse(new User()).getEmail());
-        assertEquals(1000000L, user.orElse(new User()).getBalance());
     }
 
 }

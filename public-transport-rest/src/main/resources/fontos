@@ -420,3 +420,97 @@ Mock
 
  az integracios tesztek parameterei
  https://www.baeldung.com/integration-testing-in-spring
+
+
+
+https://stackoverflow.com/questions/44593066/spring-webflux-webclient-get-body-on-error
+
+Don't we have onStatus()?
+
+    public Mono<Void> cancel(SomeDTO requestDto) {
+        return webClient.post().uri(SOME_URL)
+                .body(fromObject(requestDto))
+                .header("API_KEY", properties.getApiKey())
+                .retrieve()
+                .onStatus(HttpStatus::isError, response -> {
+                    logTraceResponse(log, response);
+                    return Mono.error(new IllegalStateException(
+                            String.format("Failed! %s", requestDto.getCartId())
+                    ));
+                })
+                .bodyToMono(Void.class)
+                .timeout(timeout);
+    }
+
+And:
+
+    public static void logTraceResponse(Logger log, ClientResponse response) {
+        if (log.isTraceEnabled()) {
+            log.trace("Response status: {}", response.statusCode());
+            log.trace("Response headers: {}", response.headers().asHttpHeaders());
+            response.bodyToMono(String.class)
+                    .publishOn(Schedulers.elastic())
+                    .subscribe(body -> log.trace("Response body: {}", body));
+        }
+    }
+
+Share
+Improve this answer
+Follow
+answered Jun 3 '20 at 15:02
+WesternGun
+6,5984747 silver badges9292 bronze badges
+add a comment
+7
+
+I do something like this:
+
+Mono<ClientResponse> responseMono = requestSpec.exchange()
+            .doOnNext(response -> {
+                HttpStatus httpStatus = response.statusCode();
+                if (httpStatus.is4xxClientError() || httpStatus.is5xxServerError()) {
+                    throw new WebClientException(
+                            "ClientResponse has erroneous status code: " + httpStatus.value() +
+                                    " " + httpStatus.getReasonPhrase());
+                }
+            });
+
+and then:
+
+responseMono.subscribe(v -> { }, ex -> processError(ex));
+
+https://www.websparrow.org/spring/spring-boot-consuming-a-rest-services-with-webclient
+https://www.websparrow.org/spring/spring-boot-handling-errors-in-webclient
+https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/
+
+https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/
+
+
+client.post()
+                .uri("/tickets/purchaseTicket")
+                .body(Mono.just(new), Dagi.class)
+                .retrieve();
+                .onStatus(HttpStatus::is4xxClientError, clientResponse ->
+                        clientResponse.bodyToMono(Error.class).flatMap(error -> Mono.error(new ClientResponseException(error)))
+                )
+                .onStatus(HttpStatus::is5xxServerError, clientResponse ->
+                        clientResponse.bodyToMono(String.class).flatMap(error -> Mono.error(new ClientResponseException(error)))
+                )
+
+
+webclient leiras
+https://howtodoinjava.com/spring-webflux/webclient-get-post-example/#post
+
+vannak itt nagyon jo tesztek is
+https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/
+webclient teszt
+
+mock mvc example
+
+https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
+
+    @ExceptionHandler(WebClientResponseException.class)
+    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException ex) {
+        log.error("Error from WebClient - Status {}, Body {}", ex.getRawStatusCode(), ex.getResponseBodyAsString(), ex);
+        return ResponseEntity.status(ex.getRawStatusCode()).body(ex.getResponseBodyAsString());
+    }

@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ptc.springframework.publictransportweb.model.TicketType;
-import ptc.springframework.publictransportweb.model.TicketPurchaseDTO;
+import ptc.springframework.publictransportweb.model.TicketPurchaseInfoDTO;
+import ptc.springframework.publictransportweb.model.TicketTypeModel;
 import ptc.springframework.publictransportweb.service.TicketService;
+
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping
@@ -22,21 +24,27 @@ public class WebTicketController {
     }
 
     @GetMapping("/ticket/getTicketTypes")
-    public ResponseEntity<List<TicketType>> getTicketTypes(){
+    public ResponseEntity<List<TicketTypeModel>> getTicketTypes(){
         return ResponseEntity.ok(ticketService.getTicketTypes());
+    }
+
+    @GetMapping("/home")
+    public String homePage(Model model){
+        return "home";
     }
 
     @GetMapping("/ticketPurchasePage")
     public String ticketPurchasePage(Model model){
         model.addAttribute("tickets", ticketService.getTicketTypes());
-        model.addAttribute("ticketPurchaseDTO", new TicketPurchaseDTO());
-        return "ticketPurchase";
+        model.addAttribute("ticketPurchaseDTO", new TicketPurchaseInfoDTO());
+        return "ticketPurchaseNew";
     }
 
     @PostMapping("/ticketPurchasePage")
-    public String ticketPurchasePageSave(TicketPurchaseDTO ticketPurchaseDTO, Model model){
-        System.out.println("ticket type: " + ticketPurchaseDTO.getTicketTypeName());
-        System.out.println("Ticket date: " + ticketPurchaseDTO.getValidFrom());
+    public String ticketPurchasePageSave(TicketPurchaseInfoDTO ticketPurchaseDTO){
+        //TODO: change it when authentication created
+        ticketPurchaseDTO.setUserId(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
+        ticketService.purchaseTicket(ticketPurchaseDTO);
         return "successfulTicketPurchase";
     }
 }

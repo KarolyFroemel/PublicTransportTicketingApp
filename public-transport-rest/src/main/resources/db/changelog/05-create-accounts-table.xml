@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="Karoly_Froemel" id="7">
+        <createTable tableName="accounts">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_accounts_users" references="users(id)"/>
+            </column>
+            <column name="last_modification" type="TIMESTAMP"/>
+            <column name="balance" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <insert tableName="accounts">
+            <column name="id" value="c8050f05-aa4d-4711-868a-a8615f1488a4"/>
+            <column name="user_id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
+            <column name="last_modification" value="2020-12-01 00:00:01"/>
+            <column name="balance" value="1000000"/>
+        </insert>
+
+        <insert tableName="accounts">
+            <column name="id" value="cca958ed-7f52-44c7-9b06-a43621b40145"/>
+            <column name="user_id" value="234f00e0-e544-48ec-9d68-e1bef9fedd9f"/>
+            <column name="last_modification" value="2020-12-01 00:00:01"/>
+            <column name="balance" value="1000000"/>
+        </insert>
+
+        <rollback>
+            <dropTable tableName="accounts"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

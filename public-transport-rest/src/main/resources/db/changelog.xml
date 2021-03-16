@@ -9,5 +9,5 @@
     <include file="/db/changelog/02-insert-data-to-ticket-types-table.xml"/>
     <include file="/db/changelog/03-create-tickets-and-users-table.xml"/>
     <include file="/db/changelog/04-insert-data-to-tickets-and-users-table.xml"/>
-
+    <include file="/db/changelog/05-create-accounts-table.xml"/>
 </databaseChangeLog>

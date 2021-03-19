@@ -11,7 +11,6 @@ import ptc.springframework.publictransportweb.model.TicketTypeModel;
 import ptc.springframework.publictransportweb.service.TicketService;
 
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping
@@ -37,13 +36,11 @@ public class WebTicketController {
     public String ticketPurchasePage(Model model){
         model.addAttribute("tickets", ticketService.getTicketTypes());
         model.addAttribute("ticketPurchaseDTO", new TicketPurchaseInfoDTO());
-        return "ticketPurchaseNew";
+        return "ticketPurchase";
     }
 
     @PostMapping("/ticketPurchasePage")
     public String ticketPurchasePageSave(TicketPurchaseInfoDTO ticketPurchaseDTO){
-        //TODO: change it when authentication created
-        ticketPurchaseDTO.setUserId(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
         ticketService.purchaseTicket(ticketPurchaseDTO);
         return "successfulTicketPurchase";
     }

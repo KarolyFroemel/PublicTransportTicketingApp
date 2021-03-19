@@ -13,6 +13,7 @@ import ptc.springframework.publictransportrest.repository.TicketTypeRepository;
 import ptc.springframework.publictransportrest.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class TicketService {
     }
 
     @Transactional
-    public void purchaseTicket(UUID userId, String ticketName, String date) throws UserNotfoundException, TicketTypeNotFoundException {
+    public void purchaseTicket(UUID userId, String ticketName, String validFrom) throws UserNotfoundException, TicketTypeNotFoundException {
         log.info("Create new ticket: {} for user: {}!", ticketName, userId);
         log.info("user:"+userId);
         log.info("ticket:"+ticketName);
@@ -52,14 +53,13 @@ public class TicketService {
         TicketType ticketType = ticketTypeRepository.findByName(ticketName).orElseThrow(TicketTypeNotFoundException::new);
         log.info("ticket type id: " + ticketType.getId());
 
-
         Ticket newTicket = Ticket.builder()
                 .id(UUID.randomUUID())
                 .user(user)
                 .ticketType(ticketType)
                 .purchaseDate(LocalDateTime.now())
-                .validFrom(DateTimeFormatterHelper.parseStringToDateTime(date))
-                .validTo(calculateValidTo(ticketType))
+                .validFrom(calculateValidFrom(validFrom, ticketType))
+                .validTo(calculateValidTo(validFrom, ticketType))
                 .build();
 
         log.info("new ticket id:  " + newTicket.getId());
@@ -116,7 +116,31 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    private LocalDateTime calculateValidTo(TicketType ticketType) {
-        return LocalDateTime.now().plusDays(ticketType.getExpirationTime());
+    private LocalDateTime calculateValidTo(String validFrom, TicketType ticketType) {
+
+        LocalDateTime startDate = DateTimeFormatterHelper.parseStringToEndOfDate(validFrom);
+
+        if("Single ticket".equals(ticketType.getName()) ||
+                startDate.isBefore(LocalDateTime.now().minusMinutes(3))) {
+            startDate = DateTimeFormatterHelper.parseStringToEndOfDate(LocalDate.now().toString());
+        }
+
+        if ("Daily pass".equals(ticketType.getName())) {
+            return startDate;
+        }
+
+        return startDate.plusDays(ticketType.getExpirationTime());
+    }
+
+    private LocalDateTime calculateValidFrom(String validFrom, TicketType ticketType) {
+
+        LocalDateTime startDate = DateTimeFormatterHelper.parseStringToStartOfDate(validFrom);
+
+        if("Single ticket".equals(ticketType.getName()) ||
+                startDate.isBefore(LocalDateTime.now().minusMinutes(3))) {
+            startDate = DateTimeFormatterHelper.parseStringToStartOfDate(LocalDate.now().toString());
+        }
+
+        return startDate;
     }
 }

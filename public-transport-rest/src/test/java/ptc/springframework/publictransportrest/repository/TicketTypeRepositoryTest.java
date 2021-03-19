@@ -21,7 +21,6 @@ class TicketTypeRepositoryTest {
     private TicketTypeRepository ticketTypeRepository;
 
     @Test
-    @DirtiesContext //TODO: azert ennek meg utananezni, hogy helyesen hasznaljuk
     public void findAllticketTypes() {
         List<TicketType> ticketTypesTest = TicketTypeTestData.getTicketTypeList();
 
@@ -33,7 +32,6 @@ class TicketTypeRepositoryTest {
 
 
     @Test
-    @DirtiesContext
     public void emptyTicketTypesTable() {
 
         List<TicketType> ticketTypes = ticketTypeRepository.findAll();
@@ -42,7 +40,6 @@ class TicketTypeRepositoryTest {
     }
 
     @Test
-    @DirtiesContext
     public void findByName() {
         TicketType ticketType = TicketTypeTestData.getSingleTicketType();
         ticketTypeRepository.save(ticketType);

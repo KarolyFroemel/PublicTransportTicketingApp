@@ -22,11 +22,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h1> My tickets </h1>
+            <h1> Ticket types </h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <table class="table">
                 <thead>
                 <tr>
@@ -50,7 +50,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h1> Buy Ticket </h1>
+            <h1> Purchase Ticket </h1>
         </div>
     </div>
     <div class="container">
@@ -59,7 +59,7 @@
                 <form method="post" th:object="${ticketPurchaseDTO}">
                     <div class="form-group">
                         <label for="ticket">Choose ticket type</label>
-                        <select class="form-control selectpicker" th:field="*{ticketTypeName}" id="ticket">
+                        <select class="form-control selectpicker" th:field="*{ticketTypeName}" id="ticket" style="width: 175px">
                             <option th:each="ticket : ${tickets}"
                                     th:value="${ticket.name}"
                                     th:text="${ticket.name}">
@@ -70,8 +70,8 @@
                     <div class="form-group">
                         <label for="validFrom">Start date of validity</label>
                         <div class="input-group date">
-                            <input type="text" class="form-control" id="validFrom" autocomplete="off"
-                                   th:field="*{validFrom}" placeholder="Select date"/>
+                            <input type="date" class="form-control" id="validFrom" autocomplete="off"
+                                   th:field="*{validFrom}" style="width: 175px"/>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                             </div>
@@ -79,28 +79,13 @@
 
                     </div>
 
-                    <button class="btn btn-primary" type="submit" style="background-color: #4CAF50" name="userId">
+                    <button class="btn btn-primary" type="submit" style="background-color: #4CAF50" name="userId" th:value="516ce0cc-4b70-11eb-ae93-0242ac130002">
                         Buy Ticket
                     </button>
                 </form>
             </div>
         </div>
     </div>
-
-
-
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-
-    <script>
-        $('.input-group.date').datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            format: "yyyy-mm-dd"
-        });
-    </script>
 </div>
 </body>
 </html>

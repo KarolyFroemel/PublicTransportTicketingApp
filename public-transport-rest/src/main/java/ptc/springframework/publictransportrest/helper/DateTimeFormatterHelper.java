@@ -17,9 +17,16 @@ public class DateTimeFormatterHelper {
         return timestamp.format(DATE_TIME_FORMATTER);
     }
 
-    public static LocalDateTime parseStringToDateTime(String date) {
+    public static LocalDateTime parseStringToStartOfDate(String date) {
         LocalDate localDate = LocalDate.parse(date);
         return localDate.atStartOfDay();
     }
+
+    public static LocalDateTime parseStringToEndOfDate(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return localDate.atTime(23,59,59,99);
+    }
+
+
 
 }

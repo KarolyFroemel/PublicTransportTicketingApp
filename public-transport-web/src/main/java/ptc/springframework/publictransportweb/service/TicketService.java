@@ -45,7 +45,7 @@ public class TicketService {
         log.debug("Get all tickets that belong to specific user");
 
         List<TicketModel> ticketDTOList = this.client
-                .post()
+                .get()
                 .uri("/tickets/"+userId.toString())
                 .retrieve()
                 .bodyToFlux(TicketModel.class)
@@ -68,6 +68,17 @@ public class TicketService {
         this.client.post()
                 .uri("/tickets/purchaseTicket")
                 .body(Mono.just(purchaseTicketModel), PurchaseTicketModel.class)
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+    }
+
+    //TODO: teszt is kell
+    public void validateTicket(UUID ticketId) {
+        log.debug("Validate ticket");
+
+        this.client.put()
+                .uri("/tickets/validateTicket/"+ticketId)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .block();

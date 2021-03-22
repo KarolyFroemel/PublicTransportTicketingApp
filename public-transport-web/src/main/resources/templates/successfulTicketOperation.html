@@ -4,7 +4,7 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link th:rel="stylesheet" th:href="@{../css/navbar.css}"/>
-    <title>Ticket validation page</title>
+    <title>REsult page</title>
 </head>
 <body>
 <div class="container">
@@ -18,10 +18,8 @@
         <a href="#" style="float: right"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Login</a>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <p th:text="${responseStatusCode}">responseStatusCode</p>
-            <p th:text="${message}">message</p>
-            <p th:text="${details}">details</p>
+        <div class="col-md-12" style="text-align: center">
+            <h1 th:text="${message}"> Successful </h1>
         </div>
     </div>
 </div>

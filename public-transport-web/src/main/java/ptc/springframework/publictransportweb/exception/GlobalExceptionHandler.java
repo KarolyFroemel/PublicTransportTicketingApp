@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler /*extends ResponseEntityExceptionHandler */{
 
     @ExceptionHandler(WebClientException.class)
     protected ResponseEntity<Object> handleWebClientException(WebClientException ex) {
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(WebClientResponseException.class)
-    public ModelAndView handleWebClientResponseException(WebClientResponseException ex) throws IOException {
+    public ModelAndView handleWebClientResponseException(WebClientResponseException ex, RedirectAttributes redirectAttributes) throws IOException {
         log.error("Error from WebClient - Status {}, Body {}", ex.getRawStatusCode(), ex.getResponseBodyAsString(), ex);
         ModelAndView modelAndView = new ModelAndView("error");
         ObjectMapper objectMapper = new ObjectMapper();

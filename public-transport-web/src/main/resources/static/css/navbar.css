@@ -47,3 +47,6 @@ td, th {
     display: flex;
     justify-content: center;
 }
+.centerClass td, th {
+    text-align:center;
+}

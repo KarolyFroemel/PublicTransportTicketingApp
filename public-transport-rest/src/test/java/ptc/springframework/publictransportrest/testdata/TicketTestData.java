@@ -23,6 +23,19 @@ public class TicketTestData {
                 .build();
     }
 
+    public static Ticket getValidatedSingleTicket(User user) {
+
+        return Ticket.builder()
+                .id(UUID.randomUUID())
+                .user(user)
+                .ticketType(TicketTypeTestData.getSingleTicketType())
+                .purchaseDate(DateTestData.getCurrentLocalDateTime())
+                .validFrom(DateTestData.getCurrentLocalDateTime())
+                .validTo(DateTestData.getPlusOneYearLocalDateTime())
+                .validationDate(DateTestData.getYesterdayLocalDateTime())
+                .build();
+    }
+
     public static Ticket getMonthlyPass(User user) {
 
         return Ticket.builder()
@@ -31,7 +44,19 @@ public class TicketTestData {
                 .ticketType(TicketTypeTestData.getMontlyPassTicketType())
                 .purchaseDate(DateTestData.getCurrentLocalDateTime())
                 .validFrom(DateTestData.getCurrentLocalDateTime())
-                .validTo(DateTestData.getPlusOneYearLocalDateTime())
+                .validTo(DateTestData.getPlusOneMonthLocalDateTime())
+                .build();
+    }
+
+    public static Ticket getExpiredMonthlyPass(User user) {
+
+        return Ticket.builder()
+                .id(UUID.randomUUID())
+                .user(user)
+                .ticketType(TicketTypeTestData.getMontlyPassTicketType())
+                .purchaseDate(DateTestData.getCurrentLocalDateTime())
+                .validFrom(DateTestData.getCurrentLocalDateTime())
+                .validTo(DateTestData.getYesterdayLocalDateTime())
                 .build();
     }
 
@@ -43,7 +68,19 @@ public class TicketTestData {
                 .ticketType(TicketTypeTestData.getDailyPassTicketType())
                 .purchaseDate(DateTestData.getCurrentLocalDateTime())
                 .validFrom(DateTestData.getCurrentLocalDateTime())
-                .validTo(DateTestData.getPlusOneYearLocalDateTime())
+                .validTo(DateTestData.getTomorrowLocalDateTime())
+                .build();
+    }
+
+    public static Ticket getExpiredDailyPass(User user) {
+
+        return Ticket.builder()
+                .id(UUID.randomUUID())
+                .user(user)
+                .ticketType(TicketTypeTestData.getDailyPassTicketType())
+                .purchaseDate(DateTestData.getCurrentLocalDateTime())
+                .validFrom(DateTestData.getCurrentLocalDateTime())
+                .validTo(DateTestData.getYesterdayLocalDateTime())
                 .build();
     }
 

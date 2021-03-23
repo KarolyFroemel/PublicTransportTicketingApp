@@ -28,18 +28,33 @@ public class TicketController implements TicketsApi {
 
     @Override
     public ResponseEntity<Void> deleteTicket(UUID userId, UUID ticketId) {
+        log.info("Delete ticket endpoint called");
         ticketService.deleteTicket(userId, ticketId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Override
     public ResponseEntity<List<TicketTypeModel>> getTicketTypes() {
+        log.info("Get ticket types endpoint called");
         return ResponseEntity.ok(ticketMapper.toTicketTypeModelList(ticketService.getTicketTypes()));
     }
 
     @Override
     public ResponseEntity<List<TicketModel>> getUserTicketsById(UUID userId) {
+        log.info("User tickets endpoint called");
         return ResponseEntity.ok(ticketMapper.toTicketModelList(ticketService.getTicketsByUserId(userId)));
+    }
+
+    @Override
+    public ResponseEntity<List<TicketModel>> getUserTicketsByIdToRefund(UUID userId) {
+        log.info("User tickets to refund endpoint called");
+        return ResponseEntity.ok(ticketMapper.toTicketModelList(ticketService.getTicketsByUserIdToRefund(userId)));
+    }
+
+    @Override
+    public ResponseEntity<List<TicketModel>> getUserTicketsByIdToValidate(UUID userId) {
+        log.info("User tickets to validate endpoint called");
+        return ResponseEntity.ok(ticketMapper.toTicketModelList(ticketService.getTicketsByUserIdToValidate(userId)));
     }
 
     @Override

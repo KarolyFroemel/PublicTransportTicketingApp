@@ -27,7 +27,7 @@ public class TicketService {
     private WebClient client = WebClient.create(host) ;
 
     public List<TicketTypeModel> getTicketTypes(){
-        log.debug("Get ticket types from api started");
+        log.info("Get ticket types from api started");
 
         List<TicketTypeModel> ticketTypes = this.client
                 .get()
@@ -42,9 +42,9 @@ public class TicketService {
     }
 
     public List<TicketModel> getUserTickets(UUID userId) {
-        log.debug("Get all tickets that belong to specific user");
+        log.info("Get all tickets that belong to specific user");
 
-        List<TicketModel> ticketDTOList = this.client
+        List<TicketModel> ticketList = this.client
                 .get()
                 .uri("/tickets/"+userId.toString())
                 .retrieve()
@@ -53,15 +53,45 @@ public class TicketService {
                 .block();
 
         log.debug("Get all tickets that belong to specific user from api successful");
-        return ticketDTOList;
+        return ticketList;
+    }
+
+    public List<TicketModel> getUserTicketsToValidate(UUID userId) {
+        log.info("Get all tickets that belong to specific user to validate");
+
+        List<TicketModel> ticketList = this.client
+                .get()
+                .uri("/tickets/validate/"+userId.toString())
+                .retrieve()
+                .bodyToFlux(TicketModel.class)
+                .collectList()
+                .block();
+
+        log.debug("Get all tickets that belong to specific user to validate from api successful");
+        return ticketList;
+    }
+
+    public List<TicketModel> getUserTicketsToRefund(UUID userId) {
+        log.info("Get all tickets that belong to specific user to validate");
+
+        List<TicketModel> ticketList = this.client
+                .get()
+                .uri("/tickets/refund/"+userId.toString())
+                .retrieve()
+                .bodyToFlux(TicketModel.class)
+                .collectList()
+                .block();
+
+        log.debug("Get all tickets that belong to specific user to validate from api successful");
+        return ticketList;
     }
 
     public void purchaseTicket(TicketPurchaseInfoDTO ticketPurchaseDTO) throws WebClientResponseException {
-        log.debug("Purchase new ticket");
+        log.info("Purchase new ticket");
         PurchaseTicketModel purchaseTicketModel = PurchaseTicketModel
                 .builder()
                 .ticketName(ticketPurchaseDTO.getTicketTypeName())
-                .validFrom(dateFormatHelper.dateFormatter(ticketPurchaseDTO.getValidFrom()))
+                .validFrom(ticketPurchaseDTO.getTicketTypeName().equals("Single ticket") ? null : dateFormatHelper.dateFormatter(ticketPurchaseDTO.getValidFrom()))
                 .userId(ticketPurchaseDTO.getUserId())
                 .build();
 
@@ -73,12 +103,21 @@ public class TicketService {
                 .block();
     }
 
-    //TODO: teszt is kell
     public void validateTicket(UUID ticketId) {
-        log.debug("Validate ticket");
+        log.info("Validate ticket");
 
         this.client.put()
                 .uri("/tickets/validateTicket/"+ticketId)
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+    }
+
+    public void refundTicket(UUID userId, UUID ticketId) {
+        log.info("Refund ticket");
+
+        this.client.delete()
+                .uri("/tickets/"+userId+"/deleteTicket/"+ticketId)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .block();

@@ -17,10 +17,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class TicketService {
+
+    private final String SINGLE_TICKET = "Single ticket";
 
     @Autowired
     TicketTypeRepository ticketTypeRepository;
@@ -44,11 +47,27 @@ public class TicketService {
         return userRepository.findById(id).orElseThrow(UserNotfoundException::new).getTickets();
     }
 
+    public List<Ticket> getTicketsByUserIdToValidate(UUID id) throws UserNotfoundException {
+        log.info("Find all tickets by user id!" );
+        List<Ticket> tickets = userRepository.findById(id).orElseThrow(UserNotfoundException::new).getTickets();
+
+        return  tickets.stream().filter(ticket -> !ticket.isTicketValidated() &&
+                !ticket.isTicketExpired() &&
+                ticket.getTicketType().getName().equals(SINGLE_TICKET))
+                .collect(Collectors.toList());
+    }
+
+    public List<Ticket> getTicketsByUserIdToRefund(UUID id) throws UserNotfoundException {
+        log.info("Find all tickets by user id!" );
+        List<Ticket> tickets = userRepository.findById(id).orElseThrow(UserNotfoundException::new).getTickets();
+
+        return tickets.stream().filter(ticket -> !ticket.isTicketValidated() && !ticket.isTicketExpired())
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void purchaseTicket(UUID userId, String ticketName, String validFrom) throws UserNotfoundException, TicketTypeNotFoundException {
         log.info("Create new ticket: {} for user: {}!", ticketName, userId);
-        log.info("user:"+userId);
-        log.info("ticket:"+ticketName);
         User user = userRepository.findById(userId).orElseThrow(UserNotfoundException::new);
         TicketType ticketType = ticketTypeRepository.findByName(ticketName).orElseThrow(TicketTypeNotFoundException::new);
         log.info("ticket type id: " + ticketType.getId());
@@ -95,6 +114,7 @@ public class TicketService {
         ticketRepository.delete(ticket);
     }
 
+    @Transactional
     public void validateTicket(UUID ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(TicketNotFoundException::new);
 
@@ -118,27 +138,25 @@ public class TicketService {
 
     private LocalDateTime calculateValidTo(String validFrom, TicketType ticketType) {
 
-        LocalDateTime startDate = DateTimeFormatterHelper.parseStringToEndOfDate(validFrom);
-
-        if("Single ticket".equals(ticketType.getName()) ||
-                startDate.isBefore(LocalDateTime.now().minusMinutes(3))) {
-            startDate = DateTimeFormatterHelper.parseStringToEndOfDate(LocalDate.now().toString());
-        }
-
-        if ("Daily pass".equals(ticketType.getName())) {
-            return startDate;
-        }
-
-        return startDate.plusDays(ticketType.getExpirationTime());
+        return calculateStartDate(validFrom, ticketType).plusDays(ticketType.getExpirationTime());
     }
 
     private LocalDateTime calculateValidFrom(String validFrom, TicketType ticketType) {
 
-        LocalDateTime startDate = DateTimeFormatterHelper.parseStringToStartOfDate(validFrom);
+        return calculateStartDate(validFrom, ticketType);
+    }
 
-        if("Single ticket".equals(ticketType.getName()) ||
-                startDate.isBefore(LocalDateTime.now().minusMinutes(3))) {
+    private LocalDateTime calculateStartDate(String validFrom, TicketType ticketType) {
+
+        LocalDateTime startDate;
+        if(validFrom == null ||
+                "Single ticket".equals(ticketType.getName()) ||
+                DateTimeFormatterHelper
+                        .parseStringToStartOfDate(validFrom)
+                        .isBefore(LocalDateTime.now().minusMinutes(3))) {
             startDate = DateTimeFormatterHelper.parseStringToStartOfDate(LocalDate.now().toString());
+        } else {
+            startDate = DateTimeFormatterHelper.parseStringToStartOfDate(validFrom);
         }
 
         return startDate;

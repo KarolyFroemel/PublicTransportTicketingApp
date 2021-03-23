@@ -29,6 +29,22 @@
             <column name="valid_to" value="2021-12-01 00:00:01"/>
         </insert>
         <insert tableName="tickets">
+            <column name="id" value="1e74368c-6630-404a-a87d-b574b6140e20"/>
+            <column name="user_id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
+            <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
+            <column name="purchase_date" value="2020-12-01 00:00:01"/>
+            <column name="valid_from" value="2020-12-01 00:00:01"/>
+            <column name="valid_to" value="2021-02-01 00:00:01"/>
+        </insert>
+        <insert tableName="tickets">
+            <column name="id" value="f145b989-552c-4c4c-ba93-e34f87719b3c"/>
+            <column name="user_id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
+            <column name="ticket_type_id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
+            <column name="purchase_date" value="2020-12-01 00:00:01"/>
+            <column name="valid_from" value="2020-12-01 00:00:01"/>
+            <column name="valid_to" value="2021-02-01 00:00:01"/>
+        </insert>
+        <insert tableName="tickets">
             <column name="id" value="1369ccdc-d5e5-4344-8b14-cdfefa8e7451"/>
             <column name="user_id" value="234f00e0-e544-48ec-9d68-e1bef9fedd9f"/>
             <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>

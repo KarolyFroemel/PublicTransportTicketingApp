@@ -26,7 +26,7 @@ public class WebTicketController {
     }
 
     @GetMapping("/ticket/getTicketTypes")
-    public ResponseEntity<List<TicketTypeModel>> getTicketTypes(){
+    public ResponseEntity<List<TicketTypeModel>> getTicketTypes() {
         return ResponseEntity.ok(ticketService.getTicketTypes());
     }
 
@@ -36,31 +36,52 @@ public class WebTicketController {
     }
 
     @GetMapping("/ticketPurchasePage")
-    public String ticketPurchasePage(Model model){
+    public String ticketPurchasePage(Model model) {
         model.addAttribute("tickets", ticketService.getTicketTypes());
         model.addAttribute("ticketPurchaseDTO", new TicketPurchaseInfoDTO());
         return "ticketPurchase";
     }
 
     @PostMapping("/ticketPurchasePage")
-    public String ticketPurchasePageSave(Model model, TicketPurchaseInfoDTO ticketPurchaseDTO){
+    public String ticketPurchasePageSave(Model model, TicketPurchaseInfoDTO ticketPurchaseDTO) {
         ticketService.purchaseTicket(ticketPurchaseDTO);
         model.addAttribute("message", "Successful ticket purchase!");
         return "successfulTicketOperation";
     }
 
     @GetMapping("/ticketValidationPage")
-    public String ticketValidationPage(Model model){
+    public String ticketValidationPage(Model model) {
         //TODO: meg kell a user id, de meg nem tudom hogyan
-        List<TicketModel> userTickets = ticketService.getUserTickets(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
+        List<TicketModel> userTickets = ticketService.getUserTicketsToValidate(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
         model.addAttribute("tickets", userTickets);
         return "ticketValidation";
     }
 
     @PostMapping("/ticketValidationPage/{ticketId}")
-    public String ticketValidation(Model model, @PathVariable("ticketId") UUID ticketId){
+    public String ticketValidation(Model model, @PathVariable("ticketId") UUID ticketId) {
         ticketService.validateTicket(ticketId);
         model.addAttribute("message", "Successful ticket validation!");
         return "successfulTicketOperation";
+    }
+
+    @GetMapping("/ticketRefundPage")
+    public String ticketRefundPage(Model model) {
+        List<TicketModel> userTickets = ticketService.getUserTicketsToRefund(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
+        model.addAttribute("tickets", userTickets);
+        return "ticketRefund";
+    }
+
+    @PostMapping("/ticketRefundPage/{ticketId}")
+    public String ticketRefund(Model model, @PathVariable("ticketId") UUID ticketId) {
+        ticketService.refundTicket(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"), ticketId);
+        model.addAttribute("message", "Successful ticket refund!");
+        return "successfulTicketOperation";
+    }
+
+    @GetMapping("/userTicketsPage")
+    public String userTicketsPage(Model model) {
+        List<TicketModel> userTickets = ticketService.getUserTickets(UUID.fromString("516ce0cc-4b70-11eb-ae93-0242ac130002"));
+        model.addAttribute("tickets", userTickets);
+        return "userTicketList";
     }
 }

@@ -259,4 +259,30 @@ class TicketControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Ticket is expired!"));
     }
+
+    @Test
+    void getUserTicketsByIdToRefund() throws Exception {
+        //given
+        User user = UserTestData.getEdisonUser();
+        userTickets = user.getTickets();
+        List<TicketModel> ticketModelList = ticketMapper.toTicketModelList(userTickets);
+        Mockito.when(ticketMapperMock.toTicketModelList(any())).thenReturn(ticketModelList);
+
+        //when+then
+        mockMvc.perform(get("/tickets/refund/516ce0cc-4b70-11eb-ae93-0242ac130002").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void getUserTicketsByIdToValidate() throws Exception {
+        //given
+        User user = UserTestData.getEdisonUser();
+        userTickets = user.getTickets();
+        List<TicketModel> ticketModelList = ticketMapper.toTicketModelList(userTickets);
+        Mockito.when(ticketMapperMock.toTicketModelList(any())).thenReturn(ticketModelList);
+
+        //when+then
+        mockMvc.perform(get("/tickets/validate/516ce0cc-4b70-11eb-ae93-0242ac130002").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

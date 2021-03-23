@@ -19,4 +19,8 @@ public class DateTestData {
     public static LocalDateTime getPlusOneYearLocalDateTime() {
         return LocalDateTime.now().plusYears(1L);
     }
+
+    public static LocalDateTime getPlusOneMonthLocalDateTime() {
+        return LocalDateTime.now().plusMonths(1L);
+    }
 }

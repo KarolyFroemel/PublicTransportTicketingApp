@@ -246,4 +246,42 @@ class TicketServiceTest {
                 ticketService.validateTicket(UUID.randomUUID()));
         Mockito.verify(ticketRepository, times(1)).findById(any(UUID.class));
     }
+
+    @Test
+    void getTicketsByUserIdToRefund() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        List<Ticket> tickets = user.getTickets();
+        tickets.add(TicketTestData.getValidatedSingleTicket(user));
+        tickets.add(TicketTestData.getExpiredDailyPass(user));
+        tickets.add(TicketTestData.getExpiredMonthlyPass(user));
+        Optional<User> otionalUserResult = Optional.of(user);
+        Mockito.when(userRepository.findById(any(UUID.class))).thenReturn(otionalUserResult);
+
+        //when
+        List<Ticket> ticketResultList = ticketService.getTicketsByUserIdToRefund(UUID.randomUUID());
+
+        //then
+        assertEquals(6, user.getTickets().size());
+        assertEquals(3, ticketResultList.size());
+        Mockito.verify(userRepository, times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void getTicketsByUserIdToValidate() {
+        //given
+        User user = UserTestData.getEdisonUser();
+        List<Ticket> tickets = user.getTickets();
+        tickets.add(TicketTestData.getValidatedSingleTicket(user));
+        Optional<User> otionalUserResult = Optional.of(user);
+        Mockito.when(userRepository.findById(any(UUID.class))).thenReturn(otionalUserResult);
+
+        //when
+        List<Ticket> ticketResultList = ticketService.getTicketsByUserIdToValidate(UUID.randomUUID());
+
+        //then
+        assertEquals(4, user.getTickets().size());
+        assertEquals(1, ticketResultList.size());
+        Mockito.verify(userRepository, times(1)).findById(any(UUID.class));
+    }
 }

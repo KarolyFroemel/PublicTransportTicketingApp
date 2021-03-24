@@ -57,7 +57,7 @@
     </build>
 
     <scm>
-        <connection>scm:git:ssh:@github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
+        <connection>scm:git:ssh://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
     <tag>v0.0.1</tag>
   </scm>
 </project>

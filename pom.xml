@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
@@ -21,7 +20,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
@@ -47,6 +46,6 @@
     <scm>
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
         <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-        <tag>HEAD</tag>
+        <tag>public-transport-app-0.0.1</tag>
     </scm>
 </project>

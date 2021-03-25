@@ -69,7 +69,7 @@
                 <configuration>
                     <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>test-release-@{project.version}</tagNameFormat>
+<!--                    <tagNameFormat>test-release-@{project.version}</tagNameFormat>-->
                 </configuration>
             </plugin>
             <plugin>

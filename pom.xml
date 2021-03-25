@@ -46,31 +46,44 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>default</id>-->
-<!--                        <goals>-->
-<!--                            <goal>perform</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <pomFileName>../public-transport-web/pom.xml</pomFileName>-->
-<!--                            <pomFileName>../public-transport-rest/pom.xml</pomFileName>-->
-<!--                            <pomFileName>../public-transport-rest-contract/pom.xml</pomFileName>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
                 <configuration>
-<!--                    <goals>install</goals>-->
+                    <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>RELEASE-@{project.version}</tagNameFormat>
-                    <releaseProfiles>releases</releaseProfiles>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 
     <scm>
-        <developerConnection>scm:git:git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
-    <tag>RELEASE-0.0.1</tag>
-  </scm>
+        <developerConnection>scm:git:git@github.com:springframeworkguru/sfg-pet-clinic.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 </project>

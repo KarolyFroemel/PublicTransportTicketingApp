@@ -46,19 +46,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>perform</goal>
-                        </goals>
-                        <configuration>
-                            <pomFileName>../public-transport-web/pom.xml</pomFileName>
-                            <pomFileName>../public-transport-rest/pom.xml</pomFileName>
-                            <pomFileName>../public-transport-rest-contract/pom.xml</pomFileName>
-                        </configuration>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default</id>-->
+<!--                        <goals>-->
+<!--                            <goal>perform</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <pomFileName>../public-transport-web/pom.xml</pomFileName>-->
+<!--                            <pomFileName>../public-transport-rest/pom.xml</pomFileName>-->
+<!--                            <pomFileName>../public-transport-rest-contract/pom.xml</pomFileName>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
                 <configuration>
 <!--                    <goals>install</goals>-->
                     <autoVersionSubmodules>true</autoVersionSubmodules>

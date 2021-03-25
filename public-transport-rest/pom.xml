@@ -3,7 +3,7 @@
     <parent>
         <artifactId>public-transport-app</artifactId>
         <groupId>ptc.springframework</groupId>
-        <version>0.0.1</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>ptc.springframework</groupId>
             <artifactId>public-transport-rest-contract</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

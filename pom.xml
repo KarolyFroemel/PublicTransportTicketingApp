@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
@@ -53,9 +53,9 @@
                             <goal>perform</goal>
                         </goals>
                         <configuration>
-                            <pomFileName>C:\Repository/PublicTransportTicketingApp/public-transport-web/pom.xml</pomFileName>
-                            <pomFileName>C:\Repository/PublicTransportTicketingApp/public-transport-rest/pom.xml</pomFileName>
-                            <pomFileName>C:\Repository/PublicTransportTicketingApp/public-transport-rest-contract/pom.xml</pomFileName>
+                            <pomFileName>../public-transport-web/pom.xml</pomFileName>
+                            <pomFileName>../public-transport-rest/pom.xml</pomFileName>
+                            <pomFileName>../public-transport-rest-contract/pom.xml</pomFileName>
                         </configuration>
                     </execution>
                 </executions>
@@ -70,7 +70,6 @@
     </build>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-    <tag>RELEASE-0.0.1</tag>
+        <developerConnection>scm:git:git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
   </scm>
 </project>

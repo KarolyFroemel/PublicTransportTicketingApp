@@ -4,7 +4,7 @@
 
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
@@ -69,6 +69,7 @@
                 <configuration>
                     <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <tagNameFormat>test-release@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
             <plugin>
@@ -104,7 +105,6 @@
     <scm>
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
         <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-        <tag>public-transport-app-0.0.1</tag>
     </scm>
 
 </project>

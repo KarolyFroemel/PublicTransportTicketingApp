@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
     <modules>
-        <module>../public-transport-web</module>
-        <module>../public-transport-rest</module>
-        <module>../public-transport-rest-contract</module>
+        <module>public-transport-web</module>
+        <module>public-transport-rest</module>
+        <module>public-transport-rest-contract</module>
     </modules>
 
     <packaging>pom</packaging>

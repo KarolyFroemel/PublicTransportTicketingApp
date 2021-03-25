@@ -104,6 +104,6 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
-        <tag>public-transport-app-0.0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>

@@ -104,7 +104,7 @@
     <scm>
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
         <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-        <tag>RELEASE</tag>
+        <tag>HEAD</tag>
     </scm>
 
 </project>

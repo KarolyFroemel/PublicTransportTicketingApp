@@ -71,6 +71,6 @@
 
     <scm>
         <developerConnection>scm:git:ssh:git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
-    <tag>release0.0.1</tag>
+        <tag>release-0.0.1</tag>
   </scm>
 </project>

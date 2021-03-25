@@ -62,7 +62,7 @@
                 <configuration>
 <!--                    <goals>install</goals>-->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>release@{project.version}</tagNameFormat>
+                    <tagNameFormat>RELEASE-@{project.version}</tagNameFormat>
                     <releaseProfiles>releases</releaseProfiles>
                 </configuration>
             </plugin>
@@ -70,6 +70,6 @@
     </build>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-  </scm>
+        <connection>scm:git:ssh:git@github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
+    </scm>
 </project>

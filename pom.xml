@@ -46,7 +46,7 @@
     </build>
     <scm>
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
-        <developerConnection>scm:git:https://KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
         <tag>test-release-0.0.2</tag>
     </scm>
 </project>

@@ -46,7 +46,8 @@
     </build>
     <scm>
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
-        <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
+        <connection>scm:git:git://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
+        <developerConnection>scm:git:git@github.com:KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 </project>

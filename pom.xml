@@ -4,7 +4,7 @@
 
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
@@ -48,6 +48,6 @@
         <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
         <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
         <developerConnection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
-        <tag>test-release2-0.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>

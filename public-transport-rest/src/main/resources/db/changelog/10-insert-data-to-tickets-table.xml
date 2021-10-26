@@ -13,6 +13,7 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" value="now()+366"/>
         </insert>
+
         <insert tableName="tickets">
             <column name="id" value="1e74368c-6630-404a-a87d-b574b6140e20"/>
             <column name="user_id" value="7716eec9-bc10-4891-9035-0980865669d2"/>
@@ -21,6 +22,7 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" value="now()+1"/>
         </insert>
+
         <insert tableName="tickets">
             <column name="id" value="f145b989-552c-4c4c-ba93-e34f87719b3c"/>
             <column name="user_id" value="7716eec9-bc10-4891-9035-0980865669d2"/>
@@ -29,6 +31,7 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" value="now()+31"/>
         </insert>
+
         <insert tableName="tickets">
             <column name="id" value="1369ccdc-d5e5-4344-8b14-cdfefa8e7451"/>
             <column name="user_id" value="d6cf2f96-d00c-432c-8c0e-03e06e325688"/>
@@ -37,6 +40,7 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" value="now()+1"/>
         </insert>
+
         <insert tableName="tickets">
             <column name="id" value="516ce0cc-4b70-11eb-ae93-0242ac130002"/>
             <column name="user_id" value="d6cf2f96-d00c-432c-8c0e-03e06e325688"/>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="7">
+        <insert tableName="users">
+            <column name="id" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="firstname" value="Edinson"/>
+            <column name="lastname" value="Cavani"/>
+            <column name="email" value="edinson.cavani@gmail.com"/>
+            <column name="password" value="password"/>
+            <column name="role" value="ADMIN"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="ADMIN"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="ADMIN"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="7716eec9-bc10-4891-9035-0980865669d2"/>
+            <column name="firstname" value="David"/>
+            <column name="lastname" value="Beckham"/>
+            <column name="email" value="david.beckham@gmail.com"/>
+            <column name="password" value="password"/>
+            <column name="role" value="PASSENGER"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="d6cf2f96-d00c-432c-8c0e-03e06e325688"/>
+            <column name="firstname" value="David"/>
+            <column name="lastname" value="Silva"/>
+            <column name="email" value="david.silva@gmail.com"/>
+            <column name="password" value="password"/>
+            <column name="role" value="PASSENGER"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+</changeSet>
+</databaseChangeLog>

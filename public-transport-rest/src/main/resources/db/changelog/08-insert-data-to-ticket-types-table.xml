@@ -4,27 +4,36 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet author="Karoly_Froemel" id="2">
+    <changeSet author="Karoly_Froemel" id="8">
         <insert tableName="ticket_types">
             <column name="id" value="dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047"/>
             <column name="name" value="Single ticket"/>
             <column name="description" value="Single ticket for one ride. Valid to 60 minutes from validation."/>
             <column name="price" value="1"/>
-            <column name="expiration_time" value="366"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
         </insert>
         <insert tableName="ticket_types">
             <column name="id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
             <column name="name" value="Monthly pass"/>
             <column name="description" value="Monthly pass to use any service (Bus, Tram, Underground, Ship). Valid to 30 days from purchase."/>
             <column name="price" value="30"/>
-            <column name="expiration_time" value="31"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
         </insert>
         <insert tableName="ticket_types">
             <column name="id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="name" value="Daily pass"/>
             <column name="description" value="Daily pass to use any service (Bus, Tram, Underground, Ship). Valid only purchase day."/>
             <column name="price" value="10"/>
-            <column name="expiration_time" value="1"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

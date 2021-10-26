@@ -3,29 +3,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-
-    <changeSet author="Karoly_Froemel" id="3">
-        <createTable tableName="users">
-            <column name="id" type="UUID">
-                <constraints primaryKey="true" nullable="false" unique="true"/>
-            </column>
-            <column name="name" type="varchar(250)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="varchar(250)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(250)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <rollback>
-            <dropTable tableName="user"/>
-        </rollback>
-    </changeSet>
-
     <changeSet author="Karoly_Froemel" id="4">
+        <sql>DROP TYPE IF EXIST ticket_status</sql>
+        <sql>CREATE TYPE ticket_status AS ENUM ('VALIDATED','REFUNDED', 'CAN_BE_USED', 'EXPIRED')</sql>
         <createTable tableName="tickets">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -36,10 +16,11 @@
             <column name="ticket_type_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_tickets_ticket_types" references="ticket_types(id)"/>
             </column>
-            <column name="purchase_date" type="TIMESTAMP"/>
-            <column name="valid_from" type="TIMESTAMP"/>
-            <column name="valid_to" type="TIMESTAMP"/>
-            <column name="validation_date" type="TIMESTAMP"/>
+            <column name="purchase_date" type="DATETIME(2)"/>
+            <column name="valid_from" type="DATETIME(2)"/>
+            <column name="valid_to" type="DATETIME(2)"/>
+            <column name="validation_time" type="DATETIME(2)"/>
+            <column name="status" type="ticket_status"/>
         </createTable>
 
         <rollback>

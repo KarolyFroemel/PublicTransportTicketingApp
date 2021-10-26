@@ -4,26 +4,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!--    You can do this by using properties that are defined depending on the current DBMS.-->
-
-    <!--    <property name="uuid_type" value="uuid" dbms="postgresql"/>-->
-    <!--    <property name="uuid_type" value="uniqueidentifier" dbms="mssql"/>-->
-    <!--    <property name="uuid_type" value="RAW(16)" dbms="oracle"/>-->
-
-    <!--    <property name="uuid_function" value="uid.uuid_generate_v4()" dbms="postgresql"/>-->
-    <!--    <property name="uuid_function" value="NEWID()" dbms="mssql"/>-->
-    <!--    <property name="uuid_function" value="sys_guid()" dbms="oracle"/>-->
-
-    <!--    Then use those properties when defining the table:-->
-
-    <!--    <column name="id" type="${uuid_type}" defaultValueComputed="${uuid_function}">-->
-    <!--        <constraints nullable="false" unique="true" />-->
-    <!--    </column>-->
-
-    <!--    Note that you need to use defaultValueComputed, not value-->
-
-
-    <changeSet author="Karoly_Froemel" id="1">
+    <changeSet author="Karoly_Froemel" id="2">
         <createTable tableName="ticket_types">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -34,8 +15,19 @@
             <column name="description" type="VARCHAR(250)"/>
             <column name="price" type="BIGINT"/>
             <column name="expiration_time" type="BIGINT"/>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_ticket_types_users" references="users(id)"/>
+            </column>
+            <column name="created_on" type="DATETIME(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_ticket_types_users" references="users(id)"/>
+            </column>
+            <column name="modified_on" type="DATETIME(2)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
-
         <rollback>
             <dropTable tableName="ticket_types"/>
         </rollback>

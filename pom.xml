@@ -4,7 +4,7 @@
 
     <groupId>ptc.springframework</groupId>
     <artifactId>public-transport-app</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>public-transport-app</name>
     <description>Demo Spring project for job seeking</description>
 
@@ -19,35 +19,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.1</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <version>2.5.4</version>
+        <relativePath/>
     </parent>
 
     <properties>
         <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>install</goals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>test-release2-@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <scm>
-        <url>https://github.com/KarolyFroemel/PublicTransportTicketingApp</url>
-        <connection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</connection>
-        <developerConnection>scm:git:https://github.com/KarolyFroemel/PublicTransportTicketingApp.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
 </project>

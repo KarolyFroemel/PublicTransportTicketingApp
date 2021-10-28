@@ -13,16 +13,16 @@
                 <constraints nullable="false" unique="true" />
             </column>
             <column name="description" type="VARCHAR(250)"/>
-            <column name="price" type="BIGINT"/>
-            <column name="expiration_time" type="BIGINT"/>
+            <column name="price" type="INTEGER"/>
+            <column name="expiration_time" type="INTEGER"/>
             <column name="created_by" type="UUID">
-                <constraints nullable="false" foreignKeyName="fk_ticket_types_users" references="users(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_ticket_types_expiration_time_users" references="users(id)"/>
             </column>
             <column name="created_on" type="DATETIME(2)">
                 <constraints nullable="false"/>
             </column>
             <column name="modified_by" type="UUID">
-                <constraints nullable="false" foreignKeyName="fk_ticket_types_users" references="users(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_ticket_types_modified_by_users" references="users(id)"/>
             </column>
             <column name="modified_on" type="DATETIME(2)">
                 <constraints nullable="false"/>

@@ -4,7 +4,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="Karoly_Froemel" id="4">
-        <sql>DROP TYPE IF EXIST ticket_status</sql>
+        <sql>DROP TYPE IF EXISTS ticket_status</sql>
         <sql>CREATE TYPE ticket_status AS ENUM ('VALIDATED','REFUNDED', 'CAN_BE_USED', 'EXPIRED')</sql>
         <createTable tableName="tickets">
             <column name="id" type="UUID">

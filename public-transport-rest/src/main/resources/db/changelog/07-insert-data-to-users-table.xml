@@ -13,9 +13,9 @@
             <column name="password" value="password"/>
             <column name="role" value="ADMIN"/>
             <column name="number_of_incorrect_logins" value="0"/>
-            <column name="created_by" value="ADMIN"/>
+            <column name="created_by" value="null"/>
             <column name="created_on" value="now()"/>
-            <column name="modified_by" value="ADMIN"/>
+            <column name="modified_by" value="null"/>
             <column name="modified_on" value="now()"/>
         </insert>
 

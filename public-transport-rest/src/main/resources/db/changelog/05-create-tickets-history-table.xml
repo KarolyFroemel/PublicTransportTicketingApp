@@ -4,7 +4,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="Karoly_Froemel" id="5">
-        <sql>DROP TYPE IF EXIST history_type</sql>
+        <sql>DROP TYPE IF EXISTS history_type</sql>
         <sql>CREATE TYPE history_type AS ENUM ('PURCHASE','REFUND', 'VALIDATE')</sql>
         <createTable tableName="tickets_history">
             <column name="id" type="UUID">
@@ -23,7 +23,9 @@
             <column name="account_history_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_tickets_history_accounts_history" references="accounts_history(id)"/>
             </column>
-            <column name="created_on" type="DATETIME(2)"/>
+            <column name="created_on" type="DATETIME(2)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <rollback>

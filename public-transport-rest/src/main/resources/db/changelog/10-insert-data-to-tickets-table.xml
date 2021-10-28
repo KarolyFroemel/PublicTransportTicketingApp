@@ -11,7 +11,7 @@
             <column name="ticket_type_id" value="dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" value="now()+366"/>
+            <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
         </insert>
 
         <insert tableName="tickets">
@@ -20,7 +20,7 @@
             <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" value="now()+1"/>
+            <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
         </insert>
 
         <insert tableName="tickets">
@@ -29,7 +29,7 @@
             <column name="ticket_type_id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" value="now()+31"/>
+            <column name="valid_to" defaultValueComputed="now() + interval '31 days'"/>
         </insert>
 
         <insert tableName="tickets">
@@ -38,7 +38,7 @@
             <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" value="now()+1"/>
+            <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
         </insert>
 
         <insert tableName="tickets">
@@ -47,7 +47,7 @@
             <column name="ticket_type_id" value="8a70b016-3ddb-46d8-818c-16a11eae55c9"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" value="now()+31"/>
+            <column name="valid_to" defaultValueComputed="now() + interval '31 days'"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

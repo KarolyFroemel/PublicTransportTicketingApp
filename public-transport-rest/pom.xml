@@ -18,8 +18,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>szrt.sportmarketing</groupId>
-            <artifactId>Sportmarketing-contract</artifactId>
+            <groupId>ptc.springframework</groupId>
+            <artifactId>public-transport-rest-contract</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

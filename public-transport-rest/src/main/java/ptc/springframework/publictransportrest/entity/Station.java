@@ -1,8 +1,8 @@
-package ptc.springframework.publictransportrest.entities;
+package ptc.springframework.publictransportrest.entity;
+
 
 import lombok.Getter;
 import lombok.Setter;
-import ptc.springframework.publictransportrest.enums.ServiceType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "services")
-public class Service {
+@Table(name = "stations")
+public class Station {
 
     @Id
     private UUID id;
@@ -24,7 +24,7 @@ public class Service {
     private String name;
 
     @NotNull
-    private ServiceType type;
+    private String qrCode;
 
     private UUID createdBy;
 

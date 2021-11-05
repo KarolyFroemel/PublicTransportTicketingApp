@@ -1,12 +1,12 @@
-package ptc.springframework.publictransportrest.entities;
+package ptc.springframework.publictransportrest.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import ptc.springframework.publictransportrest.enums.TicketHistoryType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,26 +14,31 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "tickets_history")
-public class TicketHistory {
+@Table(name = "ticket_types")
+public class TicketType {
 
     @Id
     private UUID id;
 
     @NotNull
-    private TicketHistoryType historyType;
+    private String name;
 
     @NotNull
-    private UUID ticketId;
+    private String description;
 
     @NotNull
-    private UUID userId;
-
-    private UUID accountId;
-
-    @NotNull
-    private UUID accountHistoryId;
+    @Min(1)
+    private Integer price;
 
     @NotNull
+    private Integer expirationTime;
+
+    private UUID createdBy;
+
     private LocalDateTime createdOn;
+
+    private UUID modifiedBy;
+
+    private LocalDateTime modifiedOn;
+
 }

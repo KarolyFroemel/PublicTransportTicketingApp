@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.entities;
+package ptc.springframework.publictransportrest.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +35,7 @@ public class User {
     private String password;
 
     @NotNull
+//    @Enumerated(EnumType.STRING)
     private Roles role;
 
     @NotNull

@@ -10,6 +10,48 @@ servers:
   - url: http://localhost:8081
 
 paths:
+  /authentication:
+    post:
+      tags:
+        - Authenticate
+      operationId: createAuthenticationToken
+      summary: Create new token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Authenticate"
+      responses:
+        201:
+          description: token succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /register:
+    post:
+      tags:
+        - Authenticate
+      operationId: registerUser
+      summary: Register new user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegister"
+      responses:
+        200:
+          description: User succesfully registered
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
   /user:
     post:
       tags:
@@ -1069,6 +1111,24 @@ paths:
 
 components:
   schemas:
+    Authenticate:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+      required:
+        - username
+        - password
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+
     User:
       type: object
       properties:
@@ -1082,20 +1142,47 @@ components:
         email:
           type: string
           format: email
+        password:
+          type: string
         role:
           type: string
           enum:
             - ADMIN
             - PASSENGER
             - VALIDATOR
+          default: 'PASSENGER'
+        numberOfIncorrectLogins:
+          type: integer
+          minimum: 0
+          maximum: 3
         locked:
           type: boolean
+          default: false
+        token:
+          type: string
       required:
         - 'id'
         - 'firstname'
         - 'lastname'
         - 'email'
         - 'role'
+
+    UserRegister:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - 'firstname'
+        - 'lastname'
+        - 'email'
 
     UserSearch:
       type: object
@@ -1496,5 +1583,3 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-
-

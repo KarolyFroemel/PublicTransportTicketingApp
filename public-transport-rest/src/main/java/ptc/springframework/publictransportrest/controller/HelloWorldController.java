@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.controllers;
+package ptc.springframework.publictransportrest.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

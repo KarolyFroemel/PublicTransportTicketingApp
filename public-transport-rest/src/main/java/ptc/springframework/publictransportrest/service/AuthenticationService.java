@@ -34,5 +34,6 @@ public class AuthenticationService {
 
     public void registerNewUser(User user) {
         userDetailsService.registerNewUser(user);
+//        userDetailsService.save();
     }
 }

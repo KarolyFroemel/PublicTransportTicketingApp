@@ -11,4 +11,19 @@ public class HelloWorldController {
         return "Hello World";
     }
 
+    @RequestMapping({ "/helloadmin" })
+    public String admin() {
+        return "Hello World";
+    }
+
+    @RequestMapping({ "/hellopassenger" })
+    public String passenger() {
+        return "Hello World";
+    }
+
+    @RequestMapping({ "/hellovalidator" })
+    public String validator() {
+        return "Hello World";
+    }
+
 }

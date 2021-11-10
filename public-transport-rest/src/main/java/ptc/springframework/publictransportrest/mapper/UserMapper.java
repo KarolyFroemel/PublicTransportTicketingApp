@@ -13,6 +13,7 @@ public interface UserMapper {
     UserModel UserToUserModel(User user);
 
     @Mappings({
+            @Mapping(target="role", ignore = true),
             @Mapping(target="createdBy", ignore = true),
             @Mapping(target="createdOn", ignore = true),
             @Mapping(target="modifiedBy", ignore = true),

@@ -2,11 +2,9 @@ package ptc.springframework.publictransportrest.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import ptc.springframework.publictransportrest.enums.Roles;
+import ptc.springframework.publictransportrest.enums.Role;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -15,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema="ptc")
 public class User {
 
     @Id
@@ -35,8 +33,8 @@ public class User {
     private String password;
 
     @NotNull
-//    @Enumerated(EnumType.STRING)
-    private Roles role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @NotNull
     private Integer numberOfIncorrectLogins;

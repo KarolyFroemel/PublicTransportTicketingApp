@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="Karoly_Froemel" id="1">
-        <sql>DROP TYPE IF EXISTS roles</sql>
-        <sql>CREATE TYPE roles AS ENUM ('ADMIN','PASSENGER','VALIDATOR')</sql>
         <createTable tableName="users">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
@@ -20,10 +18,10 @@
             <column name="email" type="varchar(250)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="password" type="varchar(250)">
+            <column name="password" type="varchar(2500)">
                 <constraints nullable="false"/>
             </column>
-            <column name="role" type="roles">
+            <column name="role" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>
             <column name="number_of_incorrect_logins" type="INT">

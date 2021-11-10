@@ -46,5 +46,61 @@
             <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
             <column name="modified_on" value="now()"/>
         </insert>
+
+        <insert tableName="users">
+            <column name="id" value="6df8c7fb-3cfc-41c5-80e7-3d243963213b"/>
+            <column name="firstname" value="javainuse"/>
+            <column name="lastname" value="javainuse"/>
+            <column name="email" value="javainuse@gmail.com"/>
+            <column name="password" value="password"/>
+            <column name="role" value="PASSENGER"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="a8a1edd3-a103-4940-9e04-50ee541c02c4"/>
+            <column name="firstname" value="admin"/>
+            <column name="lastname" value="admin"/>
+            <column name="email" value="admin@gmail.com"/>
+            <column name="password" value="$2a$12$c8XzTzT2TIUSrtSQqNyBHewhYCfj9DiVza.GJrC/K6qCqUAlqDMGa"/>
+            <column name="role" value="ADMIN"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="7e68d31e-0232-4340-9875-8ccc238c6a78"/>
+            <column name="firstname" value="passenger"/>
+            <column name="lastname" value="passenger"/>
+            <column name="email" value="passenger@gmail.com"/>
+            <column name="password" value="$2a$12$FId8UYfGbyysHwqCQUAwc.CCpVV.ZAfU.E6OZobbmYKL6pJ8Sgs46"/>
+            <column name="role" value="PASSENGER"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="abefb4e3-9362-46fa-b893-9928e88fe6cb"/>
+            <column name="firstname" value="checker"/>
+            <column name="lastname" value="checker"/>
+            <column name="email" value="checker@gmail.com"/>
+            <column name="password" value="$2a$12$F0m7lVnRXFGtgw7VF4Vc8.t151Zw1ab5tfzqOCOiuJDrbJxgbL4em"/>
+            <column name="role" value="VALIDATOR"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
 </changeSet>
 </databaseChangeLog>

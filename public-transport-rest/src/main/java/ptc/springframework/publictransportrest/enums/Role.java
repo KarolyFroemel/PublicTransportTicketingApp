@@ -1,6 +1,6 @@
 package ptc.springframework.publictransportrest.enums;
 
-public enum Roles {
+public enum Role {
     ADMIN,
     PASSENGER,
     VALIDATOR

@@ -3,6 +3,8 @@ package ptc.springframework.publictransportrest.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 public class HelloWorldController {
 
@@ -11,19 +13,28 @@ public class HelloWorldController {
         return "Hello World";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping({ "/helloadmin" })
     public String admin() {
-        return "Hello World";
+        return "Hello admin";
     }
 
+    @RolesAllowed("PASSENGER")
     @RequestMapping({ "/hellopassenger" })
     public String passenger() {
-        return "Hello World";
+        return "Hello passenger";
     }
 
+    @RolesAllowed("VALIDATOR")
     @RequestMapping({ "/hellovalidator" })
     public String validator() {
-        return "Hello World";
+        return "Hello validator";
+    }
+
+    @RolesAllowed({"VALIDATOR", "ADMIN", "PASSENGER"})
+    @RequestMapping({ "/alluser" })
+    public String allUser() {
+        return "Hello all users";
     }
 
 }

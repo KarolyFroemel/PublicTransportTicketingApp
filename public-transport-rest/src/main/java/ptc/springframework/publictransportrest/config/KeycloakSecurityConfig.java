@@ -15,6 +15,7 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import ptc.springframework.publictransportrest.enums.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -25,8 +26,10 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .anyRequest()
-                .permitAll();
+                .antMatchers("/helloadmin").hasRole(Role.ADMIN.name())
+                .antMatchers("/hellopassenger").hasRole(Role.PASSENGER.name())
+                .antMatchers("/hellovalidator").hasRole(Role.VALIDATOR.name())
+                .anyRequest().authenticated();
         http.csrf().disable();
     }
 

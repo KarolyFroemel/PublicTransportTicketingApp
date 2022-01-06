@@ -13,25 +13,25 @@ public class HelloWorldController {
         return "Hello World";
     }
 
-    @RolesAllowed("ADMIN")
+//    @RolesAllowed("ADMIN")
     @RequestMapping({ "/helloadmin" })
     public String admin() {
         return "Hello admin";
     }
 
-    @RolesAllowed("PASSENGER")
+//    @RolesAllowed("PASSENGER")
     @RequestMapping({ "/hellopassenger" })
     public String passenger() {
         return "Hello passenger";
     }
 
-    @RolesAllowed("VALIDATOR")
+//    @RolesAllowed("VALIDATOR")
     @RequestMapping({ "/hellovalidator" })
     public String validator() {
         return "Hello validator";
     }
 
-    @RolesAllowed({"VALIDATOR", "ADMIN", "PASSENGER"})
+//    @RolesAllowed({"VALIDATOR", "ADMIN", "PASSENGER"})
     @RequestMapping({ "/alluser" })
     public String allUser() {
         return "Hello all users";

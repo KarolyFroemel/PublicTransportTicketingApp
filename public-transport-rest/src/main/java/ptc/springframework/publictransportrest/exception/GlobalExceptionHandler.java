@@ -5,8 +5,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -23,32 +21,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 body(ErrorResponse.builder().
                         errorCode(HttpStatus.INTERNAL_SERVER_ERROR.toString()).
                         message(ExceptionUtils.getMessage(ex)).
-                        detailedMessage(ExceptionUtils.getStackTrace(ex)).
-                        build());
-    }
-
-    @ExceptionHandler(value
-            = { DisabledException.class })
-    protected
-    ResponseEntity<ErrorResponse> handleDisabledException(RuntimeException ex) {
-        return ResponseEntity.
-                status(HttpStatus.INTERNAL_SERVER_ERROR).
-                body(ErrorResponse.builder().
-                        errorCode(HttpStatus.INTERNAL_SERVER_ERROR.toString()).
-                        message("User disabled!").
-                        detailedMessage(ExceptionUtils.getStackTrace(ex)).
-                        build());
-    }
-
-    @ExceptionHandler(value
-            = { BadCredentialsException.class })
-    protected
-    ResponseEntity<ErrorResponse> handleBadCredentialsException(RuntimeException ex) {
-        return ResponseEntity.
-                status(HttpStatus.INTERNAL_SERVER_ERROR).
-                body(ErrorResponse.builder().
-                        errorCode(HttpStatus.INTERNAL_SERVER_ERROR.toString()).
-                        message("Invalid credentials!").
                         detailedMessage(ExceptionUtils.getStackTrace(ex)).
                         build());
     }

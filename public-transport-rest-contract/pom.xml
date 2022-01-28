@@ -18,8 +18,8 @@
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <springfox.version>2.9.2</springfox.version>
+        <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -46,6 +46,11 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${validation-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
     </dependencies>
 
@@ -75,6 +80,8 @@
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
                                 <useTags>true</useTags>
+                                <performBeanValidation>true</performBeanValidation>
+                                <useBeanValidation>true</useBeanValidation>
                             </configOptions>
                         </configuration>
                     </execution>

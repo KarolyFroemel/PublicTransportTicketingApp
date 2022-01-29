@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.config;
+package ptc.springframework.publictransportrest.configurations;
 
 import org.mapstruct.MapperConfig;
 import org.mapstruct.ReportingPolicy;

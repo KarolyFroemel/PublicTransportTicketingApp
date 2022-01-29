@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.exception;
+package ptc.springframework.publictransportrest.exceptions;
 
 import lombok.Getter;
 

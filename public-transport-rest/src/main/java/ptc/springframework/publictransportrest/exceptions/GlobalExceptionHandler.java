@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.exception;
+package ptc.springframework.publictransportrest.exceptions;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;

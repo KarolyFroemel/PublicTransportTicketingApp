@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.entity;
+package ptc.springframework.publictransportrest.entities;
 
 
 import lombok.Getter;

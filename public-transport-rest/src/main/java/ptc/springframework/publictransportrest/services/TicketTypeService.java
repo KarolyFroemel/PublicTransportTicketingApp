@@ -6,6 +6,7 @@ import ptc.springframework.publictransportrest.entities.TicketType;
 import ptc.springframework.publictransportrest.mappers.TicketTypeMapper;
 import ptc.springframework.publictransportrest.repositories.TicketTypeRepository;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -41,8 +42,8 @@ public class TicketTypeService {
     public TicketTypeModel createNewTicketType(TicketTypeModel ticketTypeModel) {
         TicketType ticketType = ticketTypeMapper.ticketTypeModelToTicketTypeEntity(ticketTypeModel);
         ticketType.setId(UUID.randomUUID());
-//        ticketType.setCreatedBy(keycloakService.getUserId());
-//        ticketType.setCreatedOn(LocalDateTime.now());
+        ticketType.setCreatedBy(keycloakService.getUserId());
+        ticketType.setCreatedOn(LocalDateTime.now());
         ticketType = ticketTypeRepository.save(ticketType);
         return ticketTypeMapper.ticketTypeEntityToTicketTypeModel(ticketType);
     }

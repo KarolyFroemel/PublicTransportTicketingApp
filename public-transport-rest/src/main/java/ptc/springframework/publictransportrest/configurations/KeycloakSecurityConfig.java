@@ -26,7 +26,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .antMatchers("/helloadmin").hasRole(Role.ADMIN.name())
+                .antMatchers("/helloadmin", "/ticketType").hasRole(Role.ADMIN.name())
                 .antMatchers("/hellopassenger").hasRole(Role.PASSENGER.name())
                 .antMatchers("/hellovalidator").hasRole(Role.VALIDATOR.name())
                 .anyRequest().authenticated();

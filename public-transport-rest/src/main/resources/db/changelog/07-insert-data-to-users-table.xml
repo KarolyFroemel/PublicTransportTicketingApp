@@ -62,7 +62,7 @@
         </insert>
 
         <insert tableName="users">
-            <column name="id" value="a8a1edd3-a103-4940-9e04-50ee541c02c4"/>
+            <column name="id" value="fdb20ffa-496e-43dd-b445-a44922b926e1"/>
             <column name="firstname" value="admin"/>
             <column name="lastname" value="admin"/>
             <column name="email" value="admin@gmail.com"/>

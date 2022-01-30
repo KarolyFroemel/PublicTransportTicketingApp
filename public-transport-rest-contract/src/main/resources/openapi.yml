@@ -875,12 +875,16 @@ components:
           format: uuid
         name:
           type: string
+          maxLength: 50
         description:
           type: string
+          maxLength: 250
         price:
           type: integer
+          minimum: 1
         expirationTime:
           type: integer
+          minimum: 1
       required:
         - name
         - description

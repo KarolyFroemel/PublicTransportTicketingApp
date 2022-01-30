@@ -12,21 +12,25 @@
             <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true" />
             </column>
-            <column name="description" type="VARCHAR(250)"/>
-            <column name="price" type="INTEGER"/>
-            <column name="expiration_time" type="INTEGER"/>
-            <column name="created_by" type="UUID">
-                <constraints nullable="false" foreignKeyName="fk_ticket_types_expiration_time_users" references="users(id)"/>
-            </column>
-            <column name="created_on" type="DATETIME(2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="modified_by" type="UUID">
-                <constraints nullable="false" foreignKeyName="fk_ticket_types_modified_by_users" references="users(id)"/>
-            </column>
-            <column name="modified_on" type="DATETIME(2)">
-                <constraints nullable="false"/>
-            </column>
+<!--            <column name="description" type="VARCHAR(250)"/>-->
+<!--            <column name="price" type="INTEGER"/>-->
+<!--            <column name="expiration_time" type="INTEGER"/>-->
+<!--            <column name="created_by" type="UUID">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_ticket_types_expiration_time_users" references="users(id)"/>-->
+<!--            </column>-->
+<!--            <column name="created_by" type="UUID"/>-->
+<!--            <column name="created_on" type="DATETIME(2)"/>-->
+<!--            <column name="created_on" type="DATETIME(2)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="modified_by" type="UUID">-->
+<!--                <constraints nullable="true" foreignKeyName="fk_ticket_types_modified_by_users" references="users(id)"/>-->
+<!--            </column>-->
+<!--            <column name="modified_by" type="UUID"/>-->
+<!--            <column name="modified_on" type="DATETIME(2)"/>-->
+<!--            <column name="modified_on" type="DATETIME(2)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
         </createTable>
         <rollback>
             <dropTable tableName="ticket_types"/>

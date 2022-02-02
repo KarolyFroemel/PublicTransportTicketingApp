@@ -139,6 +139,74 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
+  /ticketType/search:
+    post:
+      tags:
+        - Ticket type
+      operationId: searchTicketType
+      summary: Search ticket type.
+      parameters:
+        - $ref: '#/components/parameters/X-Page'
+        - $ref: '#/components/parameters/X-Size'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketTypeSearchRequest'
+      responses:
+        206:
+          description: 'Successful request'
+          headers:
+            X-Page:
+              $ref: '#/components/headers/X-Page'
+            X-Size:
+              $ref: '#/components/headers/X-Size'
+            X-Total-Pages:
+              $ref: '#/components/headers/X-Total-Pages'
+            X-Total-Size:
+              $ref: '#/components/headers/X-Total-Size'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TicketType'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /ticketType/searchLambda:
+    post:
+      tags:
+        - Ticket type
+      operationId: searchTicketTypeLambda
+      summary: Search ticket type by lambda expression.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketTypeSearchRequest'
+      responses:
+        200:
+          description: 'Successful request'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TicketType'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
   /station:
     post:
       tags:
@@ -875,6 +943,7 @@ components:
           format: uuid
         name:
           type: string
+          minLength: 1
           maxLength: 50
         description:
           type: string
@@ -890,6 +959,31 @@ components:
         - description
         - price
         - expirationTime
+
+    TicketTypeSearchRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          nullable: false
+          description: 'Name of ticket type'
+        description:
+          type: string
+          maxLength: 250
+          description: 'Description of ticket type'
+        sortBy:
+          type: string
+          nullable: false
+          default: 'name'
+          description: 'Sort by this column'
+        sortOrder:
+          type: string
+          enum:
+            - ASC
+            - DESC
+          default: 'ASC'
+          description: 'Sort Order'
 
     Station:
       type: object

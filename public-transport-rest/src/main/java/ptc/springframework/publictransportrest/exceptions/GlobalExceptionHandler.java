@@ -3,11 +3,18 @@ package ptc.springframework.publictransportrest.exceptions;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import ptc.springframework.publictransportrest.exceptions.error.ApplicationErrorCode;
+import ptc.springframework.publictransportrest.exceptions.error.ErrorCode;
+
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -39,15 +46,32 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value
-            = { ContentNotFoundException.class })
+            = { BaseException.class })
     protected
-    ResponseEntity<ErrorResponse> handleContentNotFoundExceptionException(ContentNotFoundException ex) {
+    ResponseEntity<ErrorResponse> handleApplicationExceptions(BaseException ex) {
         return ResponseEntity.
-                status(HttpStatus.NOT_FOUND).
+                status(ex.getHttpStatus()).
                 body(ErrorResponse.builder().
-                        errorCode(HttpStatus.NOT_FOUND.toString()).
+                        errorCode(ex.getErrorCode().getCode()).
                         message(ex.getMessage()).
                         detailedMessage(ex.getDetailedMessage()).
+                        build());
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String message = ex.getFieldErrors().stream()
+                .map(fieldError -> fieldError.getObjectName()+"."+fieldError.getField()+"."+fieldError.getCode())
+                .collect(Collectors.joining("|"));
+        String detailMessage =  ex.getFieldErrors().stream()
+                .map(fieldError -> fieldError.getDefaultMessage())
+                .collect(Collectors.joining("|"));
+        return ResponseEntity.
+                status(HttpStatus.BAD_REQUEST).
+                body(ErrorResponse.builder().
+                        errorCode(ApplicationErrorCode.REQUEST_PARAMETERS_NOT_VALID.getCode()).
+                        message(message).
+                        detailedMessage(detailMessage).
                         build());
     }
 }

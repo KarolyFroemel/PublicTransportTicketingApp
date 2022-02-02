@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.configurations;
+package ptc.springframework.publictransportrest.keycloak;
 
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -30,6 +31,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .antMatchers("/hellopassenger").hasRole(Role.PASSENGER.name())
                 .antMatchers("/hellovalidator").hasRole(Role.VALIDATOR.name())
                 .anyRequest().authenticated();
+
         http.csrf().disable();
     }
 
@@ -49,5 +51,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Bean
     public KeycloakConfigResolver KeycloakConfigResolver() {
         return new KeycloakSpringBootConfigResolver();
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/h2-console/**");
     }
 }

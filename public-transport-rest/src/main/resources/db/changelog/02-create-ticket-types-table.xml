@@ -24,9 +24,7 @@
             <column name="modified_by" type="UUID">
                 <constraints nullable="true" foreignKeyName="fk_ticket_types_modified_by_users" references="users(id)"/>
             </column>
-            <column name="modified_on" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
+            <column name="modified_on" type="TIMESTAMP"/>
         </createTable>
         <rollback>
             <dropTable tableName="ticket_types"/>

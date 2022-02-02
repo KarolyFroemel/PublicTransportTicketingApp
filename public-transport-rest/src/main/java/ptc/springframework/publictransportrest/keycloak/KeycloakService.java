@@ -1,4 +1,4 @@
-package ptc.springframework.publictransportrest.services;
+package ptc.springframework.publictransportrest.keycloak;
 
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -26,6 +26,6 @@ public class KeycloakService {
             return UUID.fromString(token.getSubject());
         }
 
-        return null; // TODO: dobjunk el valami hibat
+        return null;
     }
 }

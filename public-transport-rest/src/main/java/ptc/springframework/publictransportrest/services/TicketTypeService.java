@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import ptc.springframework.publictransportrest.entities.TicketType;
 import ptc.springframework.publictransportrest.entities.TicketType_;
 import ptc.springframework.publictransportrest.exceptions.TicketTypeExeption;
+import ptc.springframework.publictransportrest.keycloak.KeycloakService;
 import ptc.springframework.publictransportrest.mappers.TicketTypeMapper;
 import ptc.springframework.publictransportrest.repositories.TicketTypeRepository;
 
@@ -32,20 +33,20 @@ public class TicketTypeService {
 
     private final TicketTypeRepository ticketTypeRepository;
 
-//    private final KeycloakService keycloakService;
+    private final KeycloakService keycloakService;
 
     public TicketTypeService(TicketTypeMapper ticketTypeMapper,
-                             TicketTypeRepository ticketTypeRepository
-                             /*KeycloakService keycloakService*/)
+                             TicketTypeRepository ticketTypeRepository,
+                             KeycloakService keycloakService)
     {
         this.ticketTypeMapper = ticketTypeMapper;
         this.ticketTypeRepository = ticketTypeRepository;
-        /*this.keycloakService = keycloakService;*/
+        this.keycloakService = keycloakService;
     }
 
     public TicketTypeModel createNewTicketType(TicketTypeModel ticketTypeModel) {
         TicketType ticketType = ticketTypeMapper.ticketTypeModelToTicketTypeEntity(ticketTypeModel);
-        ticketType.setCreatedBy(/*keycloakService.getUserId()*/null);
+        ticketType.setCreatedBy(keycloakService.getUserId());
         ticketType.setCreatedOn(LocalDateTime.now());
         ticketType = ticketTypeRepository.save(ticketType);
         return ticketTypeMapper.ticketTypeEntityToTicketTypeModel(ticketType);
@@ -80,18 +81,25 @@ public class TicketTypeService {
     }
 
     public void updateTicketType(TicketTypeModel ticketTypeModel) {
-        TicketType ticketType = ticketTypeMapper.ticketTypeModelToTicketTypeEntity(ticketTypeModel);
-        if(ticketTypeRepository.existsById(ticketType.getId())) {
-            ticketTypeRepository.save(ticketType);
-        } else {
-            throw new TicketTypeExeption(TICKET_TYPE_NOT_FOUND,
-                    "Ticket type not found!",
-                    "Ticket type not found by id in database!",
-                    HttpStatus.NOT_FOUND);
-        }
+        TicketType ticketTypeSource = ticketTypeMapper.ticketTypeModelToTicketTypeEntity(ticketTypeModel);
+        TicketType ticketTypeTarget = ticketTypeRepository.findById(ticketTypeSource.getId()).orElseThrow(
+                () -> new TicketTypeExeption(TICKET_TYPE_NOT_FOUND,
+                        "Ticket type not found!",
+                        "Ticket type not found by id in database!",
+                        HttpStatus.NOT_FOUND)
+        );
+
+        ticketTypeSource.setCreatedOn(ticketTypeTarget.getCreatedOn());
+        ticketTypeSource.setCreatedBy(ticketTypeTarget.getCreatedBy());
+        ticketTypeSource.setModifiedBy(keycloakService.getUserId());
+        ticketTypeSource.setModifiedOn(LocalDateTime.now());
+        ticketTypeRepository.save(ticketTypeSource);
+
     }
 
-    public Page<TicketTypeModel> searchTicketType(final int pageNumber, final int pageSize, final TicketTypeSearchRequestModel ticketTypeSearchRequestModel) {
+    public Page<TicketTypeModel> searchTicketType(final int pageNumber,
+                                                  final int pageSize,
+                                                  final TicketTypeSearchRequestModel ticketTypeSearchRequestModel) {
 
         Pageable pageable;
 
@@ -113,17 +121,20 @@ public class TicketTypeService {
     private Specification<TicketType> createSearchSpecification(TicketTypeSearchRequestModel ticketTypeSearchRequestModel) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (ticketTypeSearchRequestModel.getName() != null) {
+            if (ticketTypeSearchRequestModel.getName() != null && !ticketTypeSearchRequestModel.getName().isEmpty()) {
                 predicates.add(criteriaBuilder.like(
                         root.get(TicketType_.name), "%" + ticketTypeSearchRequestModel.getName() + "%"));
             }
 
-            if (ticketTypeSearchRequestModel.getDescription() != null) {
+            if (ticketTypeSearchRequestModel.getDescription() != null && !ticketTypeSearchRequestModel.getDescription().isEmpty()) {
                 predicates.add(criteriaBuilder.like(
                         root.get(TicketType_.description), "%" + ticketTypeSearchRequestModel.getDescription() + "%"));
             }
 
-            if(ticketTypeSearchRequestModel.getName() == null && ticketTypeSearchRequestModel.getDescription() == null) {
+            if((ticketTypeSearchRequestModel.getName() == null ||
+                    ticketTypeSearchRequestModel.getName().isEmpty()) &&
+                    (ticketTypeSearchRequestModel.getDescription() == null ||
+                            ticketTypeSearchRequestModel.getDescription().isEmpty())) {
                 predicates.add(criteriaBuilder.conjunction());
             }
 

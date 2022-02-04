@@ -77,6 +77,7 @@ public class TicketTypeController implements TicketTypeApi {
 
     @Override
     public ResponseEntity<Void> updateTicketType(@Valid TicketTypeModel ticketTypeModel) {
+        ticketTypeService.updateTicketType(ticketTypeModel);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

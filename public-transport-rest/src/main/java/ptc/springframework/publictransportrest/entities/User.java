@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "users", schema="ptc")
+@Table(name = "users", schema="public_transport")
 public class User {
 
     @Id

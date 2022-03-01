@@ -7,6 +7,6 @@ This repo is built for job seeking. A small demo to represent my Spring experien
 ##H2 database address:
 http://localhost:8081/h2-console
 
-username: test_user
+username: user
 
-password: password
+password: pass

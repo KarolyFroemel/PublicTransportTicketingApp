@@ -4,7 +4,6 @@ import contract.ticket.api.TicketTypeApi;
 import contract.ticket.model.TicketTypeModel;
 import contract.ticket.model.TicketTypeSearchRequestModel;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,16 +55,12 @@ public class TicketTypeController implements TicketTypeApi {
     public ResponseEntity<List<TicketTypeModel>> searchTicketType(Long xPage,
                                                                   Long xSize,
                                                                   @Valid TicketTypeSearchRequestModel ticketTypeSearchRequestModel) {
-        Page<TicketTypeModel> models = ticketTypeService.searchTicketType(
+        Page<TicketTypeModel> page = ticketTypeService.searchTicketType(
                 xPage.intValue(),
                 xSize.intValue(),
                 ticketTypeSearchRequestModel);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("X-Page", String.valueOf(xPage));
-        responseHeaders.set("X-Size", String.valueOf(xSize));
-        responseHeaders.set("X-Total-Pages", String.valueOf(models.getTotalPages()));
-        responseHeaders.set("X-Total-Size", String.valueOf(models.getTotalElements()));
-        return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).headers(responseHeaders).body((models.getContent()));
+
+        return ControllerHelper.buildPartialResponse(xPage, xSize, page);
     }
 
     @Override

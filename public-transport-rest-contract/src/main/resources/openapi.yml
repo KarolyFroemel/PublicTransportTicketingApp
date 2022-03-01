@@ -10,6 +10,33 @@ servers:
   - url: http://localhost:8081
 
 paths:
+  /token:
+    post:
+      tags:
+        - Token
+      operationId: getToken
+      summary: Get token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        200:
+          description: Get token
+          content:
+            application/json:
+              schema:
+                type: string
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        404:
+          $ref: '#/components/responses/404ContentNotFound'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
   /ticketType:
     get:
       tags:
@@ -935,6 +962,18 @@ paths:
 
 components:
   schemas:
+    Credentials:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+      required:
+        - username
+        - password
+
     TicketType:
       type: object
       properties:
@@ -954,6 +993,8 @@ components:
         expirationTime:
           type: integer
           minimum: 1
+        imgSource:
+          type: string
       required:
         - name
         - description

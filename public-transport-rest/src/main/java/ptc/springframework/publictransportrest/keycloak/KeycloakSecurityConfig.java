@@ -29,7 +29,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests()
+        http.cors().and().authorizeRequests()
                 .antMatchers("/helloadmin", "/ticketType").hasRole(Role.ADMIN.name())
                 .antMatchers("/hellopassenger").hasRole(Role.PASSENGER.name())
                 .antMatchers("/hellovalidator").hasRole(Role.VALIDATOR.name())
@@ -60,7 +60,6 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/h2-console/**")
-                .antMatchers("/ticketType")
                 .antMatchers("/token");
     }
 }

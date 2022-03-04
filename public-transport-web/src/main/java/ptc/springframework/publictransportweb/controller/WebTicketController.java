@@ -3,18 +3,18 @@ package ptc.springframework.publictransportweb.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 import ptc.springframework.publictransportweb.model.TicketModel;
 import ptc.springframework.publictransportweb.model.TicketPurchaseInfoDTO;
 import ptc.springframework.publictransportweb.model.TicketTypeModel;
 import ptc.springframework.publictransportweb.service.TicketService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+@CrossOrigin
 @Controller
 @RequestMapping
 public class WebTicketController {
@@ -26,8 +26,13 @@ public class WebTicketController {
     }
 
     @GetMapping("/ticket/getTicketTypes")
-    public ResponseEntity<List<TicketTypeModel>> getTicketTypes() {
-        return ResponseEntity.ok(ticketService.getTicketTypes());
+    public ResponseEntity<List<TicketTypeModel>> getTicketTypes(/*@RequestHeader Map<String, String> headers*/@RequestHeader("authorization") String token) {
+//        System.out.println("************************************************");
+//        headers.forEach((key, value) -> {
+//            System.out.println(String.format("Header '%s' = %s", key, value));
+//        });
+        System.out.println(token);
+        return ResponseEntity.ok(ticketService.getTicketTypes(token));
     }
 
     @GetMapping("/home")
@@ -37,7 +42,7 @@ public class WebTicketController {
 
     @GetMapping("/ticketPurchasePage")
     public String ticketPurchasePage(Model model) {
-        model.addAttribute("tickets", ticketService.getTicketTypes());
+        model.addAttribute("tickets", ticketService.getTicketTypes(""));
         model.addAttribute("ticketPurchaseDTO", new TicketPurchaseInfoDTO());
         return "ticketPurchase";
     }

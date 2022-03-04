@@ -2,6 +2,7 @@ package ptc.springframework.publictransportweb.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -12,6 +13,7 @@ import ptc.springframework.publictransportweb.model.TicketPurchaseInfoDTO;
 import ptc.springframework.publictransportweb.model.TicketTypeModel;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,12 +28,19 @@ public class TicketService {
 
     private WebClient client = WebClient.create(host) ;
 
-    public List<TicketTypeModel> getTicketTypes(){
+    public List<TicketTypeModel> getTicketTypes(String token){
         log.info("Get ticket types from api started");
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        headers.add("Authorization", token);
 
         List<TicketTypeModel> ticketTypes = this.client
                 .get()
-                .uri("/tickets")
+                .uri("/ticketType")
+                .headers(httpHeaders -> {
+                    httpHeaders.set("Content-Type", "application/json");
+                    httpHeaders.set("Authorization", token);
+                })
                 .retrieve()
                 .bodyToFlux(TicketTypeModel.class)
                 .collectList()

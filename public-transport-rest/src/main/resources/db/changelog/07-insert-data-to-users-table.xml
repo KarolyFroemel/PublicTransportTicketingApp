@@ -102,5 +102,19 @@
             <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
             <column name="modified_on" value="now()"/>
         </insert>
+
+        <insert tableName="users">
+            <column name="id" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="firstname" value="Digi"/>
+            <column name="lastname" value="Dagi"/>
+            <column name="email" value="admin1@ptc.com"/>
+            <column name="password" value="password"/>
+            <column name="role" value="ADMIN"/>
+            <column name="number_of_incorrect_logins" value="0"/>
+            <column name="created_by" value="null"/>
+            <column name="created_on" value="now()"/>
+            <column name="modified_by" value="null"/>
+            <column name="modified_on" value="now()"/>
+        </insert>
 </changeSet>
 </databaseChangeLog>

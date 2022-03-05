@@ -4,8 +4,6 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="Karoly_Froemel" id="4">
-        <sql>DROP TYPE IF EXISTS ticket_status</sql>
-        <sql>CREATE TYPE ticket_status AS ENUM ('VALIDATED','REFUNDED', 'CAN_BE_USED', 'EXPIRED')</sql>
         <createTable tableName="tickets">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -20,7 +18,7 @@
             <column name="valid_from" type="DATETIME(2)"/>
             <column name="valid_to" type="DATETIME(2)"/>
             <column name="validation_time" type="DATETIME(2)"/>
-            <column name="status" type="ticket_status"/>
+            <column name="status" type="varchar(50)"/>
         </createTable>
 
         <rollback>

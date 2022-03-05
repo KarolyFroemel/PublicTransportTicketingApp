@@ -2,12 +2,13 @@ package ptc.springframework.publictransportrest.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GenerationType;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,17 +18,25 @@ import java.util.UUID;
 public class User {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @NotNull
-    private String firstname;
-
-    @NotNull
-    private String lastname;
+    private String name;
 
     @NotNull
     @Email
     private String email;
+
+    @OneToOne(mappedBy = "user")
+    private Account account;
+
+    @OneToMany(mappedBy="user")
+    private List<Ticket> ticketList;
 
     private UUID createdBy;
 

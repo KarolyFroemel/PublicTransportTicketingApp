@@ -1,24 +1,32 @@
 package ptc.springframework.publictransportrest.entities;
 
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-//@Getter
-//@Setter
-//@Entity
-//@Table(name = "accounts")
+@Getter
+@Setter
+@Entity
+@Table(name = "accounts", schema="public_transport")
 public class Account {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @NotNull
-    private UUID userId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @NotNull
     private Long balance;
-
-    @NotNull
-    private Boolean locked;
 }

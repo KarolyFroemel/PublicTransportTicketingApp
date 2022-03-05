@@ -9,13 +9,16 @@
             <column name="id" value="c3d43913-602b-42c0-8ea3-0385ee758739"/>
             <column name="user_id" value="7716eec9-bc10-4891-9035-0980865669d2"/>
             <column name="balance" value="1000"/>
-            <column name="locked" value="false"/>
         </insert>
         <insert tableName="accounts">
             <column name="id" value="9c012c3d-5d65-499f-a188-c40b33605ecf"/>
             <column name="user_id" value="d6cf2f96-d00c-432c-8c0e-03e06e325688"/>
             <column name="balance" value="1000"/>
-            <column name="locked" value="false"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="id" value="02ed469c-0599-45e9-b4d9-dadebfcb2877"/>
+            <column name="user_id" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="balance" value="1000"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

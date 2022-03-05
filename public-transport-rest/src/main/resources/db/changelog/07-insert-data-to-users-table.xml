@@ -7,8 +7,7 @@
     <changeSet author="Karoly_Froemel" id="7">
         <insert tableName="users">
             <column name="id" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
-            <column name="firstname" value="admin"/>
-            <column name="lastname" value="admin"/>
+            <column name="name" value="admin"/>
             <column name="email" value="admin1@ptc.com"/>
             <column name="created_by" value="null"/>
             <column name="created_on" value="now()"/>
@@ -17,9 +16,8 @@
         </insert>
 
         <insert tableName="users">
-            <column name="id" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
-            <column name="firstname" value="Edinson"/>
-            <column name="lastname" value="Cavani"/>
+            <column name="id" value="563474d5-77bf-400c-b2ff-c96462a1b359"/>
+            <column name="name" value="Edinson Cavani"/>
             <column name="email" value="edinson.cavani@gmail.com"/>
             <column name="created_by" value="null"/>
             <column name="created_on" value="now()"/>
@@ -28,9 +26,8 @@
         </insert>
 
         <insert tableName="users">
-            <column name="id" value="7716eec9-bc10-4891-9035-0980865669d2"/>
-            <column name="firstname" value="David"/>
-            <column name="lastname" value="Beckham"/>
+            <column name="id" value="1958fb4a-2f76-480c-8df2-6045f3c017a5"/>
+            <column name="name" value="David Beckham"/>
             <column name="email" value="david.beckham@gmail.com"/>
             <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>
@@ -39,9 +36,8 @@
         </insert>
 
         <insert tableName="users">
-            <column name="id" value="d6cf2f96-d00c-432c-8c0e-03e06e325688"/>
-            <column name="firstname" value="David"/>
-            <column name="lastname" value="Silva"/>
+            <column name="id" value="efd88677-79d7-42c9-bd97-f756a1110f1e"/>
+            <column name="name" value="David Silva"/>
             <column name="email" value="david.silva@gmail.com"/>
             <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>

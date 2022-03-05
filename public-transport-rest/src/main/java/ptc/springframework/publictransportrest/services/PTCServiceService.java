@@ -19,6 +19,7 @@ import ptc.springframework.publictransportrest.mappers.ServiceMapper;
 import ptc.springframework.publictransportrest.repositories.ServiceRepository;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.UUID;
 import static ptc.springframework.publictransportrest.exceptions.error.ServiceErrorCode.SERVICE_NOT_FOUND;
 
 @Service
+@Transactional
 public class PTCServiceService {
 
     private final ServiceRepository serviceRepository;
@@ -73,40 +75,20 @@ public class PTCServiceService {
     }
 
     public ServiceWithStationsModel getServiceById(UUID id) {
-        return serviceMapper.serviceEntityToServiceWithStationsModel(serviceRepository.findById(id).orElseThrow(
-                () -> new ServiceException(
-                SERVICE_NOT_FOUND,
-                "Service not found.",
-                "Service not found in database.",
-                HttpStatus.NOT_FOUND
-        )));
+        return serviceMapper.serviceEntityToServiceWithStationsModel(getService(id));
     }
 
     public void addStationToService(UUID serviceId, UUID stationId) {
         Station station = stationService.getStationById(stationId);
 
-        PTCService service = serviceRepository.findById(serviceId).orElseThrow(
-                () -> new ServiceException(
-                        SERVICE_NOT_FOUND,
-                        "Service not found.",
-                        "Service not found in database.",
-                        HttpStatus.NOT_FOUND
-                )
-        );
+        PTCService service = getService(serviceId);
 
         service.getStations().add(station);
         serviceRepository.save(service);
     }
 
     public void removeStationFromService(UUID serviceId, UUID stationId) {
-        PTCService service = serviceRepository.findById(serviceId).orElseThrow(
-                () -> new ServiceException(
-                        SERVICE_NOT_FOUND,
-                        "Service not found.",
-                        "Service not found in database.",
-                        HttpStatus.NOT_FOUND
-                )
-        );
+        PTCService service = getService(serviceId);
 
         service.getStations().removeIf(s -> s.getId().equals(stationId));
 
@@ -172,5 +154,16 @@ public class PTCServiceService {
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
+    }
+
+    private PTCService getService(UUID serviceId) {
+        return serviceRepository.findById(serviceId).orElseThrow(
+                () -> new ServiceException(
+                        SERVICE_NOT_FOUND,
+                        "Service not found.",
+                        "Service not found in database.",
+                        HttpStatus.NOT_FOUND
+                )
+        );
     }
 }

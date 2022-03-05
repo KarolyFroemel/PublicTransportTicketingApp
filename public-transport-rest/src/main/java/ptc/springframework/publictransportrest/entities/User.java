@@ -3,6 +3,7 @@ package ptc.springframework.publictransportrest.entities;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.GenerationType;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

@@ -12,9 +12,7 @@
             <column name="name" type="varchar(250)">
                 <constraints nullable="false"/>
             </column>
-            <column name="qr_code" type="varchar(250)">
-                <constraints nullable="true"/>
-            </column>
+            <column name="qr_code" type="varchar(250)"/>
             <column name="created_by" type="UUID"/>
             <column name="created_on" type="DATETIME(2)"/>
             <column name="modified_by" type="UUID"/>

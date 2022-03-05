@@ -1,5 +1,6 @@
 package ptc.springframework.publictransportrest.mappers;
 
+import contract.ticket.model.CreateStationModel;
 import contract.ticket.model.StationModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,6 +21,16 @@ public interface StationMapper {
             @Mapping(target = "modifiedOn", ignore = true)
     })
     Station stationModelToStationEntity(StationModel stationModel);
+
+    @Mappings({
+            @Mapping(target = "createdBy", ignore = true),
+            @Mapping(target = "createdOn", ignore = true),
+            @Mapping(target = "modifiedBy", ignore = true),
+            @Mapping(target = "modifiedOn", ignore = true),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "qrCode", ignore = true)
+    })
+    Station createStationModelToStationEntity(CreateStationModel createStationModel);
 
     StationModel stationEntityToStationModel(Station station);
 

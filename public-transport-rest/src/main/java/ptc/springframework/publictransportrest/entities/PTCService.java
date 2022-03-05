@@ -32,7 +32,7 @@ public class PTCService {
     @Enumerated(EnumType.STRING)
     private ServiceType type;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "services_stations",
             joinColumns = {@JoinColumn(name = "services_id", referencedColumnName = "id")},

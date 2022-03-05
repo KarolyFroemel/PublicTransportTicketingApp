@@ -244,7 +244,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Station"
+              $ref: "#/components/schemas/CreateStation"
       responses:
         201:
           description: Staion succesfully created
@@ -1050,14 +1050,19 @@ components:
       required:
         - id
         - name
-        - qrCode
+
+    CreateStation:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
 
     StationSearch:
       type: object
       properties:
         name:
-          type: string
-        qrCode:
           type: string
         sortBy:
           type: string

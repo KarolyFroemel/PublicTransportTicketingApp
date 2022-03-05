@@ -12,9 +12,9 @@
             <column name="price" value="1"/>
             <column name="expiration_time" value="365"/>
             <column name="imgSource" value="https://images.squarespace-cdn.com/content/v1/5954fa00f5e231ae2f86f00a/1601577866070-WT6HFF3194MCNRDLB817/cinema-old-type-ticket-beige-isolated-recycle-top-4V6EZ7N.jpg"/>
-            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>
-            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="modified_on" value="now()"/>
         </insert>
         <insert tableName="ticket_types">
@@ -24,9 +24,9 @@
             <column name="price" value="30"/>
             <column name="expiration_time" value="31"/>
             <column name="imgSource" value="https://image.shutterstock.com/image-vector/two-pair-vector-ticket-isolated-600w-1028178904.jpg"/>
-            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>
-            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="modified_on" value="now()"/>
         </insert>
         <insert tableName="ticket_types">
@@ -36,9 +36,9 @@
             <column name="price" value="10"/>
             <column name="expiration_time" value="1"/>
             <column name="imgSource" value="https://st2.depositphotos.com/1008406/6606/v/950/depositphotos_66060937-stock-illustration-ticket-set-cinema-concert-theater.jpg"/>
-            <column name="created_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>
-            <column name="modified_by" value="079cc55e-1833-4df5-a3ca-038dc94cdeff"/>
+            <column name="modified_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="modified_on" value="now()"/>
         </insert>
     </changeSet>

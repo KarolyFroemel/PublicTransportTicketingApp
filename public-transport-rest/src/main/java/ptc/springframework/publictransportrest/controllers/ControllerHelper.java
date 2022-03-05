@@ -14,7 +14,7 @@ public class ControllerHelper {
     public static final String X_TOTAL_PAGES = "X-Total-Pages";
     public static final String X_TOTAL_SIZE = "X-Total-Size";
 
-    public static <T> HttpHeaders buildHeaders(Long xPage, Long xSize, Page<T> page) {
+    public static <T> HttpHeaders buildHeaders(Integer xPage, Integer xSize, Page<T> page) {
         HttpHeaders headers = new HttpHeaders();
         headers.add(X_PAGE, String.valueOf(xPage));
         headers.add(X_SIZE, String.valueOf(xSize));
@@ -23,7 +23,7 @@ public class ControllerHelper {
         return headers;
     }
 
-    public static <T> ResponseEntity<List<T>> buildPartialResponse(Long xPage, Long xSize, Page<T> page) {
+    public static <T> ResponseEntity<List<T>> buildPartialResponse(Integer xPage, Integer xSize, Page<T> page) {
         return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
                 .headers(ControllerHelper.buildHeaders(xPage, xSize, page))
                 .body(page.getContent());

@@ -2,7 +2,6 @@ package ptc.springframework.publictransportrest.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import ptc.springframework.publictransportrest.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -28,21 +27,6 @@ public class User {
     @NotNull
     @Email
     private String email;
-
-    @NotNull
-    private String password;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @NotNull
-    private Integer numberOfIncorrectLogins;
-
-    @NotNull
-    private Boolean locked;
-
-    private String token;
 
     private UUID createdBy;
 

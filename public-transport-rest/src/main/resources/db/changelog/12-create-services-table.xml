@@ -4,9 +4,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet author="Karoly_Froemel" id="11">
-        <sql>DROP TYPE IF EXISTS service_type</sql>
-        <sql>CREATE TYPE service_type AS ENUM ('BUS','TRAM', 'SUBWAY', 'BOAT')</sql>
+    <changeSet author="Karoly_Froemel" id="12">
         <createTable tableName="services">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
@@ -14,7 +12,7 @@
             <column name="name" type="varchar(250)">
                 <constraints nullable="false"/>
             </column>
-            <column name="type" type="service_type">
+            <column name="type" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="UUID"/>

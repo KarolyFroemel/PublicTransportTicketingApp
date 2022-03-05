@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="15">
+        <createTable tableName="services_stations">
+            <column name="services_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_services_stations_services_id" references="services(id)"/>
+            </column>
+            <column name="stations_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_services_stations_stations_id" references="stations(id)"/>
+            </column>
+<!--            <column name="order" type="INTEGER"/>-->
+        </createTable>
+<!--        <addUniqueConstraint-->
+<!--                columnNames="services_id, stations_id, order"-->
+<!--                constraintName="services_stations_order_unique_constraint"-->
+<!--                tableName="services_stations"-->
+<!--        />-->
+        <rollback>
+            <dropTable tableName="services_stations"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

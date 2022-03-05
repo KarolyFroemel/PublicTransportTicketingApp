@@ -52,12 +52,12 @@ public class TicketTypeController implements TicketTypeApi {
     }
 
     @Override
-    public ResponseEntity<List<TicketTypeModel>> searchTicketType(Long xPage,
-                                                                  Long xSize,
+    public ResponseEntity<List<TicketTypeModel>> searchTicketType(Integer xPage,
+                                                                  Integer xSize,
                                                                   @Valid TicketTypeSearchRequestModel ticketTypeSearchRequestModel) {
         Page<TicketTypeModel> page = ticketTypeService.searchTicketType(
-                xPage.intValue(),
-                xSize.intValue(),
+                xPage,
+                xSize,
                 ticketTypeSearchRequestModel);
 
         return ControllerHelper.buildPartialResponse(xPage, xSize, page);

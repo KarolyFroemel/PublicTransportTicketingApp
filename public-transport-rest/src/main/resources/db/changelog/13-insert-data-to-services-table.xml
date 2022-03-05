@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="13">
+        <insert tableName="services">
+            <column name="id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="name" value="Tram 1"/>
+            <column name="type" value="TRAM"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+
+        <insert tableName="services">
+            <column name="id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="name" value="Subway 1"/>
+            <column name="type" value="SUBWAY"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+
+        <insert tableName="services">
+            <column name="id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="name" value="Bus 1"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

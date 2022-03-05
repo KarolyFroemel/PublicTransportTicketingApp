@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ptc.springframework.publictransportrest.exceptions.error.ApplicationErrorCode;
-import ptc.springframework.publictransportrest.exceptions.error.ErrorCode;
 
 import java.util.stream.Collectors;
 

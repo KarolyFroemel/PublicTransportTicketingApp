@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles(profiles = "test")
 class TicketTypeControllerTest {
 
-    private final UUID USER_ID = UUID.fromString("fdb20ffa-496e-43dd-b445-a44922b926e1");
+    private final UUID USER_ID = UUID.fromString("eb5e3e64-1153-410d-bfc7-9988766c82ac");
     private final String SINGLE_TICKET_ID = "dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047";
     private final String NON_EXISTING_TICKET_ID = "086cd646-7adb-49df-97f8-7ee10717929c";
 

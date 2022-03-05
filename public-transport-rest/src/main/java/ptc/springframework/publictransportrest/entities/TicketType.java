@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "ticket_types", schema="public_transport")
-public class TicketType extends BaseEntity {
+public class TicketType {
 
     @Id
     @GeneratedValue(generator = "UUID")

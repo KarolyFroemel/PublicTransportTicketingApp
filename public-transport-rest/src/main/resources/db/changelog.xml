@@ -15,6 +15,10 @@
     <include file="/db/changelog/08-insert-data-to-ticket-types-table.xml"/>
 <!--    <include file="/db/changelog/09-insert-data-to-accounts-table.xml"/>-->
 <!--    <include file="/db/changelog/10-insert-data-to-tickets-table.xml"/>-->
-<!--    <include file="/db/changelog/11-create-stations-table.xml"/>-->
-<!--    <include file="/db/changelog/12-create-services-table.xml"/>-->
+    <include file="/db/changelog/11-create-stations-table.xml"/>
+    <include file="/db/changelog/12-create-services-table.xml"/>
+    <include file="/db/changelog/13-insert-data-to-services-table.xml"/>
+    <include file="/db/changelog/14-insert-data-to-stations-table.xml"/>
+    <include file="/db/changelog/15-create-services_stations-table.xml"/>
+    <include file="/db/changelog/16-insert-data-to-services_stations-table.xml"/>
 </databaseChangeLog>

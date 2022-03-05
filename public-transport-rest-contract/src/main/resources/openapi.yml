@@ -390,7 +390,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Service"
+              $ref: "#/components/schemas/CreateService"
       responses:
         201:
           description: Service succesfully created
@@ -492,7 +492,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/ServiceWithStations'
         401:
           $ref: '#/components/responses/401Unauthorized'
         403:
@@ -526,7 +526,8 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-  /service/{id}/addStation:
+  /service/{serviceId}/station/{stationId}:
+
     put:
       tags:
         - Service
@@ -534,11 +535,22 @@ paths:
       summary: Add station to service.
       parameters:
         - in: path
-          name: id
+          name: serviceId
           required: true
           schema:
             type: string
             format: uuid
+        - in: path
+          name: stationId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      #      requestBody:
+      #        content:
+      #          application/json:
+      #            schema:
+      #              type: integer
       responses:
         204:
           description: Successfully updated.
@@ -553,8 +565,7 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-  /service/{serviceId}/addStation/{stationId}:
-    put:
+    delete:
       tags:
         - Service
       operationId: removeStationFromService
@@ -1081,6 +1092,47 @@ components:
         - name
         - type
 
+    ServiceWithStations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - BUS
+            - TRAM
+            - SUBWAY
+            - BOAT
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Station'
+      required:
+        - id
+        - name
+        - type
+        - stations
+
+    CreateService:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - BUS
+            - TRAM
+            - SUBWAY
+            - BOAT
+      required:
+        - name
+        - type
+
     ServiceSearch:
       type: object
       properties:
@@ -1308,7 +1360,6 @@ components:
       required: true
       schema:
         type: integer
-        format: int64
     X-Size:
       name: X-Size
       in: header
@@ -1316,7 +1367,6 @@ components:
       required: true
       schema:
         type: integer
-        format: int64
 
 
   headers:
@@ -1324,27 +1374,23 @@ components:
       required: true
       schema:
         type: integer
-        format: int64
       description: "Number of requested pages"
 
     X-Size:
       required: true
       schema:
         type: integer
-        format: int64
       description: "Max page size"
 
     X-Total-Pages:
       required: true
       schema:
         type: integer
-        format: int64
       description: "Number of all requestable pages"
     X-Total-Size:
       required: true
       schema:
         type: integer
-        format: int64
       description: "Number of all requestable element"
 
   responses:

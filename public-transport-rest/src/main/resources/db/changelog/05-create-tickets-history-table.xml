@@ -10,7 +10,7 @@
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="history_type" type="history_type">
+            <column name="history_type" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="ticket_id" type="UUID">

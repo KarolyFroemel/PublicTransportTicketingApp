@@ -8,13 +8,13 @@
     <include file="/db/changelog/01-create-users-table.xml"/>
     <include file="/db/changelog/02-create-ticket-types-table.xml"/>
     <include file="/db/changelog/03-create-accounts-table.xml"/>
-<!--    <include file="/db/changelog/04-create-tickets-table.xml"/>-->
+    <include file="/db/changelog/04-create-tickets-table.xml"/>
 <!--    <include file="/db/changelog/06-create-accounts-history-table.xml"/>-->
 <!--    <include file="/db/changelog/05-create-tickets-history-table.xml"/>-->
     <include file="/db/changelog/07-insert-data-to-users-table.xml"/>
     <include file="/db/changelog/08-insert-data-to-ticket-types-table.xml"/>
     <include file="/db/changelog/09-insert-data-to-accounts-table.xml"/>
-<!--    <include file="/db/changelog/10-insert-data-to-tickets-table.xml"/>-->
+    <include file="/db/changelog/10-insert-data-to-tickets-table.xml"/>
     <include file="/db/changelog/11-create-stations-table.xml"/>
     <include file="/db/changelog/12-create-services-table.xml"/>
     <include file="/db/changelog/13-insert-data-to-services-table.xml"/>

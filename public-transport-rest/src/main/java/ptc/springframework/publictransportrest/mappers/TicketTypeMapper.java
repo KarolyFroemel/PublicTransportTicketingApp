@@ -16,7 +16,8 @@ public interface TicketTypeMapper {
             @Mapping(target = "createdBy", ignore = true),
             @Mapping(target = "createdOn", ignore = true),
             @Mapping(target = "modifiedBy", ignore = true),
-            @Mapping(target = "modifiedOn", ignore = true)
+            @Mapping(target = "modifiedOn", ignore = true),
+            @Mapping(target = "tickets", ignore = true)
     })
     TicketType ticketTypeModelToTicketTypeEntity(TicketTypeModel ticketTypeModel);
     TicketTypeModel ticketTypeEntityToTicketTypeModel(TicketType ticketType);

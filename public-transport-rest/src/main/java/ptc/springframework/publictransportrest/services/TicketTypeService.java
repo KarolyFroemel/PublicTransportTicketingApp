@@ -17,6 +17,7 @@ import ptc.springframework.publictransportrest.mappers.TicketTypeMapper;
 import ptc.springframework.publictransportrest.repositories.TicketTypeRepository;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 import static ptc.springframework.publictransportrest.exceptions.error.TicketTypeErrorCode.TICKET_TYPE_NOT_FOUND;
 
 @Service
+@Transactional
 public class TicketTypeService {
 
     private final TicketTypeMapper ticketTypeMapper;

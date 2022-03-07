@@ -21,8 +21,9 @@ public class Ticket {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @NotNull
-    private UUID ticketTypeId;
+    @ManyToOne
+    @JoinColumn(name="ticket_type_id", referencedColumnName = "id", nullable=false)
+    private TicketType ticketType;
 
     @NotNull
     private LocalDateTime purchaseDate;

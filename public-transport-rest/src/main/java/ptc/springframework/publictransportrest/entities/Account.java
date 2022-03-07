@@ -28,5 +28,9 @@ public class Account {
     private User user;
 
     @NotNull
-    private Long balance;
+    private Integer balance;
+
+    public void addBalance(int addToBalance) {
+        this.balance += addToBalance;
+    }
 }

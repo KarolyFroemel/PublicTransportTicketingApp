@@ -11,7 +11,7 @@
             <column name="user_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_accounts_users" references="users(id)"/>
             </column>
-            <column name="balance" type="BIGINT">
+            <column name="balance" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>

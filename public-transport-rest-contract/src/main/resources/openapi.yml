@@ -2,7 +2,6 @@ openapi: 3.0.1
 info:
   title: Public transport ticket endpoint
   description: This is an application which is simulate a public transport ticket handling.
-    This application based on Budapest public transport (BKK) ticket types.
   contact:
     email: karoly.froemel@gmail.com
   version: 2.0.0
@@ -34,6 +33,116 @@ paths:
           $ref: '#/components/responses/403PermissionDenied'
         404:
           $ref: '#/components/responses/404ContentNotFound'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /user:
+    get:
+      tags:
+        - User
+      operationId: getUserInfo
+      summary: Get user info
+      description: Get user info.
+      responses:
+        200:
+          description: Get user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        404:
+          $ref: '#/components/responses/404ContentNotFound'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /user/fillBalance:
+    put:
+      tags:
+        - User
+      summary: Fill account balance
+      operationId: fillUserAccountBalance
+      description: Fill user account balance.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FillBalance'
+      responses:
+        204:
+          description: Account balance changed.
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        404:
+          $ref: '#/components/responses/404ContentNotFound'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /user/getBalance:
+    get:
+      tags:
+        - User
+      summary: Get account balance
+      operationId: getUserAccountBalance
+      description: Get user account balance.
+      responses:
+        200:
+          description: Succesfully get account.
+          content:
+            application/json:
+              schema:
+                type: integer
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
+  /user/searchInAccountHistory:
+    post:
+      tags:
+        - User
+      operationId: searchInAccountHistory
+      summary: Search accoutn history.
+      parameters:
+        - $ref: '#/components/parameters/X-Page'
+        - $ref: '#/components/parameters/X-Size'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountHistorySearch'
+      responses:
+        206:
+          description: 'Successful request'
+          headers:
+            X-Page:
+              $ref: '#/components/headers/X-Page'
+            X-Size:
+              $ref: '#/components/headers/X-Size'
+            X-Total-Pages:
+              $ref: '#/components/headers/X-Total-Pages'
+            X-Total-Size:
+              $ref: '#/components/headers/X-Total-Size'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountHistory'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
         500:
           $ref: '#/components/responses/500ServerError'
 
@@ -325,7 +434,6 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-
   /station/{id}:
     get:
       tags:
@@ -471,7 +579,6 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-
   /service/{id}:
     get:
       tags:
@@ -527,7 +634,6 @@ paths:
           $ref: '#/components/responses/500ServerError'
 
   /service/{serviceId}/station/{stationId}:
-
     put:
       tags:
         - Service
@@ -546,11 +652,6 @@ paths:
           schema:
             type: string
             format: uuid
-      #      requestBody:
-      #        content:
-      #          application/json:
-      #            schema:
-      #              type: integer
       responses:
         204:
           description: Successfully updated.
@@ -594,219 +695,6 @@ paths:
           $ref: '#/components/responses/403PermissionDenied'
         404:
           $ref: '#/components/responses/404ContentNotFound'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account:
-    post:
-      tags:
-        - Account
-      operationId: createNewAccount
-      summary: Add a new Account.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Account"
-      responses:
-        201:
-          description: Account succesfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-
-  /account/{id}:
-    get:
-      tags:
-        - Account
-      operationId: getAccountById
-      summary: Get account by id.
-      description: Get account by id.
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        200:
-          description: Succesfully get account.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        404:
-          $ref: '#/components/responses/404ContentNotFound'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account/fillBalance/{balance}:
-    put:
-      tags:
-        - Account
-      summary: Fill account balance
-      operationId: fillUserAccountBalance
-      description: Fill user account balance.
-      parameters:
-        - name: balance
-          in: path
-          required: true
-          description: addition balance
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 5000
-      responses:
-        200:
-          description: Succesfully filled account.
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        404:
-          $ref: '#/components/responses/404ContentNotFound'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account/{userId}/getBalance:
-    get:
-      tags:
-        - Account
-      summary: Get account balance
-      operationId: getUserAccountBalance
-      description: Get user account balance.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: user id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        200:
-          description: Succesfully get account.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Balance'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account/lock/{accountId}:
-    put:
-      tags:
-        - Account
-      operationId: lockUserAccount
-      summary: Lock an user account.
-      parameters:
-        - name: accountId
-          in: path
-          required: true
-          description: account id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        204:
-          description: Successfully locked.
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        404:
-          $ref: '#/components/responses/404ContentNotFound'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account/unlock/{accountId}:
-    put:
-      tags:
-        - Account
-      operationId: unlockUserAccount
-      summary: Unlock an user account.
-      parameters:
-        - name: accountId
-          in: path
-          required: true
-          description: account id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        204:
-          description: Successfully unlocked.
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        404:
-          $ref: '#/components/responses/404ContentNotFound'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
-  /account/searchInAccountHistory:
-    post:
-      tags:
-        - Account
-      operationId: searchInAccountHistory
-      summary: Search accoutn history.
-      parameters:
-        - $ref: '#/components/parameters/X-Page'
-        - $ref: '#/components/parameters/X-Size'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AccountHistorySearch'
-      responses:
-        206:
-          description: 'Successful request'
-          headers:
-            X-Page:
-              $ref: '#/components/headers/X-Page'
-            X-Size:
-              $ref: '#/components/headers/X-Size'
-            X-Total-Pages:
-              $ref: '#/components/headers/X-Total-Pages'
-            X-Total-Size:
-              $ref: '#/components/headers/X-Total-Size'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AccountHistory'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
         500:
           $ref: '#/components/responses/500ServerError'
 
@@ -931,6 +819,7 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
+  #  TODO: extra function
   /ticket/searchInTicketHistory:
     post:
       tags:
@@ -984,6 +873,30 @@ components:
       required:
         - username
         - password
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        account:
+          $ref: '#/components/schemas/Account'
+
+    FillBalance:
+      type: object
+      properties:
+        addBalance:
+          type: integer
+          minimum: 1
+          maximum: 5000
+      required:
+        - userId
+        - addBalance
 
     TicketType:
       type: object
@@ -1163,87 +1076,6 @@ components:
           description: 'Sort order'
           default: 'ASC'
 
-    AccountHistorySearch:
-      type: object
-      properties:
-        transactionType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-            - LOCK
-            - UNLOCK
-        sortOrder:
-          type: string
-          enum:
-            - ASC
-            - DESC
-          description: 'Sort order'
-          default: 'ASC'
-
-    AccountHistory:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        transactionType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-            - LOCK
-            - UNLOCK
-        balanceBefore:
-          type: integer
-        balanceAfter:
-          type: integer
-        createdOn:
-          type: string
-          format: date-time
-
-    TicketHistorySearch:
-      type: object
-      properties:
-        historyType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-        sortBy:
-          type: string
-          nullable: false
-          description: 'Sort by this column'
-          default: 'historyType'
-        sortOrder:
-          type: string
-          enum:
-            - ASC
-            - DESC
-          description: 'Sort order'
-          default: 'ASC'
-
-    TicketHistory:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        ticketType:
-          type: string
-        historyType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-        createdOn:
-          type: string
-          format: date-time
-
     TicketSearch:
       type: object
       properties:
@@ -1303,8 +1135,9 @@ components:
     PurchaseTicket:
       type: object
       properties:
-        ticketName:
+        ticketId:
           type: string
+          format: uuid
         validFrom:
           type: string
           format: date
@@ -1315,26 +1148,8 @@ components:
     Account:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        userId:
-          type: string
-          format: uuid
         balance:
           type: integer
-        locked:
-          type: boolean
-      required:
-        - id
-        - userId
-        - balance
-
-    Balance:
-      type: object
-      properties:
-        balance:
-          type: string
       required:
         - balance
 
@@ -1357,6 +1172,87 @@ components:
       required:
         - "errorCode"
 
+    TicketHistorySearch:
+      type: object
+      properties:
+        historyType:
+          type: string
+          enum:
+            - PURCHASE
+            - REFUND
+            - VALIDATE
+        sortBy:
+          type: string
+          nullable: false
+          description: 'Sort by this column'
+          default: 'historyType'
+        sortOrder:
+          type: string
+          enum:
+            - ASC
+            - DESC
+          description: 'Sort order'
+          default: 'ASC'
+
+    TicketHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ticketType:
+          type: string
+        historyType:
+          type: string
+          enum:
+            - PURCHASE
+            - REFUND
+            - VALIDATE
+        createdOn:
+          type: string
+          format: date-time
+
+    AccountHistorySearch:
+      type: object
+      properties:
+        transactionType:
+          type: string
+          enum:
+            - PURCHASE
+            - REFUND
+            - VALIDATE
+            - LOCK
+            - UNLOCK
+        sortOrder:
+          type: string
+          enum:
+            - ASC
+            - DESC
+          description: 'Sort order'
+          default: 'ASC'
+
+    AccountHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        transactionType:
+          type: string
+          enum:
+            - PURCHASE
+            - REFUND
+            - VALIDATE
+            - LOCK
+            - UNLOCK
+        balanceBefore:
+          type: integer
+        balanceAfter:
+          type: integer
+        createdOn:
+          type: string
+          format: date-time
+
   parameters:
     X-Page:
       name: X-Page
@@ -1372,7 +1268,6 @@ components:
       required: true
       schema:
         type: integer
-
 
   headers:
     X-Page:

@@ -285,6 +285,7 @@ class TicketTypeControllerTest {
 
     @Test
     @DisplayName("Delete single ticket.")
+    @Order(12)
     void deleteTicketTypeById() throws Exception {
         mvc.perform(delete("/ticketType/{id}", SINGLE_TICKET_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -297,6 +298,7 @@ class TicketTypeControllerTest {
 
     @Test
     @DisplayName("Delete non existing single ticket.")
+    @Order(13)
     void deleteTicketTypeByIdNonExistingTicket() throws Exception {
         mvc.perform(delete("/ticketType/{id}", NON_EXISTING_TICKET_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -308,6 +310,7 @@ class TicketTypeControllerTest {
 
     @Test
     @DisplayName("Get non existing ticket by id.")
+    @Order(14)
     void getTicketTypeByIdNonExisting() throws Exception {
         mvc.perform(get("/ticketType/{id}", NON_EXISTING_TICKET_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -319,6 +322,7 @@ class TicketTypeControllerTest {
 
     @Test
     @DisplayName("Update non existing ticket type.")
+    @Order(15)
     void updateTicketTypeNonExisting() throws Exception {
         TicketTypeModel ticketTypeModel = ticketTypeTestData.getNonExistingTicketTypeModel();
 
@@ -330,5 +334,33 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.message").value("Ticket type not found!"))
                 .andExpect(jsonPath("$.detailedMessage").value("Ticket type not found by id in database!"));
 
+    }
+
+    @Test
+    @DisplayName("Search in ticket types witn enforceable.")
+    @Order(16)
+    void searchTicketTypeWithEnforceable() throws Exception {
+        TicketTypeSearchRequestModel ticketTypeSearchRequestModel = ticketTypeTestData.getTicketTypeSearchRequestModelSortByNameASCEnforceable();
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("X-Page", "0");
+        requestHeaders.set("X-Size", "3");
+
+        mvc.perform(post("/ticketType/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(requestHeaders)
+                .content(mapper.writeValueAsString(ticketTypeSearchRequestModel)))
+                .andExpect(status().isPartialContent())
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Page", "0"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Size", "3"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Pages", "0"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Size", "0"));
     }
 }

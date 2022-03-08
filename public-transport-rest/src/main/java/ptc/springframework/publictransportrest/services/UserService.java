@@ -49,22 +49,12 @@ public class UserService {
 
     public void fillBalance(int addToBalance) {
         User user = getUser();
-        user.setBalance(user.getBalance()+addToBalance);
+        user.getAccount().addBalance(addToBalance);
         userRepository.save(user);
     }
 
     public Integer getUserAccountBalance(){
         User user = getUser();
-        return user.getBalance();
-    }
-
-    public boolean checkPayingCapacity(int price) {
-        User user = getUser();
-        return user.getBalance() - price >= 0;
-    }
-
-    public void deductFee(int price) {
-        User user = getUser();
-        user.setBalance(user.getBalance() + price);
+        return user.getAccount().getBalance();
     }
 }

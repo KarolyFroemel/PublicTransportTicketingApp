@@ -54,9 +54,4 @@ public class TicketTestData {
         ticketSearchModel.setStatus(TicketSearchModel.StatusEnum.CAN_BE_USED);
         return ticketSearchModel;
     }
-
-    public TicketSearchModel getTicketSearchModelEMPTY() {
-        TicketSearchModel ticketSearchModel = new TicketSearchModel();
-        return ticketSearchModel;
-    }
 }

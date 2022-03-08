@@ -23,7 +23,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static ptc.springframework.publictransportrest.exceptions.error.TicketErrorCode.*;
 import static ptc.springframework.publictransportrest.exceptions.error.TicketTypeErrorCode.TICKET_TYPE_NOT_FOUND;
@@ -73,7 +72,7 @@ public class TicketService {
                         HttpStatus.NOT_FOUND)
         );
 
-        if(!userService.checkPayingCapacity(ticketType.getPrice())) {
+        if(!user.getAccount().checkPayingCapacity(ticketType.getPrice())) {
             throw new UserException(
                     USER_BALANCE_LESS_THAN_NEEDED,
                     "User has less balance than needed.",
@@ -90,7 +89,7 @@ public class TicketService {
         ticket.setValidFrom(purchaseTicketModel.getValidFrom().atStartOfDay());
         ticket.setValidTo(purchaseTicketModel.getValidFrom().atStartOfDay().plusDays(ticketType.getExpirationTime()));
         ticketRepository.save(ticket);
-        userService.deductFee(ticketType.getPrice());
+        user.getAccount().deductFee(ticketType.getPrice());
     }
 
     public void validateTicket(UUID ticketId) {
@@ -140,23 +139,6 @@ public class TicketService {
         ticketRepository.save(ticket);
         userService.fillBalance(ticket.getTicketType().getPrice());
     }
-
-//    public List<TicketModel> getAllTicket() {
-//        User user = userService.getUser();
-//        List<Ticket> ticketList = user.getTicketList();
-//        List<TicketModel> ticketModelList = new ArrayList<>();
-//        System.out.println(ticketList.get(0).getStatus()==TicketStatus.CAN_BE_USED);
-//        ticketList.forEach(ticket -> {
-//            System.out.println(ticket.getStatus()==TicketStatus.CAN_BE_USED);
-//        });
-////        for (Ticket ticket: ticketList) {
-////            if(ticket.getStatus().equals(TicketStatus.CAN_BE_USED)){
-////                ticketModelList.add(ticketMapper.ticketEntityToTicketModel(ticket));
-////            }
-////        }
-//
-//        return ticketMapper.ticketEntityListToTicketModelList(ticketList);
-//    }
 
     public Page<TicketModel> searchTicket(final int pageNumber,
                                               final int pageSize,
@@ -208,63 +190,11 @@ public class TicketService {
         User user = userService.getUser();
         List<Ticket> ticketList = user.getTicketList();
         ticketList.forEach(ticket -> {
-            if(ticket.getStatus() == TicketStatus.CAN_BE_USED && ticket.getValidTo().isAfter(LocalDateTime.now())) {
+            if(ticket.getStatus() == TicketStatus.CAN_BE_USED && LocalDateTime.now().isAfter(ticket.getValidTo())) {
                 ticket.setStatus(TicketStatus.EXPIRED);
             }
         });
 
         ticketRepository.saveAll(ticketList);
     }
-
-//    public List<TicketModel> getTicketsLambda(TicketSearchModel ticketSearchModel) {
-//        List<Ticket> ticketList = userService.getUser().getTicketList();
-//
-//        if(ticketSearchModel.getTicketType() != null && !ticketSearchModel.getTicketType().isEmpty()) {
-//            ticketList = ticketList
-//                    .stream()
-//                    .filter(ticket -> ticket.getTicketType().getName().equals(ticketSearchModel.getTicketType()))
-//                    .collect(Collectors.toList());
-//        }
-//
-//        if(ticketSearchModel.getStatus() != null) {
-//
-//            ticketList = ticketList
-//                    .stream()
-//                    .filter(ticket -> ticket.getStatus().equals(ticketSearchModel.getStatus()))
-//                    .collect(Collectors.toList());
-//        }
-//
-//
-//        if (ticketSearchModel.getSortBy().equals("ticketType")) {
-//
-//            if (ticketSearchModel.getSortOrder().getValue().equals("ASC")) {
-//                ticketList = ticketList
-//                        .stream()
-//                        .sorted(Comparator.comparing(TicketType::getName))
-//                        .collect(Collectors.toList());
-//            } else {
-//                ticketTypeList = ticketTypeList
-//                        .stream()
-//                        .sorted(Comparator.comparing(TicketType::getName).reversed())
-//                        .collect(Collectors.toList());
-//            }
-//
-//        } else {
-//
-//            if (ticketTypeSearchRequestModel.getSortOrder().getValue().equals("ASC")) {
-//                ticketTypeList = ticketTypeList
-//                        .stream()
-//                        .sorted(Comparator.comparing(TicketType::getDescription))
-//                        .collect(Collectors.toList());
-//            } else {
-//                ticketTypeList = ticketTypeList
-//                        .stream()
-//                        .sorted(Comparator.comparing(TicketType::getDescription).reversed())
-//                        .collect(Collectors.toList());
-//            }
-//        }
-//
-//
-//        return ticketTypeMapper.ticketTypeEntityListToTicketTypeModelList(ticketTypeList);
-//    }
 }

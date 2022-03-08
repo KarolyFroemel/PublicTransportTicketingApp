@@ -15,7 +15,7 @@
             <column name="email" type="varchar(250)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="balance" type="INT"/>
+<!--            <column name="balance" type="INT"/>-->
             <column name="created_by" type="UUID"/>
             <column name="created_on" type="DATETIME(2)"/>
             <column name="modified_by" type="UUID"/>

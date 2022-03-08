@@ -1,7 +1,5 @@
 package ptc.springframework.publictransportrest.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,10 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-//@Getter
-//@Setter
-//@Entity
-//@Table(name = "accounts", schema="public_transport")
+@Getter
+@Setter
+@Entity
+@Table(name = "accounts", schema="public_transport")
 public class Account {
 
     @Id
@@ -24,13 +22,10 @@ public class Account {
     )
     private UUID id;
 
-//    @NotNull
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    @JsonBackReference
-//    @JsonIgnore
-//    private User user;
-
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @NotNull
     private Integer balance;

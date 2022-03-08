@@ -1,5 +1,6 @@
 package ptc.springframework.publictransportrest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -47,6 +48,7 @@ public class TicketType {
     private LocalDateTime modifiedOn;
 
     @OneToMany(mappedBy = "ticketType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Ticket> tickets;
 
 }

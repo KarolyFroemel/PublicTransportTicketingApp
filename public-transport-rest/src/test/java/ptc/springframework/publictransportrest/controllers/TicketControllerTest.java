@@ -203,6 +203,33 @@ class TicketControllerTest {
     }
 
     @Test
+    @DisplayName("Search in ticket types DESC.")
+    @Order(11)
+    void searchTicketTypeDESC() throws Exception {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("X-Page", "0");
+        requestHeaders.set("X-Size", "3");
+
+        mvc.perform(post("/ticket/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(requestHeaders)
+                .content(mapper.writeValueAsString(ticketTestData.getTicketSearchModelDESC())))
+                .andExpect(status().isPartialContent())
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Page", "0"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Size", "3"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Pages", "1"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Size", "1"));
+    }
+
+    @Test
     void searchInTicketHistory() {
     }
 

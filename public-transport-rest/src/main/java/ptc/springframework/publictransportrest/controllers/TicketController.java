@@ -39,7 +39,7 @@ public class TicketController implements TicketApi {
 
     @Override
     public ResponseEntity<List<TicketModel>> searchTicket(Integer xPage, Integer xSize, @Valid TicketSearchModel ticketSearchModel) {
-//        ticketService.updateTicketStatus();
+        ticketService.updateTicketStatus();
         Page<TicketModel> page = ticketService.searchTicket(
                 xPage,
                 xSize,

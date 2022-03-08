@@ -27,6 +27,16 @@ public class TicketTypeTestData {
         return ticketTypeSearchRequestModel;
     }
 
+    public TicketTypeSearchRequestModel getTicketTypeSearchRequestModelSortByNameASCEnforceable() {
+        TicketTypeSearchRequestModel ticketTypeSearchRequestModel = new TicketTypeSearchRequestModel();
+        ticketTypeSearchRequestModel.setName("ticket");
+        ticketTypeSearchRequestModel.setDescription("one ride");
+        ticketTypeSearchRequestModel.setSortBy("name");
+        ticketTypeSearchRequestModel.setSortOrder(TicketTypeSearchRequestModel.SortOrderEnum.ASC);
+        ticketTypeSearchRequestModel.setIsEnforceable(true);
+        return ticketTypeSearchRequestModel;
+    }
+
     public TicketTypeSearchRequestModel getTicketTypeSearchRequestModelSortByNameDesc() {
         TicketTypeSearchRequestModel ticketTypeSearchRequestModel = getTicketTypeSearchRequestModelSortByNameASC();
         ticketTypeSearchRequestModel.setSortOrder(TicketTypeSearchRequestModel.SortOrderEnum.DESC);

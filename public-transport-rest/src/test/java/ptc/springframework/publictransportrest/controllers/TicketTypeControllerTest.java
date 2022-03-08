@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -28,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = TestSecurityConfig.class)
 @ActiveProfiles(profiles = "test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class TicketTypeControllerTest {
 
     private final UUID USER_ID = UUID.fromString("eb5e3e64-1153-410d-bfc7-9988766c82ac");
@@ -71,7 +73,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.name").value(result.getName()))
                 .andExpect(jsonPath("$.description").value(result.getDescription()))
                 .andExpect(jsonPath("$.price").value(result.getPrice()))
-                .andExpect(jsonPath("$.expirationTime").value(result.getExpirationTime()));
+                .andExpect(jsonPath("$.expirationTime").value(result.getExpirationTime()))
+                .andExpect(jsonPath("$.isEnforceable").value(result.getIsEnforceable()));
     }
 
     @Test
@@ -86,7 +89,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.name").value(ticketTypeModel.getName()))
                 .andExpect(jsonPath("$.description").value(ticketTypeModel.getDescription()))
                 .andExpect(jsonPath("$.price").value(ticketTypeModel.getPrice()))
-                .andExpect(jsonPath("$.expirationTime").value(ticketTypeModel.getExpirationTime()));
+                .andExpect(jsonPath("$.expirationTime").value(ticketTypeModel.getExpirationTime()))
+                .andExpect(jsonPath("$.isEnforceable").value(ticketTypeModel.getIsEnforceable()));
     }
 
     @Test
@@ -189,7 +193,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.[0].name").value(result.getName()))
                 .andExpect(jsonPath("$.[0].description").value(result.getDescription()))
                 .andExpect(jsonPath("$.[0].price").value(result.getPrice()))
-                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()));
+                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()))
+                .andExpect(jsonPath("$.[0].isEnforceable").value(result.getIsEnforceable()));
 
     }
 
@@ -209,7 +214,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.[0].name").value(result.getName()))
                 .andExpect(jsonPath("$.[0].description").value(result.getDescription()))
                 .andExpect(jsonPath("$.[0].price").value(result.getPrice()))
-                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()));
+                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()))
+                .andExpect(jsonPath("$.[0].isEnforceable").value(result.getIsEnforceable()));
 
     }
 
@@ -229,7 +235,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.[0].name").value(result.getName()))
                 .andExpect(jsonPath("$.[0].description").value(result.getDescription()))
                 .andExpect(jsonPath("$.[0].price").value(result.getPrice()))
-                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()));
+                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()))
+                .andExpect(jsonPath("$.[0].isEnforceable").value(result.getIsEnforceable()));
 
     }
 
@@ -249,7 +256,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.[0].name").value(result.getName()))
                 .andExpect(jsonPath("$.[0].description").value(result.getDescription()))
                 .andExpect(jsonPath("$.[0].price").value(result.getPrice()))
-                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()));
+                .andExpect(jsonPath("$.[0].expirationTime").value(result.getExpirationTime()))
+                .andExpect(jsonPath("$.[0].isEnforceable").value(result.getIsEnforceable()));
 
     }
 
@@ -271,7 +279,8 @@ class TicketTypeControllerTest {
                 .andExpect(jsonPath("$.name").value(ticketTypeModel.getName()))
                 .andExpect(jsonPath("$.description").value(ticketTypeModel.getDescription()))
                 .andExpect(jsonPath("$.price").value(ticketTypeModel.getPrice()))
-                .andExpect(jsonPath("$.expirationTime").value(ticketTypeModel.getExpirationTime()));
+                .andExpect(jsonPath("$.expirationTime").value(ticketTypeModel.getExpirationTime()))
+                .andExpect(jsonPath("$.isEnforceable").value(ticketTypeModel.getIsEnforceable()));
     }
 
     @Test

@@ -16,6 +16,9 @@
             <column name="price" type="INTEGER"/>
             <column name="expiration_time" type="INTEGER"/>
             <column name="imgSource" type="VARCHAR(2500)"/>
+            <column name="is_enforceable" type="BOOLEAN">
+                <constraints nullable="false"></constraints>
+            </column>
             <column name="created_by" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_ticket_types_expiration_time_users" references="users(id)"/>
             </column>

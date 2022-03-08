@@ -14,6 +14,7 @@ public class TicketTypeTestData {
         ticketTypeModel.setDescription("New ticket type description");
         ticketTypeModel.setExpirationTime(30);
         ticketTypeModel.setPrice(50);
+        ticketTypeModel.setIsEnforceable(true);
         return ticketTypeModel;
     }
 
@@ -58,6 +59,7 @@ public class TicketTypeTestData {
         ticketTypeModel.setDescription("Single ticket for one ride. Valid to 60 minutes from validation.");
         ticketTypeModel.setExpirationTime(365);
         ticketTypeModel.setPrice(1);
+        ticketTypeModel.setIsEnforceable(true);
         return ticketTypeModel;
     }
 

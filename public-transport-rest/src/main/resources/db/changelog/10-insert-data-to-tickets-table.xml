@@ -13,7 +13,6 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
         </insert>
-
         <insert tableName="tickets">
             <column name="id" value="1e74368c-6630-404a-a87d-b574b6140e20"/>
             <column name="user_id" value="563474d5-77bf-400c-b2ff-c96462a1b359"/>
@@ -22,7 +21,6 @@
             <column name="valid_from" value="now()"/>
             <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
         </insert>
-
         <insert tableName="tickets">
             <column name="id" value="f145b989-552c-4c4c-ba93-e34f87719b3c"/>
             <column name="user_id" value="563474d5-77bf-400c-b2ff-c96462a1b359"/>
@@ -38,7 +36,32 @@
             <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
             <column name="purchase_date" value="now()"/>
             <column name="valid_from" value="now()"/>
-            <column name="valid_to" defaultValueComputed="now() + interval '1 day'"/>
+            <column name="valid_to" value="2035-09-17 18:47:52.69"/>
+        </insert>
+        <insert tableName="tickets">
+            <column name="id" value="83f90f5c-28ad-4536-8585-83af477c5112"/>
+            <column name="user_id" value="1958fb4a-2f76-480c-8df2-6045f3c017a5"/>
+            <column name="ticket_type_id" value="dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047"/>
+            <column name="purchase_date" value="now()"/>
+            <column name="valid_from" value="now()"/>
+            <column name="valid_to" value="now()"/>
+        </insert><insert tableName="tickets">
+            <column name="id" value="fdf2da00-e79b-449b-9884-b39f826c314c"/>
+            <column name="user_id" value="1958fb4a-2f76-480c-8df2-6045f3c017a5"/>
+            <column name="ticket_type_id" value="c5c97144-3f2a-4e4d-a2f9-da1569d2e576"/>
+            <column name="purchase_date" value="now()"/>
+            <column name="valid_from" value="now()"/>
+            <column name="valid_to" value="now()"/>
+        </insert>
+        <insert tableName="tickets">
+            <column name="id" value="6fa6538e-3c27-42fe-a51a-fbf3f581e804"/>
+            <column name="user_id" value="1958fb4a-2f76-480c-8df2-6045f3c017a5"/>
+            <column name="ticket_type_id" value="dbb5103f-4bfe-42e3-b6ab-1ca7cbcde047"/>
+            <column name="purchase_date" value="now()"/>
+            <column name="valid_from" value="now()"/>
+            <column name="valid_from" value="now()"/>
+            <column name="valid_to" value="now()"/>
+            <column name="status" value="CAN_BE_USED"/>
         </insert>
 
         <insert tableName="tickets">

@@ -1,5 +1,7 @@
 package ptc.springframework.publictransportrest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,10 +34,10 @@ public class User {
     @Email
     private String email;
 
-    @OneToOne(mappedBy = "user")
-    private Account account;
+    private Integer balance;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Ticket> ticketList;
 
     private UUID createdBy;

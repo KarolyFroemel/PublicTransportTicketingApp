@@ -36,6 +36,8 @@ public class TicketType {
     @Column(name = "imgsource")
     private String imgSource;
 
+    private Boolean isEnforceable;
+
     private UUID createdBy;
 
     private LocalDateTime createdOn;

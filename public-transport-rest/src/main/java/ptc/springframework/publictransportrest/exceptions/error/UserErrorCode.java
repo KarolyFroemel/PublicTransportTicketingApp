@@ -5,7 +5,8 @@ import java.text.NumberFormat;
 
 public enum UserErrorCode implements ErrorCode {
 
-    USER_NOT_FOUND(1);
+    USER_NOT_FOUND(1),
+    USER_BALANCE_LESS_THAN_NEEDED(2);
 
     private final int code;
     private final NumberFormat format = new DecimalFormat("USER000");

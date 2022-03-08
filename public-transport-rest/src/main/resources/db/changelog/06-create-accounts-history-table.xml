@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="Karoly_Froemel" id="6">
-        <sql>DROP TYPE IF EXISTS transaction_type</sql>
-        <sql>CREATE TYPE transaction_type AS ENUM ('PURCHASE','REFUND', 'FILL', 'LOCK', 'UNLOCK')</sql>
         <createTable tableName="accounts_history">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
@@ -14,13 +12,13 @@
             <column name="account_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_accounts_history_accounts" references="accounts(id)"/>
             </column>
-            <column name="transaction_type" type="transaction_type">
+            <column name="transaction_type" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="balance_before" type="BIGINT">
+            <column name="balance_before" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="balance_after" type="BIGINT">
+            <column name="balance_after" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="created_on" type="DATETIME(2)">

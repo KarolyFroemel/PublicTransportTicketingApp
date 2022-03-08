@@ -1,7 +1,9 @@
 package ptc.springframework.publictransportrest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import ptc.springframework.publictransportrest.enums.TicketStatus;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,11 @@ import java.util.UUID;
 public class Ticket {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @ManyToOne
@@ -23,6 +30,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name="ticket_type_id", referencedColumnName = "id", nullable=false)
+    @JsonIgnore
     private TicketType ticketType;
 
     @NotNull
@@ -36,6 +44,7 @@ public class Ticket {
 
     private LocalDateTime validationTime;
 
+    @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
 }

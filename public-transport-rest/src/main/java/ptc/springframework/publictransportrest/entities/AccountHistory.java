@@ -1,6 +1,6 @@
 package ptc.springframework.publictransportrest.entities;
 
-import ptc.springframework.publictransportrest.enums.TransactionType;
+import ptc.springframework.publictransportrest.enums.AccountHistoryTransactionType;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -20,7 +20,7 @@ public class AccountHistory {
     private UUID accountId;
 
     @NotNull
-    private TransactionType transactionType;
+    private AccountHistoryTransactionType transactionType;
 
     @NotNull
     private Long balanceBefore;

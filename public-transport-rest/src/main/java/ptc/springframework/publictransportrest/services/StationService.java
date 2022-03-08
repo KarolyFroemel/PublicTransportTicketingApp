@@ -100,12 +100,12 @@ public class StationService {
         }
 
 
-        Page<Station> servicePage = stationRepository.findAll(
+        Page<Station> stationPage = stationRepository.findAll(
                 createSearchSpecification(stationSearchModel),
                 pageable
         );
 
-        return servicePage.map(this.stationMapper::stationEntityToStationModel);
+        return stationPage.map(this.stationMapper::stationEntityToStationModel);
     }
 
     private Specification<Station> createSearchSpecification(StationSearchModel stationSearchModel) {

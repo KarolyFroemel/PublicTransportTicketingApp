@@ -797,8 +797,8 @@ paths:
       tags:
         - Ticket
       summary: Refund ticket
-      operationId: deleteTicket
-      description: delete one ticket or pass.
+      operationId: refundTicket
+      description: refund one ticket or pass.
       parameters:
         - name: ticketId
           in: path
@@ -919,11 +919,14 @@ components:
           minimum: 1
         imgSource:
           type: string
+        isEnforceable:
+          type: boolean
       required:
         - name
         - description
         - price
         - expirationTime
+        - isEnforceable
 
     TicketTypeSearchRequest:
       type: object
@@ -933,6 +936,8 @@ components:
           maxLength: 50
           nullable: false
           description: 'Name of ticket type'
+        isEnforceable:
+          type: boolean
         description:
           type: string
           maxLength: 250

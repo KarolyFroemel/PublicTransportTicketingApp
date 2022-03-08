@@ -141,8 +141,6 @@ public class PTCServiceService {
                         root.get(PTCService_.name), "%" + serviceSearchModel.getName() + "%"));
             }
 
-
-
             if (serviceSearchModel.getType() != null) {
                 predicates.add(criteriaBuilder.equal(
                         root.get(PTCService_.type), enumMapper.serviceSearchModelServiceTypeEnumToServiceTypeEnum(serviceSearchModel.getType())));

@@ -5,11 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="Karoly_Froemel" id="9">
-        <insert tableName="accounts">
-            <column name="id" value="c3d43913-602b-42c0-8ea3-0385ee758739"/>
-            <column name="user_id" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
-            <column name="balance" value="1000"/>
-        </insert>
+<!--        <insert tableName="accounts">-->
+<!--            <column name="id" value="c3d43913-602b-42c0-8ea3-0385ee758739"/>-->
+<!--            <column name="user_id" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>-->
+<!--            <column name="balance" value="0"/>-->
+<!--        </insert>-->
         <insert tableName="accounts">
             <column name="id" value="9c012c3d-5d65-499f-a188-c40b33605ecf"/>
             <column name="user_id" value="563474d5-77bf-400c-b2ff-c96462a1b359"/>
@@ -19,6 +19,11 @@
             <column name="id" value="02ed469c-0599-45e9-b4d9-dadebfcb2877"/>
             <column name="user_id" value="1958fb4a-2f76-480c-8df2-6045f3c017a5"/>
             <column name="balance" value="1000"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="id" value="4326ef77-bde7-4385-8739-a90bce81bc14"/>
+            <column name="user_id" value="efd88677-79d7-42c9-bd97-f756a1110f1e"/>
+            <column name="balance" value="0"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

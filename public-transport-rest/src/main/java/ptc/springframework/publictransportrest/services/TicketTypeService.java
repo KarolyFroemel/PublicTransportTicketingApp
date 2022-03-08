@@ -96,7 +96,6 @@ public class TicketTypeService {
         ticketTypeSource.setModifiedBy(keycloakService.getUserId());
         ticketTypeSource.setModifiedOn(LocalDateTime.now());
         ticketTypeRepository.save(ticketTypeSource);
-
     }
 
     public Page<TicketTypeModel> searchTicketType(final int pageNumber,
@@ -133,10 +132,12 @@ public class TicketTypeService {
                         root.get(TicketType_.description), "%" + ticketTypeSearchRequestModel.getDescription() + "%"));
             }
 
-            if((ticketTypeSearchRequestModel.getName() == null ||
-                    ticketTypeSearchRequestModel.getName().isEmpty()) &&
-                    (ticketTypeSearchRequestModel.getDescription() == null ||
-                            ticketTypeSearchRequestModel.getDescription().isEmpty())) {
+            if (ticketTypeSearchRequestModel.getIsEnforceable() != null) {
+                predicates.add(criteriaBuilder.equal(
+                        root.get(TicketType_.isEnforceable), ticketTypeSearchRequestModel.getIsEnforceable()));
+            }
+
+            if(predicates.isEmpty()) {
                 predicates.add(criteriaBuilder.conjunction());
             }
 

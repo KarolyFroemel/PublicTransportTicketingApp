@@ -31,7 +31,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    private User getUser() {
+    public User getUser() {
         return userRepository.findById(keycloakService.getUserId()).orElseThrow(
                 () -> new UserException(
                         USER_NOT_FOUND,
@@ -49,12 +49,22 @@ public class UserService {
 
     public void fillBalance(int addToBalance) {
         User user = getUser();
-        user.getAccount().addBalance(addToBalance);
+        user.setBalance(user.getBalance()+addToBalance);
         userRepository.save(user);
     }
 
     public Integer getUserAccountBalance(){
         User user = getUser();
-        return user.getAccount().getBalance();
+        return user.getBalance();
+    }
+
+    public boolean checkPayingCapacity(int price) {
+        User user = getUser();
+        return user.getBalance() - price >= 0;
+    }
+
+    public void deductFee(int price) {
+        User user = getUser();
+        user.setBalance(user.getBalance() + price);
     }
 }

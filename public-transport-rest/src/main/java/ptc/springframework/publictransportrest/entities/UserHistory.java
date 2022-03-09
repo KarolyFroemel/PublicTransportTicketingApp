@@ -1,9 +1,8 @@
 package ptc.springframework.publictransportrest.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import ptc.springframework.publictransportrest.enums.AccountHistoryTransactionType;
+import ptc.springframework.publictransportrest.enums.HistoryType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,9 +11,12 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "accounts_history")
-public class AccountHistory {
+@Table(name = "users_history", schema="public_transport")
+public class UserHistory {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -25,16 +27,16 @@ public class AccountHistory {
     private UUID id;
 
     @NotNull
-    private UUID accountId;
+    private HistoryType historyType;
+
+    private UUID ticketId;
 
     @NotNull
-    private AccountHistoryTransactionType transactionType;
+    private UUID userId;
 
-    @NotNull
-    private Long balanceBefore;
+    private Integer balanceBefore;
 
-    @NotNull
-    private Long balanceAfter;
+    private Integer balanceAfter;
 
     @NotNull
     private LocalDateTime createdOn;

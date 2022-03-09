@@ -1,11 +1,9 @@
 package ptc.springframework.publictransportrest.controllers;
 
 import contract.ticket.api.UserApi;
-import contract.ticket.model.AccountHistoryModel;
-import contract.ticket.model.AccountHistorySearchModel;
-import contract.ticket.model.FillBalanceModel;
-import contract.ticket.model.UserModel;
+import contract.ticket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,7 +35,13 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<List<AccountHistoryModel>> searchInAccountHistory(Integer xPage, Integer xSize, @Valid AccountHistorySearchModel accountHistorySearchModel) {
-        return null;
+    public ResponseEntity<List<UserHistoryModel>> searchInUserHistory(Integer xPage, Integer xSize, @Valid UserHistorySearchModel userHistorySearchModel) {
+        Page<UserHistoryModel> page = userService.searchHistory(
+                xPage,
+                xSize,
+                userHistorySearchModel);
+
+        return ControllerHelper.buildPartialResponse(xPage, xSize, page);
     }
+
 }

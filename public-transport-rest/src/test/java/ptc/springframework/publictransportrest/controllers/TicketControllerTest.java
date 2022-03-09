@@ -1,11 +1,8 @@
 package ptc.springframework.publictransportrest.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import contract.ticket.model.TicketTypeModel;
-import contract.ticket.model.TicketTypeSearchRequestModel;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,7 @@ class TicketControllerTest {
     private final UUID TICKET_FOR_VALIDATION = UUID.fromString("83f90f5c-28ad-4536-8585-83af477c5112");
     private final UUID TICKET_TO_REFUND = UUID.fromString("6fa6538e-3c27-42fe-a51a-fbf3f581e804");
     private final UUID TICKET_IS_NOT_ENFORCEABLE = UUID.fromString("fdf2da00-e79b-449b-9884-b39f826c314c");
+    private final UUID TICKET_IS_NOT_BELONG_TO_USER = UUID.fromString("6e4fe7b8-f5d8-4930-bc94-5cc4e9d55ead");
 
 
     @Autowired
@@ -130,8 +128,20 @@ class TicketControllerTest {
     }
 
     @Test
-    @DisplayName("Validate not enforceable ticket.")
+    @DisplayName("Ticket not belong to user.")
     @Order(7)
+    void validateNotUserTicket() throws Exception {
+        mvc.perform(put("/ticket/validateTicket/{ticketId}", TICKET_IS_NOT_BELONG_TO_USER)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorCode").value("TICKET005"))
+                .andExpect(jsonPath("$.message").value("Ticket is not belong to user!"))
+                .andExpect(jsonPath("$.detailedMessage").value("Ticket is not belong to user!"));
+    }
+
+    @Test
+    @DisplayName("Validate not enforceable ticket.")
+    @Order(8)
     void validateNotEnforceableTicket() throws Exception {
         mvc.perform(put("/ticket/validateTicket/{ticketId}", TICKET_IS_NOT_ENFORCEABLE)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -144,7 +154,7 @@ class TicketControllerTest {
 
     @Test
     @DisplayName("Refund non existing ticket.")
-    @Order(8)
+    @Order(9)
     void refundNonExistingTicket() throws Exception {
         mvc.perform(delete("/ticket/refund/{ticketId}", UUID.randomUUID())
                 .contentType(MediaType.APPLICATION_JSON))
@@ -156,7 +166,7 @@ class TicketControllerTest {
 
     @Test
     @DisplayName("Refund validated ticket.")
-    @Order(9)
+    @Order(10)
     void refundValidatedTicket() throws Exception {
         mvc.perform(delete("/ticket/refund/{ticketId}", TICKET_FOR_VALIDATION)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -168,7 +178,7 @@ class TicketControllerTest {
 
     @Test
     @DisplayName("Refund ticket.")
-    @Order(10)
+    @Order(11)
     void refundTicket() throws Exception {
         mvc.perform(delete("/ticket/refund/{ticketId}", TICKET_TO_REFUND)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -176,9 +186,21 @@ class TicketControllerTest {
     }
 
     @Test
-    @DisplayName("Search in ticket types ASC.")
-    @Order(11)
-    void searchTicketTypeASC() throws Exception {
+    @DisplayName("Refund not user's ticket.")
+    @Order(12)
+    void refundTicketNotUsersTicket() throws Exception {
+        mvc.perform(delete("/ticket/refund/{ticketId}", TICKET_IS_NOT_BELONG_TO_USER)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorCode").value("TICKET005"))
+                .andExpect(jsonPath("$.message").value("Ticket is not belong to user!"))
+                .andExpect(jsonPath("$.detailedMessage").value("Ticket is not belong to user!"));
+    }
+
+    @Test
+    @DisplayName("Search in ticket ASC.")
+    @Order(13)
+    void searchTicketASC() throws Exception {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.set("X-Page", "0");
         requestHeaders.set("X-Size", "3");
@@ -203,9 +225,9 @@ class TicketControllerTest {
     }
 
     @Test
-    @DisplayName("Search in ticket types DESC.")
-    @Order(11)
-    void searchTicketTypeDESC() throws Exception {
+    @DisplayName("Search in ticket DESC.")
+    @Order(14)
+    void searchTicketDESC() throws Exception {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.set("X-Page", "0");
         requestHeaders.set("X-Size", "3");
@@ -228,14 +250,4 @@ class TicketControllerTest {
                         .header()
                         .stringValues("X-Total-Size", "1"));
     }
-
-    @Test
-    void searchInTicketHistory() {
-    }
-
-    @Test
-    void searchTicket() {
-    }
-
-
 }

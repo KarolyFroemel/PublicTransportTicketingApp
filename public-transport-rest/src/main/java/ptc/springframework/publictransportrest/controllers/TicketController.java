@@ -33,11 +33,6 @@ public class TicketController implements TicketApi {
     }
 
     @Override
-    public ResponseEntity<List<TicketHistoryModel>> searchInTicketHistory(Integer xPage, Integer xSize, @Valid TicketHistorySearchModel ticketHistorySearchModel) {
-        return null;
-    }
-
-    @Override
     public ResponseEntity<List<TicketModel>> searchTicket(Integer xPage, Integer xSize, @Valid TicketSearchModel ticketSearchModel) {
         ticketService.updateTicketStatus();
         Page<TicketModel> page = ticketService.searchTicket(

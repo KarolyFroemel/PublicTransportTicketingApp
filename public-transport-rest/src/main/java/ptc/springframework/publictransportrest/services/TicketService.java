@@ -9,14 +9,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ptc.springframework.publictransportrest.entities.*;
+import ptc.springframework.publictransportrest.enums.HistoryType;
 import ptc.springframework.publictransportrest.enums.TicketStatus;
 import ptc.springframework.publictransportrest.exceptions.TicketException;
 import ptc.springframework.publictransportrest.exceptions.TicketTypeExeption;
 import ptc.springframework.publictransportrest.exceptions.UserException;
 import ptc.springframework.publictransportrest.mappers.EnumMapper;
 import ptc.springframework.publictransportrest.mappers.TicketMapper;
+import ptc.springframework.publictransportrest.repositories.HistoryRepository;
 import ptc.springframework.publictransportrest.repositories.TicketRepository;
 import ptc.springframework.publictransportrest.repositories.TicketTypeRepository;
+import ptc.springframework.publictransportrest.repositories.UserRepository;
 
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
@@ -42,16 +45,24 @@ public class TicketService {
 
     private final EnumMapper enumMapper;
 
+    private final UserRepository userRepository;
+
+    private final HistoryRepository historyRepository;
+
     public TicketService(TicketMapper ticketMapper,
                          TicketRepository ticketRepository,
                          TicketTypeRepository ticketTypeRepository,
                          UserService userService,
-                         EnumMapper enumMapper) {
+                         EnumMapper enumMapper,
+                         UserRepository userRepository,
+                         HistoryRepository historyRepository) {
         this.ticketMapper = ticketMapper;
         this.ticketRepository = ticketRepository;
         this.ticketTypeRepository = ticketTypeRepository;
         this.userService = userService;
         this.enumMapper = enumMapper;
+        this.userRepository = userRepository;
+        this.historyRepository = historyRepository;
     }
 
     public void purchaseTicket(PurchaseTicketModel purchaseTicketModel) {
@@ -88,11 +99,22 @@ public class TicketService {
         ticket.setUser(userService.getUser());
         ticket.setValidFrom(purchaseTicketModel.getValidFrom().atStartOfDay());
         ticket.setValidTo(purchaseTicketModel.getValidFrom().atStartOfDay().plusDays(ticketType.getExpirationTime()));
-        ticketRepository.save(ticket);
+        ticket = ticketRepository.save(ticket);
         user.getAccount().deductFee(ticketType.getPrice());
+        UserHistory userHistory = UserHistory.builder()
+                .userId(user.getId())
+                .historyType(HistoryType.PURCHASE)
+                .ticketId(ticket.getId())
+                .balanceBefore(user.getAccount().getBalance())
+                .createdOn(LocalDateTime.now())
+                .build();
+        user = userRepository.save(user);
+        userHistory.setBalanceAfter(user.getAccount().getBalance());
+        historyRepository.save(userHistory);
     }
 
     public void validateTicket(UUID ticketId) {
+        User user = userService.getUser();
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(
                 () -> new TicketException(
                         TICKET_NOT_FOUND,
@@ -101,6 +123,15 @@ public class TicketService {
                         HttpStatus.NOT_FOUND
                 )
         );
+
+        if (!ticket.getUser().getId().equals(user.getId())) {
+            throw new TicketException(
+                    TICKET_IS_NOT_BELONG_TO_USER,
+                    "Ticket is not belong to user!",
+                    "Ticket is not belong to user!",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
 
         if (!ticket.getTicketType().getIsEnforceable()) {
             throw new TicketException(
@@ -114,9 +145,17 @@ public class TicketService {
         ticket.setValidationTime(LocalDateTime.now());
         ticket.setStatus(TicketStatus.VALIDATED);
         ticketRepository.save(ticket);
+        UserHistory userHistory = UserHistory.builder()
+                .userId(user.getId())
+                .ticketId(ticket.getId())
+                .historyType(HistoryType.VALIDATE)
+                .createdOn(LocalDateTime.now())
+                .build();
+        historyRepository.save(userHistory);
     }
 
     public void refund(UUID ticketId) {
+        User user = userService.getUser();
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(
                 () -> new TicketException(
                         TICKET_NOT_FOUND,
@@ -125,6 +164,15 @@ public class TicketService {
                         HttpStatus.NOT_FOUND
                 )
         );
+
+        if (!ticket.getUser().getId().equals(user.getId())) {
+            throw new TicketException(
+                    TICKET_IS_NOT_BELONG_TO_USER,
+                    "Ticket is not belong to user!",
+                    "Ticket is not belong to user!",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
 
         if(ticket.getStatus() != TicketStatus.CAN_BE_USED) {
             throw new TicketException(
@@ -135,9 +183,19 @@ public class TicketService {
             );
         }
 
+        UserHistory userHistory = UserHistory.builder()
+                .userId(user.getId())
+                .historyType(HistoryType.REFUND)
+                .ticketId(ticket.getId())
+                .balanceBefore(user.getAccount().getBalance())
+                .createdOn(LocalDateTime.now())
+                .build();
+
         ticket.setStatus(TicketStatus.REFUNDED);
         ticketRepository.save(ticket);
         userService.fillBalance(ticket.getTicketType().getPrice());
+        userHistory.setBalanceAfter(userService.getUserAccountBalance());
+        historyRepository.save(userHistory);
     }
 
     public Page<TicketModel> searchTicket(final int pageNumber,

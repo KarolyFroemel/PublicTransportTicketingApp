@@ -2,8 +2,10 @@ package ptc.springframework.publictransportrest.testdata;
 
 import contract.ticket.model.AccountModel;
 import contract.ticket.model.FillBalanceModel;
+import contract.ticket.model.UserHistorySearchModel;
 import contract.ticket.model.UserModel;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class UserTestData {
@@ -23,5 +25,19 @@ public class UserTestData {
         FillBalanceModel fillBalanceModel = new FillBalanceModel();
         fillBalanceModel.setAddBalance(3000);
         return fillBalanceModel;
+    }
+
+    public UserHistorySearchModel getUserHistorySearchModelASC() {
+        UserHistorySearchModel userHistorySearchModel = new UserHistorySearchModel();
+        userHistorySearchModel.setHistoryType(UserHistorySearchModel.HistoryTypeEnum.FILL_BALANCE);
+        userHistorySearchModel.setEndDate(LocalDate.now().plusDays(3));
+        userHistorySearchModel.setStartDate(LocalDate.now().minusDays(3));
+        return userHistorySearchModel;
+    }
+
+    public UserHistorySearchModel getUserHistorySearchModelDESC() {
+        UserHistorySearchModel userHistorySearchModel = getUserHistorySearchModelASC();
+        userHistorySearchModel.setSortOrder(UserHistorySearchModel.SortOrderEnum.DESC);
+        return userHistorySearchModel;
     }
 }

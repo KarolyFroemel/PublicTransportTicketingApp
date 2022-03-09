@@ -1,7 +1,8 @@
 package ptc.springframework.publictransportrest.enums;
 
-public enum AccountHistoryTransactionType {
+public enum HistoryType {
     PURCHASE,
     REFUND,
-    FILL
+    FILL_BALANCE,
+    VALIDATE
 }

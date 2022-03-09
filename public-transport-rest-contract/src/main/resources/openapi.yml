@@ -106,12 +106,12 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-  /user/searchInAccountHistory:
+  /user/searchInUserHistory:
     post:
       tags:
         - User
-      operationId: searchInAccountHistory
-      summary: Search accoutn history.
+      operationId: searchInUserHistory
+      summary: Search in user history.
       parameters:
         - $ref: '#/components/parameters/X-Page'
         - $ref: '#/components/parameters/X-Size'
@@ -120,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHistorySearch'
+              $ref: '#/components/schemas/UserHistorySearch'
       responses:
         206:
           description: 'Successful request'
@@ -138,7 +138,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AccountHistory'
+                  $ref: '#/components/schemas/UserHistory'
         400:
           $ref: '#/components/responses/400BadRequest'
         403:
@@ -819,47 +819,6 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
-  #  TODO: extra function
-  /ticket/searchInTicketHistory:
-    post:
-      tags:
-        - Ticket
-      operationId: searchInTicketHistory
-      summary: Search in ticket history.
-      parameters:
-        - $ref: '#/components/parameters/X-Page'
-        - $ref: '#/components/parameters/X-Size'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TicketHistorySearch'
-      responses:
-        206:
-          description: 'Successful request'
-          headers:
-            X-Page:
-              $ref: '#/components/headers/X-Page'
-            X-Size:
-              $ref: '#/components/headers/X-Size'
-            X-Total-Pages:
-              $ref: '#/components/headers/X-Total-Pages'
-            X-Total-Size:
-              $ref: '#/components/headers/X-Total-Size'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TicketHistory'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-        403:
-          $ref: '#/components/responses/403PermissionDenied'
-        500:
-          $ref: '#/components/responses/500ServerError'
-
 components:
   schemas:
     Credentials:
@@ -1177,7 +1136,7 @@ components:
       required:
         - "errorCode"
 
-    TicketHistorySearch:
+    UserHistorySearch:
       type: object
       properties:
         historyType:
@@ -1185,7 +1144,14 @@ components:
           enum:
             - PURCHASE
             - REFUND
+            - FILL_BALANCE
             - VALIDATE
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
         sortBy:
           type: string
           nullable: false
@@ -1199,64 +1165,28 @@ components:
           description: 'Sort order'
           default: 'ASC'
 
-    TicketHistory:
+    UserHistory:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        ticketType:
-          type: string
         historyType:
           type: string
           enum:
             - PURCHASE
             - REFUND
+            - FILL_BALANCE
             - VALIDATE
-        createdOn:
-          type: string
-          format: date-time
-
-    AccountHistorySearch:
-      type: object
-      properties:
-        transactionType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-            - LOCK
-            - UNLOCK
-        sortOrder:
-          type: string
-          enum:
-            - ASC
-            - DESC
-          description: 'Sort order'
-          default: 'ASC'
-
-    AccountHistory:
-      type: object
-      properties:
-        id:
+        ticketId:
           type: string
           format: uuid
-        transactionType:
-          type: string
-          enum:
-            - PURCHASE
-            - REFUND
-            - VALIDATE
-            - LOCK
-            - UNLOCK
         balanceBefore:
           type: integer
         balanceAfter:
           type: integer
         createdOn:
           type: string
-          format: date-time
 
   parameters:
     X-Page:

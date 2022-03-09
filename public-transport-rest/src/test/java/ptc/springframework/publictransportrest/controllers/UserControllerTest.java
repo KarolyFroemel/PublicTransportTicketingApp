@@ -1,7 +1,11 @@
 package ptc.springframework.publictransportrest.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import contract.ticket.model.FillBalanceModel;
+import contract.ticket.model.TicketTypeSearchRequestModel;
 import contract.ticket.model.UserModel;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -9,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ptc.springframework.publictransportrest.configurations.TestSecurityConfig;
 import ptc.springframework.publictransportrest.keycloak.KeycloakService;
 import ptc.springframework.publictransportrest.testdata.UserTestData;
@@ -20,8 +26,7 @@ import ptc.springframework.publictransportrest.testdata.UserTestData;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,7 +45,9 @@ class UserControllerTest {
     @MockBean
     private KeycloakService keycloakService;
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = JsonMapper.builder()
+            .addModule(new JavaTimeModule())
+            .build();
 
     private UserTestData userTestData = new UserTestData();
 
@@ -116,6 +123,56 @@ class UserControllerTest {
     }
 
     @Test
-    void searchInAccountHistory() {
+    @DisplayName("Search in history ASC.")
+    @Order(5)
+    void searchInHistoryASC() throws Exception {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("X-Page", "0");
+        requestHeaders.set("X-Size", "3");
+
+        mvc.perform(post("/user/searchInUserHistory")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(requestHeaders)
+                .content(mapper.writeValueAsString(userTestData.getUserHistorySearchModelASC())))
+                .andExpect(status().isPartialContent())
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Page", "0"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Size", "3"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Pages", "1"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Size", "1"));
+    }
+
+    @Test
+    @DisplayName("Search in history DESC.")
+    @Order(6)
+    void searchInHistoryDESC() throws Exception {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("X-Page", "0");
+        requestHeaders.set("X-Size", "3");
+
+        mvc.perform(post("/user/searchInUserHistory")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(requestHeaders)
+                .content(mapper.writeValueAsString(userTestData.getUserHistorySearchModelDESC())))
+                .andExpect(status().isPartialContent())
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Page", "0"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Size", "3"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Pages", "1"))
+                .andExpect(MockMvcResultMatchers
+                        .header()
+                        .stringValues("X-Total-Size", "1"));
     }
 }

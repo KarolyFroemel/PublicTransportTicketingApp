@@ -9,7 +9,7 @@ base repo adress: https://github.com/KarolyFroemel/PublicTransportTicketingApp
 
 ##Application info
 This application has three part <br>
-1. Angular frontend
+1. Angular frontend (based on Maximilian Schwarzmüller udemy course)
 2. Java Spring backend
 3. Keycloak server to authorize and authenticate users
 

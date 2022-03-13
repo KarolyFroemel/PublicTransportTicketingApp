@@ -255,4 +255,28 @@ public class TicketService {
 
         ticketRepository.saveAll(ticketList);
     }
+
+    public TicketModel getTicket(UUID ticketId){
+        User user = userService.getUser();
+
+        Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(
+                () -> new TicketException(
+                        TICKET_NOT_FOUND,
+                        "Ticket not found!",
+                        "Ticket not found by id in database!",
+                        HttpStatus.NOT_FOUND
+                )
+        );
+
+        if (!ticket.getUser().getId().equals(user.getId())) {
+            throw new TicketException(
+                    TICKET_IS_NOT_BELONG_TO_USER,
+                    "Ticket is not belong to user!",
+                    "Ticket is not belong to user!",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
+        return ticketMapper.ticketEntityToTicketModel(ticket);
+    }
 }

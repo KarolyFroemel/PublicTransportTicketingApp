@@ -77,10 +77,10 @@ class ServiceControllerTest {
                         .stringValues("X-Size", "3"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Pages", "1"))
+                        .stringValues("X-Total-Pages", "10"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Size", "1"));
+                        .stringValues("X-Total-Size", "30"));
     }
 
 
@@ -106,10 +106,10 @@ class ServiceControllerTest {
                         .stringValues("X-Size", "3"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Pages", "1"))
+                        .stringValues("X-Total-Pages", "10"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Size", "1"));
+                        .stringValues("X-Total-Size", "30"));
     }
 
     @Test
@@ -134,10 +134,10 @@ class ServiceControllerTest {
                         .stringValues("X-Size", "3"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Pages", "1"))
+                        .stringValues("X-Total-Pages", "11"))
                 .andExpect(MockMvcResultMatchers
                         .header()
-                        .stringValues("X-Total-Size", "3"));
+                        .stringValues("X-Total-Size", "32"));
     }
 
     @Test

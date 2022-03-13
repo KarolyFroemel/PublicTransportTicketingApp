@@ -28,5 +28,208 @@
             <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
             <column name="created_on" value="now()"/>
         </insert>
+        <insert tableName="services">
+            <column name="id" value="19b68e00-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 2"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6910c-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 3"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b696de-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 4"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b698b4-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 5"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b69c56-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 6"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b69f9e-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 7"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6a16a-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 8"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6a2fa-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 9"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6a430-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 10"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6a6ec-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 11"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6a8d6-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 12"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6aa02-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 13"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6ab7e-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 14"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6acaa-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 15"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6adcc-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 16"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6aeee-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 17"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6b45c-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 18"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6b5b0-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 19"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6b6c8-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 20"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6b7ea-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 21"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6b902-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 22"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6ba1a-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 23"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6bb28-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 24"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6bdb2-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 25"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6bed4-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 26"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6bff6-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 27"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6c118-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 28"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6c424-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 29"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="services">
+            <column name="id" value="19b6c2a8-a086-11ec-b909-0242ac120002"/>
+            <column name="name" value="Bus 30"/>
+            <column name="type" value="BUS"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

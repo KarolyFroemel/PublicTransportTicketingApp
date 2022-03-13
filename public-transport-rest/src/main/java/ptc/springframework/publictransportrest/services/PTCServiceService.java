@@ -105,10 +105,14 @@ public class PTCServiceService {
             );
         }
 
-        PTCService service = serviceMapper.serviceModelToServiceEntity(serviceModel);
-        service.setModifiedBy(keycloakService.getUserId());
-        service.setModifiedOn(LocalDateTime.now());
-        serviceRepository.save(service);
+        PTCService sourceService = serviceMapper.serviceModelToServiceEntity(serviceModel);
+        PTCService targetService = getService(serviceModel.getId());
+
+        targetService.setName(sourceService.getName());
+        targetService.setType(sourceService.getType());
+        targetService.setModifiedBy(keycloakService.getUserId());
+        targetService.setModifiedOn(LocalDateTime.now());
+        serviceRepository.save(targetService);
     }
 
     public Page<ServiceModel> searchService(final int pageNumber,

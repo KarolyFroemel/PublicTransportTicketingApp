@@ -819,6 +819,37 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 
+  /ticket/{ticketId}:
+    get:
+      tags:
+        - Ticket
+      summary: get ticket
+      operationId: getTicket
+      description: get one ticket or pass.
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          description: ticket id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Ticket refund was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403PermissionDenied'
+        404:
+          $ref: '#/components/responses/404ContentNotFound'
+        500:
+          $ref: '#/components/responses/500ServerError'
+
 components:
   schemas:
     Credentials:
@@ -1088,6 +1119,10 @@ components:
             - REFUNDED
             - CAN_BE_USED
             - EXPIRED
+        imgSource:
+          type: string
+        isEnforceable:
+          type: boolean
       required:
         - id
         - name
@@ -1095,6 +1130,8 @@ components:
         - validFrom
         - validTo
         - status
+        - imgSource
+        - isEnforceable
 
     PurchaseTicket:
       type: object

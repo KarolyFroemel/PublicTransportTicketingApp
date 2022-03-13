@@ -250,4 +250,37 @@ class TicketControllerTest {
                         .header()
                         .stringValues("X-Total-Size", "1"));
     }
+
+    @Test
+    @DisplayName("Get non existing ticket.")
+    @Order(15)
+    void getNonExistingTicket() throws Exception {
+        mvc.perform(get("/ticket/{ticketId}", UUID.randomUUID())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.errorCode").value("TICKET001"))
+                .andExpect(jsonPath("$.message").value("Ticket not found!"))
+                .andExpect(jsonPath("$.detailedMessage").value("Ticket not found by id in database!"));
+    }
+
+    @Test
+    @DisplayName("Get other user ticket.")
+    @Order(16)
+    void getOtherUserTicket() throws Exception {
+        mvc.perform(get("/ticket/{ticketId}", TICKET_IS_NOT_BELONG_TO_USER)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorCode").value("TICKET005"))
+                .andExpect(jsonPath("$.message").value("Ticket is not belong to user!"))
+                .andExpect(jsonPath("$.detailedMessage").value("Ticket is not belong to user!"));
+    }
+
+    @Test
+    @DisplayName("Get user ticket.")
+    @Order(17)
+    void getUserTicket() throws Exception {
+        mvc.perform(get("/ticket/{ticketId}", TICKET_FOR_VALIDATION)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

@@ -21,6 +21,11 @@ public class TicketController implements TicketApi {
     private TicketService ticketService;
 
     @Override
+    public ResponseEntity<TicketModel> getTicket(UUID ticketId) {
+        return ResponseEntity.status(HttpStatus.OK).body(ticketService.getTicket(ticketId));
+    }
+
+    @Override
     public ResponseEntity<Void> purchaseTicket(@Valid @RequestBody PurchaseTicketModel purchaseTicketModel) {
         ticketService.purchaseTicket(purchaseTicketModel);
         return ResponseEntity.status(HttpStatus.CREATED).build();

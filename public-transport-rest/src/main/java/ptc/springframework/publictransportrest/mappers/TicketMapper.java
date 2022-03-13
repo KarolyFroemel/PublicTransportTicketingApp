@@ -14,7 +14,13 @@ import java.util.List;
 public interface TicketMapper {
 
     @Mappings({
-            @Mapping(target = "name", source = "ticketType.name")
+            @Mapping(target = "name", source = "ticketType.name"),
+            @Mapping(target = "imgSource", source = "ticketType.imgSource"),
+            @Mapping(target = "isEnforceable", source = "ticketType.isEnforceable"),
+            @Mapping(target = "purchaseDate", source = "purchaseDate", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target = "validFrom", source = "validFrom", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target = "validTo", source = "validTo", dateFormat = "yyyy-MM-dd HH:mm:ss"),
+            @Mapping(target = "validationTime", source = "validationTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
     })
     TicketModel ticketEntityToTicketModel(Ticket ticket);
 

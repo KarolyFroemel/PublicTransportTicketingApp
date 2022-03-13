@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="14">
+        <insert tableName="stations">
+            <column name="id" value="337a9512-8576-43de-95e1-79cc278b2a23"/>
+            <column name="name" value="Angkor"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="a579f0b3-d5c7-495c-9a04-7789e11fd865"/>
+            <column name="name" value="Sydney Opera House"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="a456eae6-72c6-4a85-af1b-7ef0516d9d1b"/>
+            <column name="name" value="The Eiffel Tower"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="c59471d6-596a-4b05-a934-b1679a746523"/>
+            <column name="name" value="Taj Mahal"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="16f39b99-4821-45ee-b5a4-9225be99dd66"/>
+            <column name="name" value="Machu Picchu"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="88cc0ffd-2c3b-480e-940a-c1262c764722"/>
+            <column name="name" value="The Great Wall of China"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="36d05d24-9ae2-4d28-bf6e-3a2bbf51c226"/>
+            <column name="name" value="Mount Rushmore National Memorial"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="5a59f7b3-b022-457d-89e8-5b6c355a1494"/>
+            <column name="name" value="Mont Saint-Michel"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="dbca407e-5feb-4561-8e20-e648cce63d74"/>
+            <column name="name" value="St. Basil's Cathedral"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="05799352-1af2-4a81-b4c1-f5fba6c2656a"/>
+            <column name="name" value="The Acropolis"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="a319c3c6-29de-4e2e-83fc-5ecec176ea82"/>
+            <column name="name" value="Easter Island"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="283046bd-6b31-46bf-af4a-f97eb253048d"/>
+            <column name="name" value="Golden Gate Bridge"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="b327bdf7-5274-4f20-a9f5-87273682df85"/>
+            <column name="name" value="Leaning Tower of Pisa"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="4234b39c-40e6-4233-9a95-d17d8e103079"/>
+            <column name="name" value="Neuschwanstein Castle"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="82693170-56a6-4271-8632-945b0ddce45c"/>
+            <column name="name" value="The Great Pyramid of Giza"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="6aab7d70-cfa7-4fb2-9357-760da44b5c58"/>
+            <column name="name" value="Victoria Falls"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="9bec5a87-8b8d-4595-a85d-de5ff50af50f"/>
+            <column name="name" value="The Western Wall"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="f096758b-d760-4b03-97d7-9a89a1c99f31"/>
+            <column name="name" value="Giant's Causeway"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="8dae0e44-3bb3-4b21-acfa-98ec34d0721a"/>
+            <column name="name" value="Buckingham Palace"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="2784a136-994c-4ae1-9a80-23b7c5400f7a"/>
+            <column name="name" value="La Sagrada Familia"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="e3934e72-e737-4f60-b296-7dccbc1052de"/>
+            <column name="name" value="Christ the Redeemer"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="aa50e4d2-65ff-4ee5-ac0a-c0a837e8bcb9"/>
+            <column name="name" value="Blue Mosque"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="22109372-a2ef-42f3-b746-26d49f60b443"/>
+            <column name="name" value="The Colosseum"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="02377159-6acc-4ff2-8103-bf4b3c195038"/>
+            <column name="name" value="The Grand Palace"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="5083cbf4-e303-4951-8f42-827a6dd88566"/>
+            <column name="name" value="Statue of Liberty"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="9f0a3d1a-f28d-4c53-bf14-b355a1c7ec31"/>
+            <column name="name" value="Petra"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="876cda03-7e72-475b-861d-ffbf8643513e"/>
+            <column name="name" value="Ha Long Bay"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="85cd7dff-1f31-4759-9b12-e3a059cbbae9"/>
+            <column name="name" value="Stonehenge"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="c6240b34-5637-4ad5-866b-a785453347df"/>
+            <column name="name" value="Blue Domes of Oia"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="f392a8f3-bd9f-43fe-9046-c523f47e84cd"/>
+            <column name="name" value="Times Square"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="7f3b632e-832e-473f-b2f3-caf534f277ff"/>
+            <column name="name" value="Louvre Museum"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="62838d89-8099-4bb0-a934-341d165a58d0"/>
+            <column name="name" value="Big Ben"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="a1fcdcb2-28ef-4458-bca1-5c057ac6e3e2"/>
+            <column name="name" value="Munich Airport"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+        <insert tableName="stations">
+            <column name="id" value="3767afb0-0f85-4d35-a31e-09f65c596500"/>
+            <column name="name" value="Atocha station"/>
+            <column name="created_by" value="eb5e3e64-1153-410d-bfc7-9988766c82ac"/>
+            <column name="created_on" value="now()"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

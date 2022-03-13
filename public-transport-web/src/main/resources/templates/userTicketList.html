@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:rel="stylesheet" th:href="@{../css/navbar.css}"/>
+    <title>Ticket list page</title>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a th:href="@{'/home'}"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+        <a th:href="@{'/ticketPurchasePage'}"><i class="fa fa-money" aria-hidden="true"></i> Buy ticket</a>
+        <a th:href="@{'/ticketValidationPage'}"><i class="fa fa-fw fa-ticket" aria-hidden="true"></i> Validate ticket</a>
+        <a class="active" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> My tickets</a>
+        <a th:href="@{'/ticketRefundPage'}"><i class="fa fa-eraser" aria-hidden="true"></i> Refund ticket</a>
+        <a href="#" style="float: right"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i> Contact</a>
+        <a href="#" style="float: right"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Login</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Ticket list </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table centerClass">
+                <thead>
+                <tr>
+                    <th> ticket id </th>
+                    <th> ticket type </th>
+                    <th> purchase date </th>
+                    <th> expiration date </th>
+                    <th> validation date </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${tickets.isEmpty()}">
+                    <td colspan="2"> No tickets Available</td>
+                </tr>
+                <tr th:each="ticket : ${tickets}">
+                    <td><span th:text="${ticket.getId()}"> ticket id </span></td>
+                    <td><span th:text="${ticket.getName()}"> ticket type </span></td>
+                    <td><span th:text="${ticket.getPurchaseDate()}"> purchase date </span></td>
+                    <td><span th:text="${ticket.getValidTo()}"> expiration date </span></td>
+                    <td><span th:text="${ticket.getValidationDate()}"> validation date </span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

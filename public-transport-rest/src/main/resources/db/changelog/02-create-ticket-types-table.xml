@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="2">
+        <createTable tableName="ticket_types">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="description" type="VARCHAR(250)"/>
+            <column name="price" type="INTEGER"/>
+            <column name="expiration_time" type="INTEGER"/>
+            <column name="imgSource" type="VARCHAR(2500)"/>
+            <column name="is_enforceable" type="BOOLEAN">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_ticket_types_expiration_time_users" references="users(id)"/>
+            </column>
+            <column name="created_on" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="UUID">
+                <constraints nullable="true" foreignKeyName="fk_ticket_types_modified_by_users" references="users(id)"/>
+            </column>
+            <column name="modified_on" type="TIMESTAMP"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="ticket_types"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Karoly_Froemel" id="16">
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="337a9512-8576-43de-95e1-79cc278b2a23"/>
+<!--            <column name="order" value="1"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="a579f0b3-d5c7-495c-9a04-7789e11fd865"/>
+<!--            <column name="order" value="2"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="a456eae6-72c6-4a85-af1b-7ef0516d9d1b"/>
+<!--            <column name="order" value="3"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="c59471d6-596a-4b05-a934-b1679a746523"/>
+<!--            <column name="order" value="4"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="16f39b99-4821-45ee-b5a4-9225be99dd66"/>
+<!--            <column name="order" value="5"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="88cc0ffd-2c3b-480e-940a-c1262c764722"/>
+<!--            <column name="order" value="6"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="a319c3c6-29de-4e2e-83fc-5ecec176ea82"/>
+<!--            <column name="order" value="7"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="36d05d24-9ae2-4d28-bf6e-3a2bbf51c226"/>
+<!--            <column name="order" value="8"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="5a59f7b3-b022-457d-89e8-5b6c355a1494"/>
+<!--            <column name="order" value="9"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="dbca407e-5feb-4561-8e20-e648cce63d74"/>
+<!--            <column name="order" value="10"/>-->
+        </insert>
+<!--        Common Station -->
+        <insert tableName="services_stations">
+            <column name="services_id" value="1f2fb6f6-1dc4-44c3-95ef-33c8951afeb5"/>
+            <column name="stations_id" value="7f3b632e-832e-473f-b2f3-caf534f277ff"/>
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="05799352-1af2-4a81-b4c1-f5fba6c2656a"/>
+<!--            <column name="order" value="1"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="283046bd-6b31-46bf-af4a-f97eb253048d"/>
+<!--            <column name="order" value="2"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="b327bdf7-5274-4f20-a9f5-87273682df85"/>
+<!--            <column name="order" value="3"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="4234b39c-40e6-4233-9a95-d17d8e103079"/>
+<!--            <column name="order" value="4"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="82693170-56a6-4271-8632-945b0ddce45c"/>
+<!--            <column name="order" value="5"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="6aab7d70-cfa7-4fb2-9357-760da44b5c58"/>
+<!--            <column name="order" value="6"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="9bec5a87-8b8d-4595-a85d-de5ff50af50f"/>
+<!--            <column name="order" value="7"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="f096758b-d760-4b03-97d7-9a89a1c99f31"/>
+<!--            <column name="order" value="8"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="8dae0e44-3bb3-4b21-acfa-98ec34d0721a"/>
+<!--            <column name="order" value="9"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="2784a136-994c-4ae1-9a80-23b7c5400f7a"/>
+<!--            <column name="order" value="10"/>-->
+        </insert>
+        <!--        Common Station -->
+        <insert tableName="services_stations">
+            <column name="services_id" value="dd4df655-fff1-4798-9037-2225ad8fa2a8"/>
+            <column name="stations_id" value="7f3b632e-832e-473f-b2f3-caf534f277ff"/>
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="e3934e72-e737-4f60-b296-7dccbc1052de"/>
+<!--            <column name="order" value="1"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="aa50e4d2-65ff-4ee5-ac0a-c0a837e8bcb9"/>
+<!--            <column name="order" value="2"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="22109372-a2ef-42f3-b746-26d49f60b443"/>
+<!--            <column name="order" value="3"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="02377159-6acc-4ff2-8103-bf4b3c195038"/>
+<!--            <column name="order" value="4"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="5083cbf4-e303-4951-8f42-827a6dd88566"/>
+<!--            <column name="order" value="5"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="9f0a3d1a-f28d-4c53-bf14-b355a1c7ec31"/>
+<!--            <column name="order" value="6"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="876cda03-7e72-475b-861d-ffbf8643513e"/>
+<!--            <column name="order" value="7"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="85cd7dff-1f31-4759-9b12-e3a059cbbae9"/>
+<!--            <column name="order" value="8"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="c6240b34-5637-4ad5-866b-a785453347df"/>
+<!--            <column name="order" value="9"/>-->
+        </insert>
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="f392a8f3-bd9f-43fe-9046-c523f47e84cd"/>
+<!--            <column name="order" value="10"/>-->
+        </insert>
+<!--        Common Station-->
+        <insert tableName="services_stations">
+            <column name="services_id" value="6e722e88-1703-43ff-90e7-55ff65587e29"/>
+            <column name="stations_id" value="7f3b632e-832e-473f-b2f3-caf534f277ff"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

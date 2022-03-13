@@ -9,7 +9,6 @@
     <description>Demo Spring project for job seeking</description>
 
     <modules>
-        <module>public-transport-web</module>
         <module>public-transport-rest</module>
         <module>public-transport-rest-contract</module>
     </modules>
